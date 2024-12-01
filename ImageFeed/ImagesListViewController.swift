@@ -9,7 +9,11 @@ import UIKit
 
 class ImagesListViewController: UIViewController {
     
-    @IBOutlet private var tableView: UITableView!
+    // MARK: - Constants
+    
+    let photosName: [String] = Array(0..<20).map{ "\($0)" }
+    
+    // MARK: - Public Properties
     
     lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -18,9 +22,11 @@ class ImagesListViewController: UIViewController {
         return formatter
     }()
     
-    
-    let photosName: [String] = Array(0..<20).map{ "\($0)" }
-    
+    // MARK: - IBOutlet
+
+    @IBOutlet private var tableView: UITableView!
+
+    // MARK: - UIViewController
     override func viewDidLoad() {
         super.viewDidLoad()
         
