@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="6vs-tT-6lF">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -28,7 +28,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="393" height="212"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="AaI-BR-8ek" userLabel="Image">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="0.jpg" translatesAutoresizingMaskIntoConstraints="NO" id="AaI-BR-8ek" userLabel="Cell Image">
                                                     <rect key="frame" x="16" y="4" width="361" height="204"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -36,12 +36,6 @@
                                                         </userDefinedRuntimeAttribute>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
                                                     </userDefinedRuntimeAttributes>
-                                                </imageView>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GradientLable" translatesAutoresizingMaskIntoConstraints="NO" id="yFI-HS-Kb3" userLabel="Gradient Image">
-                                                    <rect key="frame" x="16" y="186" width="393" height="30"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="30" id="7YW-Nm-BfV"/>
-                                                    </constraints>
                                                 </imageView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jva-nK-pYK" userLabel="Like Button">
                                                     <rect key="frame" x="333" y="4" width="44" height="44"/>
@@ -51,8 +45,14 @@
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                    <state key="normal" image="Active"/>
+                                                    <state key="normal" image="LikeImageNotActive"/>
                                                 </button>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="GradientLable" translatesAutoresizingMaskIntoConstraints="NO" id="yFI-HS-Kb3" userLabel="Gradient Image">
+                                                    <rect key="frame" x="16" y="186" width="393" height="30"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="7YW-Nm-BfV"/>
+                                                    </constraints>
+                                                </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="11 января 2024" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4vc-5f-ca4" userLabel="Date Lable">
                                                     <rect key="frame" x="24.000000000000007" y="184" width="94.666666666666686" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -92,12 +92,13 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" name="YP Black"/>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="mhE-Kt-0gk" secondAttribute="bottom" id="3hv-vx-hra"/>
-                            <constraint firstItem="mhE-Kt-0gk" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="mJ6-Ni-eFU"/>
-                            <constraint firstItem="mhE-Kt-0gk" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailing" id="y7o-2v-H2a"/>
+                            <constraint firstItem="mhE-Kt-0gk" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" id="3hv-vx-hra"/>
+                            <constraint firstAttribute="top" secondItem="mhE-Kt-0gk" secondAttribute="top" id="mJ6-Ni-eFU"/>
+                            <constraint firstAttribute="trailing" secondItem="mhE-Kt-0gk" secondAttribute="trailing" id="y7o-2v-H2a"/>
                             <constraint firstItem="mhE-Kt-0gk" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="zIh-uk-bY4"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="" image="tab_editorial_active" id="OFa-rd-EnR"/>
                     <connections>
                         <outlet property="tableView" destination="mhE-Kt-0gk" id="KWc-CE-5vE"/>
                     </connections>
@@ -105,6 +106,28 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="54.198473282442748" y="-34.507042253521128"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="UyX-Ih-ifv">
+            <objects>
+                <tabBarController id="6vs-tT-6lF" sceneMemberID="viewController">
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Hmp-KD-JYc">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="selectedImageTintColor" name="YP White"/>
+                        <tabBarAppearance key="standardAppearance">
+                            <color key="backgroundColor" name="YP Black"/>
+                        </tabBarAppearance>
+                    </tabBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="HRp-6D-wrL"/>
+                        <segue destination="RhY-6s-g6U" kind="relationship" relationship="viewControllers" id="Jwd-eb-OFK"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XTs-CI-weu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1880" y="-35"/>
         </scene>
         <!--Profile View-->
         <scene sceneID="zVf-qY-XlF">
@@ -115,7 +138,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Photo" translatesAutoresizingMaskIntoConstraints="NO" id="Xjm-0W-rRQ">
-                                <rect key="frame" x="16" y="27" width="70" height="70"/>
+                                <rect key="frame" x="16" y="91" width="70" height="70"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Xjm-0W-rRQ" secondAttribute="height" multiplier="1:1" id="Dci-fm-fVY"/>
                                     <constraint firstAttribute="width" constant="70" id="jqW-Ep-PNf"/>
@@ -127,10 +150,14 @@
                                 <color key="textColor" name="YP White"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9qR-Zs-4wc" userLabel="Logout Button">
-                                <rect key="frame" x="333" y="44" width="44" height="36"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="ipad.and.arrow.forward"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9qR-Zs-4wc" userLabel="Logout Button">
+                                <rect key="frame" x="333" y="104" width="44" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="44" id="Whi-Hl-SjG"/>
+                                    <constraint firstAttribute="height" constant="44" id="aCM-Dc-QXb"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="ipad.and.arrow.forward"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="@ekaterina_nov" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kte-ul-hV3" userLabel="Login Name Label">
                                 <rect key="frame" x="18" y="180" width="359" height="21"/>
@@ -156,13 +183,14 @@
                             <constraint firstItem="cEv-6C-NoJ" firstAttribute="top" secondItem="Kte-ul-hV3" secondAttribute="bottom" constant="8" id="Qum-0K-bGQ"/>
                             <constraint firstItem="Xjm-0W-rRQ" firstAttribute="leading" secondItem="07x-fY-v6s" secondAttribute="leading" constant="16" id="XMf-Bg-GlU"/>
                             <constraint firstItem="Kte-ul-hV3" firstAttribute="top" secondItem="RWk-kl-F0I" secondAttribute="bottom" constant="8" id="aZ3-of-FGt"/>
-                            <constraint firstItem="07x-fY-v6s" firstAttribute="top" secondItem="Xjm-0W-rRQ" secondAttribute="top" constant="32" id="fUO-ux-JmN"/>
+                            <constraint firstItem="Xjm-0W-rRQ" firstAttribute="top" secondItem="07x-fY-v6s" secondAttribute="top" constant="32" id="fUO-ux-JmN"/>
                             <constraint firstItem="Kte-ul-hV3" firstAttribute="leading" secondItem="RWk-kl-F0I" secondAttribute="leading" id="mJc-2r-9tS"/>
                             <constraint firstItem="9qR-Zs-4wc" firstAttribute="centerY" secondItem="Xjm-0W-rRQ" secondAttribute="centerY" id="oTo-1x-1kE"/>
                             <constraint firstItem="RWk-kl-F0I" firstAttribute="top" secondItem="Xjm-0W-rRQ" secondAttribute="bottom" constant="8" id="xGf-7B-v4W"/>
                             <constraint firstItem="cEv-6C-NoJ" firstAttribute="leading" secondItem="RWk-kl-F0I" secondAttribute="leading" id="yb5-bo-fWJ"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="" image="tab_prifile_active" id="nsC-LH-0NS"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0jW-rc-0Om" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -171,10 +199,12 @@
     </scenes>
     <resources>
         <image name="0.jpg" width="1600" height="1059"/>
-        <image name="Active" width="42" height="42"/>
         <image name="GradientLable" width="343" height="30"/>
+        <image name="LikeImageNotActive" width="42" height="42"/>
         <image name="Photo" width="70" height="70"/>
         <image name="ipad.and.arrow.forward" width="20" height="22"/>
+        <image name="tab_editorial_active" width="20" height="22"/>
+        <image name="tab_prifile_active" width="24" height="24"/>
         <namedColor name="TextColor">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
