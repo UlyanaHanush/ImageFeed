@@ -12,6 +12,7 @@ final class ImagesListViewController: UIViewController {
     // MARK: - Constants
     
     let photosName: [String] = Array(0..<20).map{ "\($0)" }
+    let showSingleImageSegueIdentifier = "ShowSingleImage"
     
     // MARK: - Public Properties
     
@@ -35,7 +36,7 @@ final class ImagesListViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "ShowSingleImage" {
+        if segue.identifier == showSingleImageSegueIdentifier {
             guard
                 let viewController = segue.destination as? SingleImageViewController,
                 let indexPath = sender as? IndexPath
@@ -44,6 +45,7 @@ final class ImagesListViewController: UIViewController {
                 return
             }
             
+            _ = viewController.view // CRASH FIXED !?
             let image = UIImage(named: photosName[indexPath.row])
             viewController.imageView.image = image
         } else {

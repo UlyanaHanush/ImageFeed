@@ -12,7 +12,7 @@ extension ImagesListViewController: UITableViewDelegate {
     
     /// переход от таблице к одной картинке
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "ShowSingleImage", sender: indexPath)
+        performSegue(withIdentifier: showSingleImageSegueIdentifier, sender: indexPath)
     }
 
     /// просчет высоты ячейки
