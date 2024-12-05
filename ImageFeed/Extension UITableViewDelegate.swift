@@ -10,7 +10,10 @@ import UIKit
 
 extension ImagesListViewController: UITableViewDelegate {
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) { }
+    /// переход от таблице к одной картинке
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "ShowSingleImage", sender: indexPath)
+    }
 
     /// просчет высоты ячейки
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
