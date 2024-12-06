@@ -7,13 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CEC321D92CF8931B00260A7E /* Extension UITableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC321D82CF8931B00260A7E /* Extension UITableViewDataSource.swift */; };
+		CEC321DB2CF8938B00260A7E /* Extension UITableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC321DA2CF8938B00260A7E /* Extension UITableViewDelegate.swift */; };
+		CEC321DD2CF894B500260A7E /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC321DC2CF894B500260A7E /* ImagesListCell.swift */; };
+		CEC321DF2CF8B8E700260A7E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEFD3F782CF0AC780006E47A /* Main.storyboard */; };
+		CEC322842CFC72B600260A7E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEFD3F802CF0AC7A0006E47A /* LaunchScreen.storyboard */; };
+		CEC322862CFC768800260A7E /* extension ImagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC322852CFC768800260A7E /* extension ImagesListViewController.swift */; };
 		CEFD3F732CF0AC780006E47A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFD3F722CF0AC780006E47A /* AppDelegate.swift */; };
 		CEFD3F752CF0AC780006E47A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFD3F742CF0AC780006E47A /* SceneDelegate.swift */; };
-		CEFD3F772CF0AC780006E47A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFD3F762CF0AC780006E47A /* ViewController.swift */; };
-		CEFD3F7A2CF0AC780006E47A /* Base in Resources */ = {isa = PBXBuildFile; fileRef = CEFD3F792CF0AC780006E47A /* Base */; };
+		CEFD3F772CF0AC780006E47A /* ImagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFD3F762CF0AC780006E47A /* ImagesListViewController.swift */; };
 		CEFD3F7D2CF0AC780006E47A /* ImageFeed.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CEFD3F7B2CF0AC780006E47A /* ImageFeed.xcdatamodeld */; };
 		CEFD3F7F2CF0AC7A0006E47A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEFD3F7E2CF0AC7A0006E47A /* Assets.xcassets */; };
-		CEFD3F822CF0AC7A0006E47A /* Base in Resources */ = {isa = PBXBuildFile; fileRef = CEFD3F812CF0AC7A0006E47A /* Base */; };
 		CEFD3F8D2CF0AC7B0006E47A /* ImageFeedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFD3F8C2CF0AC7B0006E47A /* ImageFeedTests.swift */; };
 		CEFD3F972CF0AC7B0006E47A /* ImageFeedUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFD3F962CF0AC7B0006E47A /* ImageFeedUITests.swift */; };
 		CEFD3F992CF0AC7B0006E47A /* ImageFeedUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFD3F982CF0AC7B0006E47A /* ImageFeedUITestsLaunchTests.swift */; };
@@ -37,10 +41,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CEC321D82CF8931B00260A7E /* Extension UITableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension UITableViewDataSource.swift"; sourceTree = "<group>"; };
+		CEC321DA2CF8938B00260A7E /* Extension UITableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension UITableViewDelegate.swift"; sourceTree = "<group>"; };
+		CEC321DC2CF894B500260A7E /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
+		CEC322852CFC768800260A7E /* extension ImagesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "extension ImagesListViewController.swift"; sourceTree = "<group>"; };
 		CEFD3F6F2CF0AC780006E47A /* ImageFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEFD3F722CF0AC780006E47A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEFD3F742CF0AC780006E47A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		CEFD3F762CF0AC780006E47A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		CEFD3F762CF0AC780006E47A /* ImagesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListViewController.swift; sourceTree = "<group>"; };
 		CEFD3F792CF0AC780006E47A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CEFD3F7C2CF0AC780006E47A /* ImageFeed.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ImageFeed.xcdatamodel; sourceTree = "<group>"; };
 		CEFD3F7E2CF0AC7A0006E47A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -78,6 +86,18 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CEC321DE2CF8951F00260A7E /* ImagesList */ = {
+			isa = PBXGroup;
+			children = (
+				CEC321DC2CF894B500260A7E /* ImagesListCell.swift */,
+				CEFD3F762CF0AC780006E47A /* ImagesListViewController.swift */,
+				CEC321D82CF8931B00260A7E /* Extension UITableViewDataSource.swift */,
+				CEC321DA2CF8938B00260A7E /* Extension UITableViewDelegate.swift */,
+				CEC322852CFC768800260A7E /* extension ImagesListViewController.swift */,
+			);
+			name = ImagesList;
+			sourceTree = "<group>";
+		};
 		CEFD3F662CF0AC780006E47A = {
 			isa = PBXGroup;
 			children = (
@@ -101,9 +121,9 @@
 		CEFD3F712CF0AC780006E47A /* ImageFeed */ = {
 			isa = PBXGroup;
 			children = (
+				CEC321DE2CF8951F00260A7E /* ImagesList */,
 				CEFD3F722CF0AC780006E47A /* AppDelegate.swift */,
 				CEFD3F742CF0AC780006E47A /* SceneDelegate.swift */,
-				CEFD3F762CF0AC780006E47A /* ViewController.swift */,
 				CEFD3F782CF0AC780006E47A /* Main.storyboard */,
 				CEFD3F7E2CF0AC7A0006E47A /* Assets.xcassets */,
 				CEFD3F802CF0AC7A0006E47A /* LaunchScreen.storyboard */,
@@ -234,9 +254,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEC322842CFC72B600260A7E /* LaunchScreen.storyboard in Resources */,
+				CEC321DF2CF8B8E700260A7E /* Main.storyboard in Resources */,
 				CEFD3F7F2CF0AC7A0006E47A /* Assets.xcassets in Resources */,
-				CEFD3F822CF0AC7A0006E47A /* Base in Resources */,
-				CEFD3F7A2CF0AC780006E47A /* Base in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,9 +281,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEFD3F772CF0AC780006E47A /* ViewController.swift in Sources */,
+				CEFD3F772CF0AC780006E47A /* ImagesListViewController.swift in Sources */,
 				CEFD3F7D2CF0AC780006E47A /* ImageFeed.xcdatamodeld in Sources */,
 				CEFD3F732CF0AC780006E47A /* AppDelegate.swift in Sources */,
+				CEC321DD2CF894B500260A7E /* ImagesListCell.swift in Sources */,
+				CEC321DB2CF8938B00260A7E /* Extension UITableViewDelegate.swift in Sources */,
+				CEC322862CFC768800260A7E /* extension ImagesListViewController.swift in Sources */,
+				CEC321D92CF8931B00260A7E /* Extension UITableViewDataSource.swift in Sources */,
 				CEFD3F752CF0AC780006E47A /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
