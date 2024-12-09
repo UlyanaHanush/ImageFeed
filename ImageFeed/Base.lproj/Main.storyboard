@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                                 <color key="backgroundColor" name="YP Black"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ImagesListCell" rowHeight="212" id="3d3-Qv-t6g" customClass="ImagesListCell" customModule="ImageFeed" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="ImagesListCell" rowHeight="212" id="3d3-Qv-t6g" customClass="ImagesListCell" customModule="ImageFeed" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="393" height="212"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3d3-Qv-t6g" id="iXt-SS-pti">
@@ -208,59 +208,7 @@
                     <view key="view" contentMode="scaleToFill" id="z14-nB-ui4">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Photo" translatesAutoresizingMaskIntoConstraints="NO" id="Xjm-0W-rRQ">
-                                <rect key="frame" x="16" y="91" width="70" height="70"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="Xjm-0W-rRQ" secondAttribute="height" multiplier="1:1" id="Dci-fm-fVY"/>
-                                    <constraint firstAttribute="width" constant="70" id="jqW-Ep-PNf"/>
-                                </constraints>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Екатерина Новикова" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RWk-kl-F0I" userLabel="Name Lable">
-                                <rect key="frame" x="16" y="169" width="361" height="27.666666666666657"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
-                                <color key="textColor" name="YP White"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9qR-Zs-4wc" userLabel="Logout Button">
-                                <rect key="frame" x="333" y="104" width="44" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="44" id="Whi-Hl-SjG"/>
-                                    <constraint firstAttribute="height" constant="44" id="aCM-Dc-QXb"/>
-                                </constraints>
-                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                <state key="normal" image="ipad.and.arrow.forward"/>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@ekaterina_nov" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kte-ul-hV3" userLabel="Login Name Label">
-                                <rect key="frame" x="16" y="204.66666666666666" width="361" height="15.666666666666657"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" name="YP White"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hello, World!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cEv-6C-NoJ" userLabel="Description Label">
-                                <rect key="frame" x="16" y="228.33333333333334" width="361" height="15.666666666666657"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                                <color key="textColor" name="YP White"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
                         <viewLayoutGuide key="safeArea" id="07x-fY-v6s"/>
-                        <color key="backgroundColor" name="YP Black"/>
-                        <constraints>
-                            <constraint firstItem="RWk-kl-F0I" firstAttribute="leading" secondItem="Xjm-0W-rRQ" secondAttribute="leading" id="3BL-FV-lqA"/>
-                            <constraint firstItem="07x-fY-v6s" firstAttribute="trailing" secondItem="9qR-Zs-4wc" secondAttribute="trailing" constant="16" id="7ba-yE-xLE"/>
-                            <constraint firstItem="Kte-ul-hV3" firstAttribute="trailing" secondItem="RWk-kl-F0I" secondAttribute="trailing" id="KOy-N4-RDH"/>
-                            <constraint firstItem="cEv-6C-NoJ" firstAttribute="trailing" secondItem="RWk-kl-F0I" secondAttribute="trailing" id="NmN-XQ-p9X"/>
-                            <constraint firstItem="07x-fY-v6s" firstAttribute="trailing" secondItem="RWk-kl-F0I" secondAttribute="trailing" constant="16" id="PwB-Z3-fE7"/>
-                            <constraint firstItem="cEv-6C-NoJ" firstAttribute="top" secondItem="Kte-ul-hV3" secondAttribute="bottom" constant="8" id="Qum-0K-bGQ"/>
-                            <constraint firstItem="Xjm-0W-rRQ" firstAttribute="leading" secondItem="07x-fY-v6s" secondAttribute="leading" constant="16" id="XMf-Bg-GlU"/>
-                            <constraint firstItem="Kte-ul-hV3" firstAttribute="top" secondItem="RWk-kl-F0I" secondAttribute="bottom" constant="8" id="aZ3-of-FGt"/>
-                            <constraint firstItem="Xjm-0W-rRQ" firstAttribute="top" secondItem="07x-fY-v6s" secondAttribute="top" constant="32" id="fUO-ux-JmN"/>
-                            <constraint firstItem="Kte-ul-hV3" firstAttribute="leading" secondItem="RWk-kl-F0I" secondAttribute="leading" id="mJc-2r-9tS"/>
-                            <constraint firstItem="9qR-Zs-4wc" firstAttribute="centerY" secondItem="Xjm-0W-rRQ" secondAttribute="centerY" id="oTo-1x-1kE"/>
-                            <constraint firstItem="RWk-kl-F0I" firstAttribute="top" secondItem="Xjm-0W-rRQ" secondAttribute="bottom" constant="8" id="xGf-7B-v4W"/>
-                            <constraint firstItem="cEv-6C-NoJ" firstAttribute="leading" secondItem="RWk-kl-F0I" secondAttribute="leading" id="yb5-bo-fWJ"/>
-                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="tab_prifile_active" id="nsC-LH-0NS"/>
                 </viewController>
@@ -275,8 +223,6 @@
         <image name="Backward" width="24" height="24"/>
         <image name="GradientLable" width="343" height="30"/>
         <image name="LikeImageNotActive" width="42" height="42"/>
-        <image name="Photo" width="70" height="70"/>
-        <image name="ipad.and.arrow.forward" width="20" height="22"/>
         <image name="share_button" width="50" height="50"/>
         <image name="tab_editorial_active" width="20" height="22"/>
         <image name="tab_prifile_active" width="24" height="24"/>
