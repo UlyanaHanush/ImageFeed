@@ -15,8 +15,10 @@ final class SingleImageViewController: UIViewController {
     var image: UIImage? {
         didSet {
             guard isViewLoaded, let image else { return }
+            
             imageView.image = image
             imageView.frame.size = image.size
+            rescaleAndCenterImageInScrollView(image: image)
         }
     }
     
@@ -61,6 +63,7 @@ final class SingleImageViewController: UIViewController {
         
         let visibleRectSize = scrollView.bounds.size
         let imageSize = image.size
+        
         let hScale = visibleRectSize.width / imageSize.width
         let vScale = visibleRectSize.height / imageSize.height
         let scale = min(maxZoomScale, max(minZoomScale, min(hScale, vScale)))
@@ -75,5 +78,11 @@ final class SingleImageViewController: UIViewController {
         let x = (newContentSize.width - visibleRectSize.width) / 2
         let y = (newContentSize.height - visibleRectSize.height) / 2
         scrollView.setContentOffset(CGPoint(x: x, y: y), animated: false)
+    }
+    
+    func centerImageInScrollViewAfterZoom() {
+        let xInset = max((scrollView.bounds.width - scrollView.contentSize.width) / 2, 0)
+        let yInset = max((scrollView.bounds.height - scrollView.contentSize.height) / 2, 0)
+        scrollView.contentInset = UIEdgeInsets(top: yInset, left: xInset, bottom: yInset, right: xInset)
     }
 }
