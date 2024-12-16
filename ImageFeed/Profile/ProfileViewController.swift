@@ -11,35 +11,35 @@ final class ProfileViewController: UIViewController {
     
     // MARK: - Public Properties
     
-    lazy var avatarImageView: UIImageView = {
+     private lazy var avatarImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "Photo"))
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
     
-    lazy var logoutButton: UIButton = {
+    private lazy var logoutButton: UIButton = {
         let button = UIButton.systemButton(
             with: UIImage(systemName: "ipad.and.arrow.forward")!,
             target: self,
             action: #selector(Self.didTapButton))
-        button.tintColor = .red
+        button.tintColor = .ipadAndArrowForward
         
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
-    lazy var nameLable: UILabel = {
+    private lazy var nameLable: UILabel = {
         let lable = UILabel()
         lable.text = "Екатерина Новикова"
-        lable.font = .systemFont(ofSize: 23)
+        lable.font = .boldSystemFont(ofSize: 23)
         lable.textColor = .ypWhite
         
         lable.translatesAutoresizingMaskIntoConstraints = false
         return lable
     }()
     
-    lazy var loginNameLable: UILabel = {
+    private lazy var loginNameLable: UILabel = {
         let lable = UILabel()
         lable.text = "@ekaterina_nov"
         lable.font = .systemFont(ofSize: 13)
@@ -49,7 +49,7 @@ final class ProfileViewController: UIViewController {
         return lable
     }()
     
-    lazy var descriptionLabel: UILabel = {
+    private lazy var descriptionLabel: UILabel = {
         let lable = UILabel()
         lable.text = "Hello, World!"
         lable.font = .systemFont(ofSize: 13)
