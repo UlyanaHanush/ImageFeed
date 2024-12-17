@@ -13,6 +13,9 @@
 		CEC321DF2CF8B8E700260A7E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEFD3F782CF0AC780006E47A /* Main.storyboard */; };
 		CEC322842CFC72B600260A7E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEFD3F802CF0AC7A0006E47A /* LaunchScreen.storyboard */; };
 		CEC322862CFC768800260A7E /* extension ImagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC322852CFC768800260A7E /* extension ImagesListViewController.swift */; };
+		CEC322882CFCD5D700260A7E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC322872CFCD5D700260A7E /* ProfileViewController.swift */; };
+		CEC3228E2D00D09100260A7E /* SingleImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC3228D2D00D09100260A7E /* SingleImageViewController.swift */; };
+		CEC322902D01EC5100260A7E /* extension UIScrollViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC3228F2D01EC5100260A7E /* extension UIScrollViewDelegate.swift */; };
 		CEFD3F732CF0AC780006E47A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFD3F722CF0AC780006E47A /* AppDelegate.swift */; };
 		CEFD3F752CF0AC780006E47A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFD3F742CF0AC780006E47A /* SceneDelegate.swift */; };
 		CEFD3F772CF0AC780006E47A /* ImagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFD3F762CF0AC780006E47A /* ImagesListViewController.swift */; };
@@ -45,6 +48,9 @@
 		CEC321DA2CF8938B00260A7E /* Extension UITableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension UITableViewDelegate.swift"; sourceTree = "<group>"; };
 		CEC321DC2CF894B500260A7E /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
 		CEC322852CFC768800260A7E /* extension ImagesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "extension ImagesListViewController.swift"; sourceTree = "<group>"; };
+		CEC322872CFCD5D700260A7E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		CEC3228D2D00D09100260A7E /* SingleImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImageViewController.swift; sourceTree = "<group>"; };
+		CEC3228F2D01EC5100260A7E /* extension UIScrollViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "extension UIScrollViewDelegate.swift"; sourceTree = "<group>"; };
 		CEFD3F6F2CF0AC780006E47A /* ImageFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEFD3F722CF0AC780006E47A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEFD3F742CF0AC780006E47A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -98,6 +104,23 @@
 			name = ImagesList;
 			sourceTree = "<group>";
 		};
+		CEC3228B2CFCDCC300260A7E /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				CEC322872CFCD5D700260A7E /* ProfileViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		CEC3228C2D00D06D00260A7E /* SingleImage */ = {
+			isa = PBXGroup;
+			children = (
+				CEC3228D2D00D09100260A7E /* SingleImageViewController.swift */,
+				CEC3228F2D01EC5100260A7E /* extension UIScrollViewDelegate.swift */,
+			);
+			name = SingleImage;
+			sourceTree = "<group>";
+		};
 		CEFD3F662CF0AC780006E47A = {
 			isa = PBXGroup;
 			children = (
@@ -121,6 +144,8 @@
 		CEFD3F712CF0AC780006E47A /* ImageFeed */ = {
 			isa = PBXGroup;
 			children = (
+				CEC3228C2D00D06D00260A7E /* SingleImage */,
+				CEC3228B2CFCDCC300260A7E /* Profile */,
 				CEC321DE2CF8951F00260A7E /* ImagesList */,
 				CEFD3F722CF0AC780006E47A /* AppDelegate.swift */,
 				CEFD3F742CF0AC780006E47A /* SceneDelegate.swift */,
@@ -285,8 +310,11 @@
 				CEFD3F7D2CF0AC780006E47A /* ImageFeed.xcdatamodeld in Sources */,
 				CEFD3F732CF0AC780006E47A /* AppDelegate.swift in Sources */,
 				CEC321DD2CF894B500260A7E /* ImagesListCell.swift in Sources */,
+				CEC322902D01EC5100260A7E /* extension UIScrollViewDelegate.swift in Sources */,
 				CEC321DB2CF8938B00260A7E /* Extension UITableViewDelegate.swift in Sources */,
 				CEC322862CFC768800260A7E /* extension ImagesListViewController.swift in Sources */,
+				CEC3228E2D00D09100260A7E /* SingleImageViewController.swift in Sources */,
+				CEC322882CFCD5D700260A7E /* ProfileViewController.swift in Sources */,
 				CEC321D92CF8931B00260A7E /* Extension UITableViewDataSource.swift in Sources */,
 				CEFD3F752CF0AC780006E47A /* SceneDelegate.swift in Sources */,
 			);
