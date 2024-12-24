@@ -5,7 +5,6 @@
 //  Created by ulyana on 4.12.24.
 //
 
-import Foundation
 import UIKit
 
 final class SingleImageViewController: UIViewController {

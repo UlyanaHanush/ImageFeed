@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		CE71FDE12D11B2DD00BE1D06 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE71FDE02D11B2DD00BE1D06 /* Constants.swift */; };
+		CE71FDE42D12FFC900BE1D06 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE71FDE32D12FFC900BE1D06 /* AuthViewController.swift */; };
+		CE71FDE62D143E5000BE1D06 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE71FDE52D143E5000BE1D06 /* WebViewViewController.swift */; };
 		CEC321D92CF8931B00260A7E /* Extension UITableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC321D82CF8931B00260A7E /* Extension UITableViewDataSource.swift */; };
 		CEC321DB2CF8938B00260A7E /* Extension UITableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC321DA2CF8938B00260A7E /* Extension UITableViewDelegate.swift */; };
 		CEC321DD2CF894B500260A7E /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC321DC2CF894B500260A7E /* ImagesListCell.swift */; };
@@ -46,6 +48,8 @@
 
 /* Begin PBXFileReference section */
 		CE71FDE02D11B2DD00BE1D06 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		CE71FDE32D12FFC900BE1D06 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
+		CE71FDE52D143E5000BE1D06 /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
 		CEC321D82CF8931B00260A7E /* Extension UITableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension UITableViewDataSource.swift"; sourceTree = "<group>"; };
 		CEC321DA2CF8938B00260A7E /* Extension UITableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension UITableViewDelegate.swift"; sourceTree = "<group>"; };
 		CEC321DC2CF894B500260A7E /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
@@ -94,6 +98,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE71FDE22D12FFB300BE1D06 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				CE71FDE32D12FFC900BE1D06 /* AuthViewController.swift */,
+				CE71FDE52D143E5000BE1D06 /* WebViewViewController.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
 		CEC321DE2CF8951F00260A7E /* ImagesList */ = {
 			isa = PBXGroup;
 			children = (
@@ -146,6 +159,7 @@
 		CEFD3F712CF0AC780006E47A /* ImageFeed */ = {
 			isa = PBXGroup;
 			children = (
+				CE71FDE22D12FFB300BE1D06 /* Auth */,
 				CEC3228C2D00D06D00260A7E /* SingleImage */,
 				CEC3228B2CFCDCC300260A7E /* Profile */,
 				CEC321DE2CF8951F00260A7E /* ImagesList */,
@@ -309,6 +323,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE71FDE62D143E5000BE1D06 /* WebViewViewController.swift in Sources */,
 				CEFD3F772CF0AC780006E47A /* ImagesListViewController.swift in Sources */,
 				CEFD3F7D2CF0AC780006E47A /* ImageFeed.xcdatamodeld in Sources */,
 				CEFD3F732CF0AC780006E47A /* AppDelegate.swift in Sources */,
@@ -317,6 +332,7 @@
 				CEC321DB2CF8938B00260A7E /* Extension UITableViewDelegate.swift in Sources */,
 				CEC322862CFC768800260A7E /* extension ImagesListViewController.swift in Sources */,
 				CEC3228E2D00D09100260A7E /* SingleImageViewController.swift in Sources */,
+				CE71FDE42D12FFC900BE1D06 /* AuthViewController.swift in Sources */,
 				CEC322882CFCD5D700260A7E /* ProfileViewController.swift in Sources */,
 				CEC321D92CF8931B00260A7E /* Extension UITableViewDataSource.swift in Sources */,
 				CEFD3F752CF0AC780006E47A /* SceneDelegate.swift in Sources */,
