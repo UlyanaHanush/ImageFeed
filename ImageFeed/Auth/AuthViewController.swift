@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import ProgressHUD
 
 protocol AuthViewControllerDelegate: AnyObject {
     func didAuthenticate(_ vc: AuthViewController, didAuthenticateWithCode code: String)
@@ -52,12 +53,20 @@ extension AuthViewController: WebViewViewControllerDelegate {
     
     /// сообщает SplashViewController что получен токен
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
+        vc.dismiss(animated: true)
+        // // блокирует пользовательское взаимодействие и включает анимацию
+        UIBlockingProgressHUD.show()
+        
         oauth2Service.fetchOAuthToken(with: code) { [weak self] (result: Result<String, Error>) in
             guard let self = self else { return }
+            
+            // разблокирует пользовательского взаимодействия и выключит анимацию
+            UIBlockingProgressHUD.dismiss()
+            
             switch result {
             case .success(let token):
-                oauth2TokenStorage.token = token
                 delegate?.didAuthenticate(self, didAuthenticateWithCode: code)
+                oauth2TokenStorage.token = token
                 print("Успешно получен токен: \(token)")
             case .failure(let error):
                 print("Ошибка авторизации: \(error.localizedDescription)")

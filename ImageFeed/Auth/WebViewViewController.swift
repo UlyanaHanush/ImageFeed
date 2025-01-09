@@ -80,7 +80,7 @@ final class WebViewViewController: UIViewController {
         progressView.isHidden = fabs(webView.estimatedProgress - 1.0) <= 0.0001
     }
     
-    /// формирует URL в соответствии с документацией Unsplash
+    /// формирует URL в соответствии с документацией Unsplash и направляет пользователя на страницу авторизации
     private func loadAuthView() {
         // инициализируем структуру URLComponents с указанием адреса запроса
         guard var urlComponents = URLComponents(string: WebViewConstants.unsplashAuthorizeURLString) else {
@@ -115,6 +115,7 @@ extension WebViewViewController: WKNavigationDelegate {
     ///  Запрашивает у делегата разрешение на навигационные действия на основе информации
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if let code = code(from: navigationAction) {
+            // сообщаем AuthViewCotroller что код авторизации получен
             delegate?.webViewViewController(self, didAuthenticateWithCode: code)
             // отменяем навигационное действие (всё, что нужно, мы от webView уже получили)
             decisionHandler(.cancel)

@@ -1,5 +1,5 @@
 //
-//  URLSession+data.swift
+//  NetworkClient.swift
 //  ImageFeed
 //
 //  Created by ulyana on 3.01.25.

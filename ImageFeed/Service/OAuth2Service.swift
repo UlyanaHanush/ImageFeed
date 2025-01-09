@@ -7,6 +7,10 @@
 
 import UIKit
 
+enum AuthServiceError: Error {
+    case invalidRequest
+}
+
 final class OAuth2Service {
     
     // MARK: - Constants
@@ -18,23 +22,37 @@ final class OAuth2Service {
     
     private let oauth2TokenStorage = OAuth2TokenStorage()
     private var networkClient = NetworkClient()
+    
+    private let urlSession = URLSession.shared
+    // указателя на последнюю созданную задачу
+    private var task: URLSessionTask?
+    // Переменная для хранения значения code, которое было передано в последнем созданном запросе.
+    private var lastCode: String?
 
     // MARK: - Public Methods
     
     /// десериализация данных и обработка ошибок
     func fetchOAuthToken(with code: String, completion: @escaping (Result<String, Error>) -> Void) {
+        assert(Thread.isMainThread)
+        guard lastCode != code else {
+            completion(.failure(AuthServiceError.invalidRequest))
+            return
+        }
+        task?.cancel()
+        lastCode = code
+        
         guard let request = makeOAuthTokenRequest(code: code) else {
-            completion(.failure(NSError(domain: "OAuth2Service", code: -1, userInfo: [NSLocalizedDescriptionKey: "Ошибка создания запроса"])))
+            completion(.failure(AuthServiceError.invalidRequest))
             return
         }
         
-        networkClient.data(for: request) { result in
+        let task = networkClient.data(for: request) { [weak self] result in
             switch result {
             case .success(let data):
                 do {
                     let tokenResponse = try JSONDecoder().decode(OAuthTokenResponseBody.self, from: data)
                     // сохраняем токен
-                    self.oauth2TokenStorage.token = tokenResponse.accessToken
+                    self?.oauth2TokenStorage.token = tokenResponse.accessToken
                     completion(.success(tokenResponse.accessToken))
                 } catch {
                     print("Ошибка декодирования ответа: \(error)")
@@ -44,7 +62,11 @@ final class OAuth2Service {
                 print("Ошибка сети или запроса: \(error)")
                 completion(.failure(error))
             }
-        }.resume()
+            self?.task = nil
+            self?.lastCode = nil
+        }
+        self.task = task
+        task.resume()
     }
     
     // MARK: - Private Methods
@@ -61,7 +83,7 @@ final class OAuth2Service {
             + "&&grant_type=authorization_code",
             relativeTo: baseURL
         ) else {
-            assertionFailure("Не удалось создать URL")
+            assertionFailure("Failed to create URL")
             return nil
         }
         
