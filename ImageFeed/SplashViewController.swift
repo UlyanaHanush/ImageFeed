@@ -13,16 +13,19 @@ final class SplashViewController: UIViewController {
     
     private let showAuthenticationScreenSegueIdentifier = "ShowAuthenticationScreen"
     
+    static let shared = SplashViewController()
+    
     private let oauth2TokenStorage = OAuth2TokenStorage()
     private let oauth2Service = OAuth2Service.shared
+    private var profileService = ProfileService.shared
     
     // MARK: - UIViewController(*)
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if let _ = oauth2TokenStorage.token {
-            switchToTabBarController()
+        if let token = oauth2TokenStorage.token {
+            fetchProfile(token)
         } else {
             // Show Auth Screen
             performSegue(withIdentifier: showAuthenticationScreenSegueIdentifier, sender: nil)
@@ -80,20 +83,24 @@ extension SplashViewController {
 
 extension SplashViewController: AuthViewControllerDelegate {
     func didAuthenticate(_ vc: AuthViewController, didAuthenticateWithCode code: String) {
-        dismiss(animated: true) { [weak self] in
-            guard let self = self else { return }
-            self.fetchOAuthToken(code)
-        }
+        dismiss(animated: true)
+        guard let token = OAuth2TokenStorage().token else { return }
+        fetchProfile(token)
     }
     
-    private func fetchOAuthToken(_ code: String) {
-        oauth2Service.fetchOAuthToken(with: code) { [weak self] result in
+    private func fetchProfile(_ token: String) {
+        UIBlockingProgressHUD.show()
+        
+        profileService.fetchProfile(token) { [weak self] (result: Result<Profile, Error>) in
+            UIBlockingProgressHUD.dismiss()
+            
             guard let self = self else { return }
+            
             switch result {
             case .success:
                 self.switchToTabBarController()
-            case .failure:
-                // TODO [Sprint 11]
+            case .failure(let error):
+                print("Profile was not found:\(error)")
                 break
             }
         }

@@ -9,9 +9,12 @@ import UIKit
 
 final class ProfileViewController: UIViewController {
     
-    // MARK: - Public Properties
+    // MARK: - Private Properties
     
-     private lazy var avatarImageView: UIImageView = {
+    let profileService = ProfileService.shared
+    let splashViewController = SplashViewController.shared
+    
+    private lazy var avatarImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "Photo"))
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -67,6 +70,7 @@ final class ProfileViewController: UIViewController {
         self.addSubviews()
         self.setupConstraints()
         
+        updateProfileDetails()
         view.backgroundColor = .ypBlack
     }
     
@@ -105,6 +109,16 @@ final class ProfileViewController: UIViewController {
         descriptionLabel.topAnchor.constraint(equalTo: loginNameLable.bottomAnchor, constant: 8).isActive = true
     }
     
+    private func updateProfileDetails() {
+        if let profile = profileService.profile {
+            nameLable.text = profile.name
+            loginNameLable.text = profile.loginName
+            descriptionLabel.text = profile.bio
+        } else {
+            print("profile was not found")
+        }
+    }
+        
     @objc
     private func didTapButton() {}
 }
