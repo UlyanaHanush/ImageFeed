@@ -18,6 +18,7 @@ final class SplashViewController: UIViewController {
     private let oauth2TokenStorage = OAuth2TokenStorage()
     private let oauth2Service = OAuth2Service.shared
     private var profileService = ProfileService.shared
+    private let profileImageService = ProfileImageService.shared
     
     // MARK: - UIViewController(*)
     
@@ -97,7 +98,8 @@ extension SplashViewController: AuthViewControllerDelegate {
             guard let self = self else { return }
             
             switch result {
-            case .success:
+            case .success(let profile):
+                profileImageService.fetchProfileImageURL(username: profile.username) { _ in }
                 self.switchToTabBarController()
             case .failure(let error):
                 print("Profile was not found:\(error)")

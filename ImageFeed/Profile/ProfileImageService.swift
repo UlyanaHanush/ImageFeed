@@ -1,79 +1,59 @@
 //
-//  ProfileService.swift
+//  ProfileImageService.swift
 //  ImageFeed
 //
-//  Created by ulyana on 13.01.25.
+//  Created by ulyana on 17.01.25.
 //
 
 import Foundation
 
-// MARK: - Struct + Enum
-
-enum ProfileServiceError: Error {
-    case invalidRequest
-    case invalidURL
-    case noData
-    case decodingError
-    case missingProfileImageURL
-}
-
-enum ProfileViewConstants {
-    static let unsplashProfileURLString = "https://api.unsplash.com/me"
-}
-
-struct ProfileResult: Decodable {
-    let username: String
-    let firstName: String
-    let lastName: String?
-    let bio: String?
+struct UserResult: Decodable {
+    let profileImage: ProfileImage
     
     enum CodingKeys: String, CodingKey {
-        case username, bio
-        case firstName = "first_name"
-        case lastName = "last_name"
+        case profileImage = "profile_image"
     }
 }
 
-struct Profile {
-    
-    let username: String
-    var name: String
-    let loginName: String
-    let bio: String?
+struct ProfileImage: Decodable {
+    let small: String
 }
 
-final class ProfileService {
+enum ProfileImageConstants {
+    static let unsplashProfileImageURLString = "https://api.unsplash.com//users/"
+}
+
+final class ProfileImageService {
     
     // MARK: - Singleton
     
-    static let shared = ProfileService()
+    static let shared = ProfileImageService()
     private init() {}
     
     // MARK: - Private Properties
     
     private let oauth2TokenStorage = OAuth2TokenStorage()
     private var networkClient = NetworkClient()
-    private(set) var profile: Profile?
+    private (set) var avatarURL: String?
     
     private let urlSession = URLSession.shared
     // указателя на последнюю созданную задачу
     private var task: URLSessionTask?
     // Переменная для хранения значения code, которое было передано в последнем созданном запросе.
-    private var lastToken: String?
+    private var lastUserName: String?
 
     // MARK: - Public Methods
     
-    /// десериализация данных и обработка ошибок
-    func fetchProfile(_ token: String, completion: @escaping (Result<Profile, Error>) -> Void) {
+    func fetchProfileImageURL(username: String, _ completion: @escaping (Result<String, Error>) -> Void) {
         assert(Thread.isMainThread)
-        guard lastToken != token else {
+        guard lastUserName != username else {
             completion(.failure(ProfileServiceError.invalidRequest))
             return
         }
         task?.cancel()
-        lastToken = token
+        lastUserName = username
         
-        guard let request = makeProfileRequest(token: token) else {
+        guard let request = makeProfileImageRequest(username: username) else {
             completion(.failure(ProfileServiceError.invalidURL))
             return
         }
@@ -82,16 +62,11 @@ final class ProfileService {
             switch result {
             case .success(let data):
                 do {
-                    let profileResult = try JSONDecoder().decode(ProfileResult.self, from: data)
+                    let userResult = try JSONDecoder().decode(UserResult.self, from: data)
+                    let profileImageURL = userResult.profileImage.small
                     
-                    let profile = Profile(
-                        username: profileResult.username,
-                        name: profileResult.firstName + " " + (profileResult.lastName ?? ""),
-                        loginName: "@" + profileResult.username,
-                        bio: profileResult.bio)
-                    
-                    self?.profile = profile
-                    completion(.success(profile))
+                    self?.avatarURL = profileImageURL
+                    completion(.success(profileImageURL))
                 } catch {
                     print("Ошибка декодирования ответа: \(error)")
                     completion(.failure(ProfileServiceError.decodingError))
@@ -101,7 +76,7 @@ final class ProfileService {
                 completion(.failure(ProfileServiceError.decodingError))
             }
             self?.task = nil
-            self?.lastToken = nil
+            self?.lastUserName = nil
         }
         self.task = task
         task.resume()
@@ -110,14 +85,22 @@ final class ProfileService {
     // MARK: - Private Methods
     
     /// URLRequest из составных компоненто
-    private func makeProfileRequest(token: String) -> URLRequest? {
-        guard let url = URL(string: ProfileViewConstants.unsplashProfileURLString) else {
-            assertionFailure("Failed to create URL")
+    private func makeProfileImageRequest(username: String) -> URLRequest? {
+        guard let baseURL = URL(string: "https://api.unsplash.com") else {
+            assertionFailure("[ProfileImageService: makeProfileImageRequest]: Failed to create URL")
             return nil
         }
-
+        
+        guard let url = URL(string: "/users/\(username)", relativeTo: baseURL) else {
+            return nil
+        }
+        
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
+        guard let token = oauth2TokenStorage.token else {
+            assertionFailure("[ProfileImageService: makeProfileImageRequest]: Failed token")
+            return nil
+        }
         request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         return request
     }

@@ -18,6 +18,7 @@
 		CE71FE002D2F0BD300BE1D06 /* ProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = CE71FDFF2D2F0BD300BE1D06 /* ProgressHUD */; };
 		CE71FE022D306C0D00BE1D06 /* UIBlockingProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE71FE012D306C0D00BE1D06 /* UIBlockingProgressHUD.swift */; };
 		CE71FE042D35A4C100BE1D06 /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE71FE032D35A4C100BE1D06 /* ProfileService.swift */; };
+		CEC028082D3A775A0034D925 /* ProfileImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC028072D3A775A0034D925 /* ProfileImageService.swift */; };
 		CEC321D92CF8931B00260A7E /* Extension UITableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC321D82CF8931B00260A7E /* Extension UITableViewDataSource.swift */; };
 		CEC321DB2CF8938B00260A7E /* Extension UITableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC321DA2CF8938B00260A7E /* Extension UITableViewDelegate.swift */; };
 		CEC321DD2CF894B500260A7E /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC321DC2CF894B500260A7E /* ImagesListCell.swift */; };
@@ -64,6 +65,7 @@
 		CE71FDF52D2BEB8E00BE1D06 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		CE71FE012D306C0D00BE1D06 /* UIBlockingProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBlockingProgressHUD.swift; sourceTree = "<group>"; };
 		CE71FE032D35A4C100BE1D06 /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
+		CEC028072D3A775A0034D925 /* ProfileImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageService.swift; sourceTree = "<group>"; };
 		CEC321D82CF8931B00260A7E /* Extension UITableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension UITableViewDataSource.swift"; sourceTree = "<group>"; };
 		CEC321DA2CF8938B00260A7E /* Extension UITableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension UITableViewDelegate.swift"; sourceTree = "<group>"; };
 		CEC321DC2CF894B500260A7E /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				CE71FE032D35A4C100BE1D06 /* ProfileService.swift */,
+				CEC028072D3A775A0034D925 /* ProfileImageService.swift */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -215,9 +218,9 @@
 				CEC3228C2D00D06D00260A7E /* SingleImage */,
 				CEC3228B2CFCDCC300260A7E /* Profile */,
 				CEC321DE2CF8951F00260A7E /* ImagesList */,
-				CEFD3F722CF0AC780006E47A /* AppDelegate.swift */,
 				CE71FDF72D2BEBC700BE1D06 /* Splash */,
 				CEFD3F742CF0AC780006E47A /* SceneDelegate.swift */,
+				CEFD3F722CF0AC780006E47A /* AppDelegate.swift */,
 				CEFD3F782CF0AC780006E47A /* Main.storyboard */,
 				CEFD3F7E2CF0AC7A0006E47A /* Assets.xcassets */,
 				CEFD3F802CF0AC7A0006E47A /* LaunchScreen.storyboard */,
@@ -397,6 +400,7 @@
 				CE71FDE42D12FFC900BE1D06 /* AuthViewController.swift in Sources */,
 				CEC322882CFCD5D700260A7E /* ProfileViewController.swift in Sources */,
 				CE71FDEC2D287FBD00BE1D06 /* NetworkClient.swift in Sources */,
+				CEC028082D3A775A0034D925 /* ProfileImageService.swift in Sources */,
 				CE71FDF62D2BEB8E00BE1D06 /* SplashViewController.swift in Sources */,
 				CE71FDF12D28B55600BE1D06 /* OAuthTokenResponseBody.swift in Sources */,
 				CEC321D92CF8931B00260A7E /* Extension UITableViewDataSource.swift in Sources */,
