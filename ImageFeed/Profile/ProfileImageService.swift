@@ -7,22 +7,6 @@
 
 import Foundation
 
-struct UserResult: Decodable {
-    let profileImage: ProfileImage
-    
-    enum CodingKeys: String, CodingKey {
-        case profileImage = "profile_image"
-    }
-}
-
-struct ProfileImage: Decodable {
-    let small: String
-}
-
-enum ProfileImageConstants {
-    static let unsplashProfileImageURLString = "https://api.unsplash.com//users/"
-}
-
 final class ProfileImageService {
     
     // MARK: - Singleton
@@ -51,38 +35,32 @@ final class ProfileImageService {
     func fetchProfileImageURL(username: String, _ completion: @escaping (Result<String, Error>) -> Void) {
         assert(Thread.isMainThread)
         guard lastUserName != username else {
-            completion(.failure(ProfileServiceError.invalidRequest))
+            completion(.failure(ProfileImageServiceError.invalidRequest))
             return
         }
         task?.cancel()
         lastUserName = username
         
         guard let request = makeProfileImageRequest(username: username) else {
-            completion(.failure(ProfileServiceError.invalidURL))
+            completion(.failure(ProfileImageServiceError.invalidURL))
             return
         }
         
-        let task = networkClient.data(for: request) { [weak self] (result: Result<Data, Error>) in
+        let task = networkClient.objectTask(for: request) { [weak self] (result: Result<UserResult, Error>) in
             switch result {
-            case .success(let data):
-                do {
-                    let userResult = try JSONDecoder().decode(UserResult.self, from: data)
-                    let profileImageURL = userResult.profileImage.small
+            case .success(let userResult):
+                let profileImageURL = userResult.profileImage.small
+                self?.avatarURL = profileImageURL
+                completion(.success(profileImageURL))
                     
-                    self?.avatarURL = profileImageURL
-                    completion(.success(profileImageURL))
-                    
-                    NotificationCenter.default.post(
-                            name: ProfileImageService.didChangeNotification,
-                            object: self,
-                            userInfo: ["URL": profileImageURL])
-                } catch {
-                    print("Ошибка декодирования ответа: \(error)")
-                    completion(.failure(ProfileServiceError.decodingError))
-                }
+                NotificationCenter.default.post(
+                        name: ProfileImageService.didChangeNotification,
+                        object: self,
+                        userInfo: ["URL": profileImageURL])
+
             case .failure(let error):
-                print("Ошибка сети или запроса: \(error)")
-                completion(.failure(ProfileServiceError.decodingError))
+                print("Network or request error: \(error)")
+                completion(.failure(ProfileImageServiceError.decodingError))
             }
             self?.task = nil
             self?.lastUserName = nil

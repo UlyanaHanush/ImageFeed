@@ -7,13 +7,9 @@
 
 import UIKit
 
-enum AuthServiceError: Error {
-    case invalidRequest
-}
-
 final class OAuth2Service {
     
-    // MARK: - Constants
+    // MARK: - Singleton
     
     static let shared = OAuth2Service()
     private init() {}
@@ -35,31 +31,25 @@ final class OAuth2Service {
     func fetchOAuthToken(with code: String, completion: @escaping (Result<String, Error>) -> Void) {
         assert(Thread.isMainThread)
         guard lastCode != code else {
-            completion(.failure(AuthServiceError.invalidRequest))
+            completion(.failure(Auth2ServiceError.invalidRequest))
             return
         }
         task?.cancel()
         lastCode = code
         
         guard let request = makeOAuthTokenRequest(code: code) else {
-            completion(.failure(AuthServiceError.invalidRequest))
+            completion(.failure(Auth2ServiceError.invalidRequest))
             return
         }
         
-        let task = networkClient.data(for: request) { [weak self] result in
+        let task = networkClient.objectTask(for: request) { [weak self] (result: Result<OAuthTokenResponseBody, Error>) in
             switch result {
-            case .success(let data):
-                do {
-                    let tokenResponse = try JSONDecoder().decode(OAuthTokenResponseBody.self, from: data)
-                    // сохраняем токен
-                    self?.oauth2TokenStorage.token = tokenResponse.accessToken
-                    completion(.success(tokenResponse.accessToken))
-                } catch {
-                    print("Ошибка декодирования ответа: \(error)")
-                    completion(.failure(error))
-                }
+            case .success(let tokenResponse):
+                // сохраняем токен
+                self?.oauth2TokenStorage.token = tokenResponse.accessToken
+                completion(.success(tokenResponse.accessToken))
             case .failure(let error):
-                print("Ошибка сети или запроса: \(error)")
+                print("[OAuth2Service]: [fetchOAuthToken]: \(error.localizedDescription)")
                 completion(.failure(error))
             }
             self?.task = nil

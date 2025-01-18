@@ -7,41 +7,6 @@
 
 import Foundation
 
-// MARK: - Struct + Enum
-
-enum ProfileServiceError: Error {
-    case invalidRequest
-    case invalidURL
-    case noData
-    case decodingError
-    case missingProfileImageURL
-}
-
-enum ProfileViewConstants {
-    static let unsplashProfileURLString = "https://api.unsplash.com/me"
-}
-
-struct ProfileResult: Decodable {
-    let username: String
-    let firstName: String
-    let lastName: String?
-    let bio: String?
-    
-    enum CodingKeys: String, CodingKey {
-        case username, bio
-        case firstName = "first_name"
-        case lastName = "last_name"
-    }
-}
-
-struct Profile {
-    
-    let username: String
-    var name: String
-    let loginName: String
-    let bio: String?
-}
-
 final class ProfileService {
     
     // MARK: - Singleton
@@ -78,26 +43,20 @@ final class ProfileService {
             return
         }
         
-        let task = networkClient.data(for: request) { [weak self] (result: Result<Data, Error>) in
+        let task = networkClient.objectTask(for: request) { [weak self] (result: Result<ProfileResult, Error>) in
             switch result {
-            case .success(let data):
-                do {
-                    let profileResult = try JSONDecoder().decode(ProfileResult.self, from: data)
-                    
-                    let profile = Profile(
-                        username: profileResult.username,
-                        name: profileResult.firstName + " " + (profileResult.lastName ?? ""),
-                        loginName: "@" + profileResult.username,
-                        bio: profileResult.bio)
-                    
-                    self?.profile = profile
-                    completion(.success(profile))
-                } catch {
-                    print("Ошибка декодирования ответа: \(error)")
-                    completion(.failure(ProfileServiceError.decodingError))
-                }
+            case .success(let profileResult):
+                let profile = Profile(
+                    username: profileResult.username,
+                    name: profileResult.firstName + " " + (profileResult.lastName ?? ""),
+                    loginName: "@" + profileResult.username,
+                    bio: profileResult.bio)
+                
+                self?.profile = profile
+                completion(.success(profile))
+
             case .failure(let error):
-                print("Ошибка сети или запроса: \(error)")
+                print("Network or request error: \(error.localizedDescription)")
                 completion(.failure(ProfileServiceError.decodingError))
             }
             self?.task = nil
@@ -112,7 +71,7 @@ final class ProfileService {
     /// URLRequest из составных компоненто
     private func makeProfileRequest(token: String) -> URLRequest? {
         guard let url = URL(string: ProfileViewConstants.unsplashProfileURLString) else {
-            assertionFailure("Failed to create URL")
+            assertionFailure("[ProfileService: makeProfileRequest]: Failed to create URL")
             return nil
         }
 

@@ -19,6 +19,11 @@
 		CE71FE022D306C0D00BE1D06 /* UIBlockingProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE71FE012D306C0D00BE1D06 /* UIBlockingProgressHUD.swift */; };
 		CE71FE042D35A4C100BE1D06 /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE71FE032D35A4C100BE1D06 /* ProfileService.swift */; };
 		CEC028082D3A775A0034D925 /* ProfileImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC028072D3A775A0034D925 /* ProfileImageService.swift */; };
+		CEC0280D2D3C3F3E0034D925 /* ProfileResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC0280C2D3C3F3E0034D925 /* ProfileResult.swift */; };
+		CEC0280F2D3C3F5E0034D925 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC0280E2D3C3F5E0034D925 /* Profile.swift */; };
+		CEC028112D3C3FDF0034D925 /* UserResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC028102D3C3FDF0034D925 /* UserResult.swift */; };
+		CEC028132D3C40000034D925 /* ProfileImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC028122D3C40000034D925 /* ProfileImage.swift */; };
+		CEC028152D3C40DC0034D925 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC028142D3C40DC0034D925 /* Errors.swift */; };
 		CEC321D92CF8931B00260A7E /* Extension UITableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC321D82CF8931B00260A7E /* Extension UITableViewDataSource.swift */; };
 		CEC321DB2CF8938B00260A7E /* Extension UITableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC321DA2CF8938B00260A7E /* Extension UITableViewDelegate.swift */; };
 		CEC321DD2CF894B500260A7E /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC321DC2CF894B500260A7E /* ImagesListCell.swift */; };
@@ -66,6 +71,11 @@
 		CE71FE012D306C0D00BE1D06 /* UIBlockingProgressHUD.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIBlockingProgressHUD.swift; sourceTree = "<group>"; };
 		CE71FE032D35A4C100BE1D06 /* ProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
 		CEC028072D3A775A0034D925 /* ProfileImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImageService.swift; sourceTree = "<group>"; };
+		CEC0280C2D3C3F3E0034D925 /* ProfileResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileResult.swift; sourceTree = "<group>"; };
+		CEC0280E2D3C3F5E0034D925 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		CEC028102D3C3FDF0034D925 /* UserResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResult.swift; sourceTree = "<group>"; };
+		CEC028122D3C40000034D925 /* ProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImage.swift; sourceTree = "<group>"; };
+		CEC028142D3C40DC0034D925 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		CEC321D82CF8931B00260A7E /* Extension UITableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension UITableViewDataSource.swift"; sourceTree = "<group>"; };
 		CEC321DA2CF8938B00260A7E /* Extension UITableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension UITableViewDelegate.swift"; sourceTree = "<group>"; };
 		CEC321DC2CF894B500260A7E /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
@@ -162,6 +172,17 @@
 			name = Service;
 			sourceTree = "<group>";
 		};
+		CEC0280B2D3C3F070034D925 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CEC0280C2D3C3F3E0034D925 /* ProfileResult.swift */,
+				CEC0280E2D3C3F5E0034D925 /* Profile.swift */,
+				CEC028102D3C3FDF0034D925 /* UserResult.swift */,
+				CEC028122D3C40000034D925 /* ProfileImage.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		CEC321DE2CF8951F00260A7E /* ImagesList */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,6 +198,7 @@
 		CEC3228B2CFCDCC300260A7E /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				CEC0280B2D3C3F070034D925 /* Models */,
 				CEC028062D36A3700034D925 /* Service */,
 				CEC322872CFCD5D700260A7E /* ProfileViewController.swift */,
 			);
@@ -226,6 +248,7 @@
 				CEFD3F802CF0AC7A0006E47A /* LaunchScreen.storyboard */,
 				CEFD3F832CF0AC7A0006E47A /* Info.plist */,
 				CE71FDE02D11B2DD00BE1D06 /* Constants.swift */,
+				CEC028142D3C40DC0034D925 /* Errors.swift */,
 				CEFD3F7B2CF0AC780006E47A /* ImageFeed.xcdatamodeld */,
 			);
 			path = ImageFeed;
@@ -385,12 +408,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CEC0280D2D3C3F3E0034D925 /* ProfileResult.swift in Sources */,
 				CE71FDE62D143E5000BE1D06 /* WebViewViewController.swift in Sources */,
 				CEFD3F772CF0AC780006E47A /* ImagesListViewController.swift in Sources */,
+				CEC0280F2D3C3F5E0034D925 /* Profile.swift in Sources */,
 				CEFD3F7D2CF0AC780006E47A /* ImageFeed.xcdatamodeld in Sources */,
 				CEFD3F732CF0AC780006E47A /* AppDelegate.swift in Sources */,
 				CEC321DD2CF894B500260A7E /* ImagesListCell.swift in Sources */,
 				CE71FDEE2D28B4AE00BE1D06 /* OAuth2TokenStorage.swift in Sources */,
+				CEC028132D3C40000034D925 /* ProfileImage.swift in Sources */,
 				CEC321DB2CF8938B00260A7E /* Extension UITableViewDelegate.swift in Sources */,
 				CEC322862CFC768800260A7E /* extension ImagesListViewController.swift in Sources */,
 				CE71FDEA2D22F95800BE1D06 /* OAuth2Service.swift in Sources */,
@@ -400,7 +426,9 @@
 				CE71FDE42D12FFC900BE1D06 /* AuthViewController.swift in Sources */,
 				CEC322882CFCD5D700260A7E /* ProfileViewController.swift in Sources */,
 				CE71FDEC2D287FBD00BE1D06 /* NetworkClient.swift in Sources */,
+				CEC028112D3C3FDF0034D925 /* UserResult.swift in Sources */,
 				CEC028082D3A775A0034D925 /* ProfileImageService.swift in Sources */,
+				CEC028152D3C40DC0034D925 /* Errors.swift in Sources */,
 				CE71FDF62D2BEB8E00BE1D06 /* SplashViewController.swift in Sources */,
 				CE71FDF12D28B55600BE1D06 /* OAuthTokenResponseBody.swift in Sources */,
 				CEC321D92CF8931B00260A7E /* Extension UITableViewDataSource.swift in Sources */,

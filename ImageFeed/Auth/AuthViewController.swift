@@ -46,6 +46,25 @@ final class AuthViewController: UIViewController {
             super.prepare(for: segue, sender: sender)
         }
     }
+    
+    // MARK: -Private Methods
+    
+    /// приватный метод для показа алерта ошибки
+    private func showNetworkError() {
+        let alert = UIAlertController(
+            title: "Что-то пошло не так",
+            message: "Не удалось войти в систему",
+            preferredStyle: .alert) // preferredStyle может быть .alert или .actionSheet
+        
+        // в замыкании пишем, что должно происходить при нажатии на кнопку
+        let action = UIAlertAction(title: "Ок", style: .default) { _ in }
+        
+        // добавляем в алерт кнопку
+        alert.addAction(action)
+        
+        // показываем всплывающее окно
+        self.present(alert, animated: true, completion: nil)
+    }
 }
 
 // MARK: - WebViewViewControllerDelegate
@@ -68,9 +87,11 @@ extension AuthViewController: WebViewViewControllerDelegate {
             case .success(let token):
                 delegate?.didAuthenticate(self, didAuthenticateWithCode: code)
                 oauth2TokenStorage.token = token
+                
                 print("Успешно получен токен: \(token)")
             case .failure(let error):
-                print("Ошибка авторизации: \(error.localizedDescription)")
+                print("[AuthViewController: webViewViewController]: \(error.localizedDescription)")
+                showNetworkError()
             }
         }
     }

@@ -17,3 +17,21 @@ enum Constants {
     static let accessScope = "public+read_user+write_likes"
     static let defaultBaseURL = URL(string: "https://api.unsplash.com")!
 }
+
+// MARK: - ProfileView
+
+enum ProfileViewConstants {
+    static let unsplashProfileURLString = "https://api.unsplash.com/me"
+}
+
+// MARK: - ProfileImage
+
+enum ProfileImageConstants {
+    static let unsplashProfileImageURLString = "https://api.unsplash.com//users/"
+}
+
+// MARK: - Auth2ServiceError
+
+enum Auth2ServiceError: Error {
+    case invalidRequest
+}
