@@ -30,6 +30,10 @@ final class ProfileImageService {
     static let shared = ProfileImageService()
     private init() {}
     
+    // MARK: - Public Properties
+    
+    static let didChangeNotification = Notification.Name(rawValue: "ProfileImageProviderDidChange")
+    
     // MARK: - Private Properties
     
     private let oauth2TokenStorage = OAuth2TokenStorage()
@@ -67,6 +71,11 @@ final class ProfileImageService {
                     
                     self?.avatarURL = profileImageURL
                     completion(.success(profileImageURL))
+                    
+                    NotificationCenter.default.post(
+                            name: ProfileImageService.didChangeNotification,
+                            object: self,
+                            userInfo: ["URL": profileImageURL])
                 } catch {
                     print("Ошибка декодирования ответа: \(error)")
                     completion(.failure(ProfileServiceError.decodingError))

@@ -11,8 +11,9 @@ final class ProfileViewController: UIViewController {
     
     // MARK: - Private Properties
     
-    let profileService = ProfileService.shared
-    let splashViewController = SplashViewController.shared
+    private let profileService = ProfileService.shared
+    private let splashViewController = SplashViewController.shared
+    private var profileImageServiceObserver: NSObjectProtocol?
     
     private lazy var avatarImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "Photo"))
@@ -67,14 +68,24 @@ final class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.addSubviews()
-        self.setupConstraints()
+        creatingView()
+        
+        profileImageServiceObserver = NotificationCenter.default.addObserver(forName: ProfileImageService.didChangeNotification, object: nil, queue: .main) { [weak self] _ in
+            guard let self = self else { return }
+            self.updateAvatar()
+        }
+        updateAvatar()
+    }
+    
+    // MARK: - Private Methods
+    
+    private func creatingView() {
+        addSubviews()
+        setupConstraints()
         
         updateProfileDetails()
         view.backgroundColor = .ypBlack
     }
-    
-    // MARK: - Private Methods
     
     private func addSubviews() {
         view.addSubview(avatarImageView)
@@ -117,6 +128,14 @@ final class ProfileViewController: UIViewController {
         } else {
             print("profile was not found")
         }
+    }
+    
+    private func updateAvatar() {
+        guard
+            let profileImageURL = ProfileImageService.shared.avatarURL,
+            let _ = URL(string: profileImageURL)
+        else { return }
+        // TODO [Sprint 11] Обновить аватар, используя Kingfisher
     }
         
     @objc
