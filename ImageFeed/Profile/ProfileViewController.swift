@@ -4,8 +4,8 @@
 //
 //  Created by ulyana on 1.12.24.
 //
-import Foundation
 import UIKit
+import Kingfisher
 
 final class ProfileViewController: UIViewController {
     
@@ -15,7 +15,7 @@ final class ProfileViewController: UIViewController {
     private let splashViewController = SplashViewController.shared
     private var profileImageServiceObserver: NSObjectProtocol?
     
-    private lazy var avatarImageView: UIImageView = {
+    lazy var avatarImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "Photo"))
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -133,9 +133,13 @@ final class ProfileViewController: UIViewController {
     private func updateAvatar() {
         guard
             let profileImageURL = ProfileImageService.shared.avatarURL,
-            let _ = URL(string: profileImageURL)
+            let url = URL(string: profileImageURL)
         else { return }
-        // TODO [Sprint 11] Обновить аватар, используя Kingfisher
+        
+        let processor = RoundCornerImageProcessor(cornerRadius: 61)
+        
+        avatarImageView.kf.indicatorType = .activity
+        avatarImageView.kf.setImage(with: url, placeholder: UIImage(named: "Photo"), options: [.processor(processor)])
     }
         
     @objc
