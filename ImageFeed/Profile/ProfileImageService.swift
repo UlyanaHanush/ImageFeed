@@ -84,6 +84,7 @@ final class ProfileImageService {
         
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
+        
         guard let token = oauth2TokenStorage.token else {
             assertionFailure("[ProfileImageService: makeProfileImageRequest]: Failed token")
             return nil

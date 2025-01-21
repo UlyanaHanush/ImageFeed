@@ -39,14 +39,6 @@ final class SingleImageViewController: UIViewController {
         rescaleAndCenterImageInScrollView(image: image)
     }
     
-    // MARK: - Public Methods
-    
-    func centerImageInScrollViewAfterZoom() {
-        let xInset = max((scrollView.bounds.width - scrollView.contentSize.width) / 2, 0)
-        let yInset = max((scrollView.bounds.height - scrollView.contentSize.height) / 2, 0)
-        scrollView.contentInset = UIEdgeInsets(top: yInset, left: xInset, bottom: yInset, right: xInset)
-    }
-    
     // MARK: - IBAction
     
     @IBAction private  func didTapBackButton(_ sender: UIButton) {
@@ -63,6 +55,12 @@ final class SingleImageViewController: UIViewController {
     }
     
     // MARK: - Private Methods
+    
+    private func centerImageInScrollViewAfterZoom() {
+        let xInset = max((scrollView.bounds.width - scrollView.contentSize.width) / 2, 0)
+        let yInset = max((scrollView.bounds.height - scrollView.contentSize.height) / 2, 0)
+        scrollView.contentInset = UIEdgeInsets(top: yInset, left: xInset, bottom: yInset, right: xInset)
+    }
     
     private func rescaleAndCenterImageInScrollView(image: UIImage) {
         let minZoomScale = scrollView.minimumZoomScale
@@ -94,7 +92,6 @@ final class SingleImageViewController: UIViewController {
 // MARK: - UIScrollViewDelegate
 
 extension SingleImageViewController: UIScrollViewDelegate {
-    
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return imageView
     }

@@ -69,18 +69,21 @@ final class SplashViewController: UIViewController {
     
     private func setupConstraints() {
         // splashScreenLogoImageView Constraints
-        splashScreenLogoImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        splashScreenLogoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        splashScreenLogoImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            .isActive = true
+        splashScreenLogoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            .isActive = true
     }
     
     private func creatingView() {
-        setupConstraints()
         view.addSubview(splashScreenLogoImageView)
+        setupConstraints()
         view.backgroundColor = .ypBlack
     }
     
     private func showAuthViewController() {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        
         guard let authViewController = storyboard.instantiateViewController(withIdentifier: "AuthViewController") as? AuthViewController else {
             print("[SplashViewController: showAuthViewController]: Error with AuthViewController")
             return

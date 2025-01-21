@@ -5,7 +5,7 @@
 //  Created by ulyana on 3.01.25.
 //
 
-import UIKit
+import Foundation
 
 struct NetworkClient {
     
@@ -21,7 +21,6 @@ struct NetworkClient {
     
     /// отправка запроса и разбор ответа от сервера
     func data(for request: URLRequest, completion: @escaping (Result<Data, Error>) -> Void) -> URLSessionTask {
-        
         // замыкание fulfillCompletionOnTheMainThread будет выполнять любой код на главном потоке.
         let fulfillCompletionOnTheMainThread: (Result<Data, Error>) -> Void = { result in
             DispatchQueue.main.async {
@@ -55,7 +54,9 @@ struct NetworkClient {
             switch result {
             case .success(let data):
                 do {
-                    let decodedObject = try JSONDecoder().decode(T.self, from: data)
+                    let decoder = JSONDecoder()
+                    decoder.keyDecodingStrategy = .convertFromSnakeCase
+                    let decodedObject = try decoder.decode(T.self, from: data)
                     completion(.success(decodedObject))
                 } catch {
                     print("Ошибка декодирования ответа: \(error.localizedDescription), Данные: \(String(data: data, encoding: .utf8) ?? "")")

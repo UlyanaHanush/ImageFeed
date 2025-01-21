@@ -27,12 +27,9 @@
 		CEC028132D3C40000034D925 /* ProfileImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC028122D3C40000034D925 /* ProfileImage.swift */; };
 		CEC028152D3C40DC0034D925 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC028142D3C40DC0034D925 /* Errors.swift */; };
 		CEC0281B2D3E8B2A0034D925 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = CEC0281A2D3E8B2A0034D925 /* Kingfisher */; };
-		CEC321D92CF8931B00260A7E /* Extension UITableViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC321D82CF8931B00260A7E /* Extension UITableViewDataSource.swift */; };
-		CEC321DB2CF8938B00260A7E /* Extension UITableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC321DA2CF8938B00260A7E /* Extension UITableViewDelegate.swift */; };
 		CEC321DD2CF894B500260A7E /* ImagesListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC321DC2CF894B500260A7E /* ImagesListCell.swift */; };
 		CEC321DF2CF8B8E700260A7E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEFD3F782CF0AC780006E47A /* Main.storyboard */; };
 		CEC322842CFC72B600260A7E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEFD3F802CF0AC7A0006E47A /* LaunchScreen.storyboard */; };
-		CEC322862CFC768800260A7E /* extension ImagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC322852CFC768800260A7E /* extension ImagesListViewController.swift */; };
 		CEC322882CFCD5D700260A7E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC322872CFCD5D700260A7E /* ProfileViewController.swift */; };
 		CEC3228E2D00D09100260A7E /* SingleImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC3228D2D00D09100260A7E /* SingleImageViewController.swift */; };
 		CEFD3F732CF0AC780006E47A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFD3F722CF0AC780006E47A /* AppDelegate.swift */; };
@@ -80,10 +77,7 @@
 		CEC028102D3C3FDF0034D925 /* UserResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserResult.swift; sourceTree = "<group>"; };
 		CEC028122D3C40000034D925 /* ProfileImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileImage.swift; sourceTree = "<group>"; };
 		CEC028142D3C40DC0034D925 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
-		CEC321D82CF8931B00260A7E /* Extension UITableViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension UITableViewDataSource.swift"; sourceTree = "<group>"; };
-		CEC321DA2CF8938B00260A7E /* Extension UITableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension UITableViewDelegate.swift"; sourceTree = "<group>"; };
 		CEC321DC2CF894B500260A7E /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
-		CEC322852CFC768800260A7E /* extension ImagesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "extension ImagesListViewController.swift"; sourceTree = "<group>"; };
 		CEC322872CFCD5D700260A7E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		CEC3228D2D00D09100260A7E /* SingleImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImageViewController.swift; sourceTree = "<group>"; };
 		CEFD3F6F2CF0AC780006E47A /* ImageFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,6 +124,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CE583BFF2D402BC50042E447 /* ServiceGeneral */ = {
+			isa = PBXGroup;
+			children = (
+				CE71FDEB2D287FBD00BE1D06 /* NetworkClient.swift */,
+			);
+			path = ServiceGeneral;
+			sourceTree = "<group>";
+		};
 		CE71FDE22D12FFB300BE1D06 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
@@ -164,7 +166,6 @@
 				CE71FE012D306C0D00BE1D06 /* UIBlockingProgressHUD.swift */,
 				CE71FDE92D22F95800BE1D06 /* OAuth2Service.swift */,
 				CE71FDED2D28B4AE00BE1D06 /* OAuth2TokenStorage.swift */,
-				CE71FDEB2D287FBD00BE1D06 /* NetworkClient.swift */,
 			);
 			name = Service;
 			sourceTree = "<group>";
@@ -194,9 +195,6 @@
 			children = (
 				CEC321DC2CF894B500260A7E /* ImagesListCell.swift */,
 				CEFD3F762CF0AC780006E47A /* ImagesListViewController.swift */,
-				CEC321D82CF8931B00260A7E /* Extension UITableViewDataSource.swift */,
-				CEC321DA2CF8938B00260A7E /* Extension UITableViewDelegate.swift */,
-				CEC322852CFC768800260A7E /* extension ImagesListViewController.swift */,
 			);
 			name = ImagesList;
 			sourceTree = "<group>";
@@ -242,6 +240,7 @@
 		CEFD3F712CF0AC780006E47A /* ImageFeed */ = {
 			isa = PBXGroup;
 			children = (
+				CE583BFF2D402BC50042E447 /* ServiceGeneral */,
 				CE71FDE22D12FFB300BE1D06 /* Auth */,
 				CEC3228C2D00D06D00260A7E /* SingleImage */,
 				CEC3228B2CFCDCC300260A7E /* Profile */,
@@ -429,8 +428,6 @@
 				CEC321DD2CF894B500260A7E /* ImagesListCell.swift in Sources */,
 				CE71FDEE2D28B4AE00BE1D06 /* OAuth2TokenStorage.swift in Sources */,
 				CEC028132D3C40000034D925 /* ProfileImage.swift in Sources */,
-				CEC321DB2CF8938B00260A7E /* Extension UITableViewDelegate.swift in Sources */,
-				CEC322862CFC768800260A7E /* extension ImagesListViewController.swift in Sources */,
 				CE71FDEA2D22F95800BE1D06 /* OAuth2Service.swift in Sources */,
 				CE71FE042D35A4C100BE1D06 /* ProfileService.swift in Sources */,
 				CE71FE022D306C0D00BE1D06 /* UIBlockingProgressHUD.swift in Sources */,
@@ -443,7 +440,6 @@
 				CEC028152D3C40DC0034D925 /* Errors.swift in Sources */,
 				CE71FDF62D2BEB8E00BE1D06 /* SplashViewController.swift in Sources */,
 				CE71FDF12D28B55600BE1D06 /* OAuthTokenResponseBody.swift in Sources */,
-				CEC321D92CF8931B00260A7E /* Extension UITableViewDataSource.swift in Sources */,
 				CEFD3F752CF0AC780006E47A /* SceneDelegate.swift in Sources */,
 				CE71FDE12D11B2DD00BE1D06 /* Constants.swift in Sources */,
 			);

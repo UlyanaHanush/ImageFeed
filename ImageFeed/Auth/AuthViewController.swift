@@ -14,6 +14,10 @@ protocol AuthViewControllerDelegate: AnyObject {
 
 final class AuthViewController: UIViewController {
     
+    // MARK: - Singleton
+    
+    static let shared = AuthViewController()
+    
     // MARK: - Public Properties
     
     weak var delegate: AuthViewControllerDelegate?
@@ -70,14 +74,13 @@ final class AuthViewController: UIViewController {
 // MARK: - WebViewViewControllerDelegate
 
 extension AuthViewController: WebViewViewControllerDelegate {
-    
     /// сообщает SplashViewController что получен токен
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
         vc.dismiss(animated: true)
         // // блокирует пользовательское взаимодействие и включает анимацию
         UIBlockingProgressHUD.show()
         
-        oauth2Service.fetchOAuthToken(with: code) { [weak self] (result: Result<String, Error>) in
+        oauth2Service.fetchOAuthToken(with: code) { [weak self] result in
             guard let self = self else { return }
             
             // разблокирует пользовательского взаимодействия и выключит анимацию

@@ -70,7 +70,11 @@ final class ProfileViewController: UIViewController {
         
         creatingView()
         
-        profileImageServiceObserver = NotificationCenter.default.addObserver(forName: ProfileImageService.didChangeNotification, object: nil, queue: .main) { [weak self] _ in
+        profileImageServiceObserver = NotificationCenter.default.addObserver(
+            forName: ProfileImageService.didChangeNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
             guard let self = self else { return }
             self.updateAvatar()
         }
@@ -96,7 +100,6 @@ final class ProfileViewController: UIViewController {
     }
     
     private func setupConstraints() {
-        
         // avatarImageView Constraints
         avatarImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16).isActive = true
         avatarImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32).isActive = true

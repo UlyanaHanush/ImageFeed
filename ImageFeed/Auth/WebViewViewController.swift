@@ -8,10 +8,6 @@
 import UIKit
 import WebKit
 
-enum WebViewConstants {
-    static let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
-}
-
 protocol WebViewViewControllerDelegate: AnyObject {
     // получил код
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String)
@@ -20,6 +16,11 @@ protocol WebViewViewControllerDelegate: AnyObject {
 }
 
 final class WebViewViewController: UIViewController {
+    
+    // MARK: - Enum
+    private enum WebViewConstants {
+        static let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
+    }
     
     // MARK: - Public Properties
     
@@ -43,10 +44,9 @@ final class WebViewViewController: UIViewController {
         loadAuthView()
         
         estimatedProgressObservation = webView.observe(\.estimatedProgress, options: [], changeHandler: { [weak self] _, _ in
-                guard let self = self else { return }
-                self.updateProgress()
-            })
-
+            guard let self = self else { return }
+            self.updateProgress()
+        })
     }
     
     // MARK: - IBAction

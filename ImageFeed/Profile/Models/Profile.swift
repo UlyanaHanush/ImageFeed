@@ -8,7 +8,6 @@
 import Foundation
 
 struct Profile {
-    
     let username: String
     var name: String
     let loginName: String

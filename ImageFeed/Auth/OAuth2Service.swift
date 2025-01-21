@@ -64,6 +64,7 @@ final class OAuth2Service {
     /// URLRequest из составных компоненто
     private func makeOAuthTokenRequest(code: String) -> URLRequest? {
         let baseURL = URL(string: "https://unsplash.com")
+        
         guard let url = URL(
             string: "/oauth/token"
             + "?client_id=\(Constants.accessKey)"
