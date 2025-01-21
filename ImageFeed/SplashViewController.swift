@@ -9,16 +9,24 @@ import UIKit
 
 final class SplashViewController: UIViewController {
     
+    // MARK: - Singleton
+    
+    static let shared = SplashViewController()
+    
     // MARK: - Private Properties
     
     private let showAuthenticationScreenSegueIdentifier = "ShowAuthenticationScreen"
-    
-    static let shared = SplashViewController()
     
     private let oauth2TokenStorage = OAuth2TokenStorage()
     private let oauth2Service = OAuth2Service.shared
     private var profileService = ProfileService.shared
     private let profileImageService = ProfileImageService.shared
+    
+    private lazy var splashScreenLogoImageView: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "Vector"))
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
     
     // MARK: - UIViewController(*)
     
@@ -28,9 +36,11 @@ final class SplashViewController: UIViewController {
         if let token = oauth2TokenStorage.token {
             fetchProfile(token)
         } else {
-            // Show Auth Screen
-            performSegue(withIdentifier: showAuthenticationScreenSegueIdentifier, sender: nil)
+            print("[SplashViewController: viewDidAppear]: token was not found")
         }
+        
+        creatingView()
+        showAuthViewController()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,27 +66,30 @@ final class SplashViewController: UIViewController {
             .instantiateViewController(withIdentifier: "TabBarViewController")
         window.rootViewController = tabBarController
     }
-}
-
-// MARK: - Segue
-
-extension SplashViewController {
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Проверим, что переходим на авторизацию
-        if segue.identifier == showAuthenticationScreenSegueIdentifier {
-            
-            // Доберёмся до первого контроллера в навигации. Мы помним, что в программировании отсчёт начинается с 0?
-            guard
-                let navigationController = segue.destination as? UINavigationController,
-                let viewController = navigationController.viewControllers[0] as? AuthViewController
-            else {
-                fatalError("Failed to prepare for \(showAuthenticationScreenSegueIdentifier)")
-            }
-            // Установим делегатом контроллера наш SplashViewController
-            viewController.delegate = self
-        } else {
-            super.prepare(for: segue, sender: sender)
+    
+    private func setupConstraints() {
+        // splashScreenLogoImageView Constraints
+        splashScreenLogoImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        splashScreenLogoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    }
+    
+    private func creatingView() {
+        setupConstraints()
+        view.addSubview(splashScreenLogoImageView)
+        view.backgroundColor = .ypBlack
+    }
+    
+    private func showAuthViewController() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        guard let authViewController = storyboard.instantiateViewController(withIdentifier: "AuthViewController") as? AuthViewController else {
+            print("[SplashViewController: showAuthViewController]: Error with AuthViewController")
+            return
         }
+        authViewController.delegate = self
+           
+        let navigationController = UINavigationController(rootViewController: authViewController)
+        navigationController.modalPresentationStyle = .fullScreen
+        present(navigationController, animated: true, completion: nil)
     }
 }
 

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CE583BFC2D3ED27C0042E447 /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = CE583BFB2D3ED27C0042E447 /* SwiftKeychainWrapper */; };
+		CE583BFE2D3FEA8C0042E447 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE583BFD2D3FEA8C0042E447 /* TabBarController.swift */; };
 		CE71FDE12D11B2DD00BE1D06 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE71FDE02D11B2DD00BE1D06 /* Constants.swift */; };
 		CE71FDE42D12FFC900BE1D06 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE71FDE32D12FFC900BE1D06 /* AuthViewController.swift */; };
 		CE71FDE62D143E5000BE1D06 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE71FDE52D143E5000BE1D06 /* WebViewViewController.swift */; };
@@ -62,6 +63,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CE583BFD2D3FEA8C0042E447 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		CE71FDE02D11B2DD00BE1D06 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		CE71FDE32D12FFC900BE1D06 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		CE71FDE52D143E5000BE1D06 /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 				CEC3228B2CFCDCC300260A7E /* Profile */,
 				CEC321DE2CF8951F00260A7E /* ImagesList */,
 				CE71FDF72D2BEBC700BE1D06 /* Splash */,
+				CE583BFD2D3FEA8C0042E447 /* TabBarController.swift */,
 				CEFD3F742CF0AC780006E47A /* SceneDelegate.swift */,
 				CEFD3F722CF0AC780006E47A /* AppDelegate.swift */,
 				CEFD3F782CF0AC780006E47A /* Main.storyboard */,
@@ -419,6 +422,7 @@
 				CEC0280D2D3C3F3E0034D925 /* ProfileResult.swift in Sources */,
 				CE71FDE62D143E5000BE1D06 /* WebViewViewController.swift in Sources */,
 				CEFD3F772CF0AC780006E47A /* ImagesListViewController.swift in Sources */,
+				CE583BFE2D3FEA8C0042E447 /* TabBarController.swift in Sources */,
 				CEC0280F2D3C3F5E0034D925 /* Profile.swift in Sources */,
 				CEFD3F7D2CF0AC780006E47A /* ImageFeed.xcdatamodeld in Sources */,
 				CEFD3F732CF0AC780006E47A /* AppDelegate.swift in Sources */,

@@ -15,7 +15,7 @@ final class ProfileViewController: UIViewController {
     private let splashViewController = SplashViewController.shared
     private var profileImageServiceObserver: NSObjectProtocol?
     
-    lazy var avatarImageView: UIImageView = {
+    private lazy var avatarImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "Photo"))
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
