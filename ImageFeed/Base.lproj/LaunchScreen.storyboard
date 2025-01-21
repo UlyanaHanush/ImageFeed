@@ -18,7 +18,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Vector" translatesAutoresizingMaskIntoConstraints="NO" id="aJ2-gQ-8ho">
-                                <rect key="frame" x="160" y="294" width="73" height="75"/>
+                                <rect key="frame" x="160" y="388.66666666666669" width="73" height="75"/>
                                 <color key="backgroundColor" name="YP Black"/>
                                 <color key="tintColor" name="AccentColor"/>
                             </imageView>
@@ -27,7 +27,7 @@
                         <color key="backgroundColor" name="YP Black"/>
                         <constraints>
                             <constraint firstItem="aJ2-gQ-8ho" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="8f3-OJ-RzN"/>
-                            <constraint firstItem="aJ2-gQ-8ho" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" multiplier="7:9" id="RQI-gp-ANv"/>
+                            <constraint firstItem="aJ2-gQ-8ho" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="RQI-gp-ANv"/>
                         </constraints>
                     </view>
                 </viewController>
