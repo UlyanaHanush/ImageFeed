@@ -132,24 +132,33 @@
 			path = ServiceGeneral;
 			sourceTree = "<group>";
 		};
-		CE71FDE22D12FFB300BE1D06 /* Auth */ = {
-			isa = PBXGroup;
-			children = (
-				CE71FDEF2D28B53B00BE1D06 /* Models */,
-				CEC028052D36A3220034D925 /* Service */,
-				CE71FDE32D12FFC900BE1D06 /* AuthViewController.swift */,
-				CE71FDE52D143E5000BE1D06 /* WebViewViewController.swift */,
-			);
-			path = Auth;
-			sourceTree = "<group>";
-		};
-		CE71FDEF2D28B53B00BE1D06 /* Models */ = {
+		CE583C0A2D415A8D0042E447 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				CE71FDF02D28B55600BE1D06 /* OAuthTokenResponseBody.swift */,
 			);
-			name = Models;
-			path = ..;
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CE583C0B2D415AA80042E447 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				CE71FE012D306C0D00BE1D06 /* UIBlockingProgressHUD.swift */,
+				CE71FDE92D22F95800BE1D06 /* OAuth2Service.swift */,
+				CE71FDED2D28B4AE00BE1D06 /* OAuth2TokenStorage.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		CE71FDE22D12FFB300BE1D06 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				CE583C0B2D415AA80042E447 /* Service */,
+				CE583C0A2D415A8D0042E447 /* Models */,
+				CE71FDE32D12FFC900BE1D06 /* AuthViewController.swift */,
+				CE71FDE52D143E5000BE1D06 /* WebViewViewController.swift */,
+			);
+			path = Auth;
 			sourceTree = "<group>";
 		};
 		CE71FDF72D2BEBC700BE1D06 /* Splash */ = {
@@ -158,16 +167,6 @@
 				CE71FDF52D2BEB8E00BE1D06 /* SplashViewController.swift */,
 			);
 			name = Splash;
-			sourceTree = "<group>";
-		};
-		CEC028052D36A3220034D925 /* Service */ = {
-			isa = PBXGroup;
-			children = (
-				CE71FE012D306C0D00BE1D06 /* UIBlockingProgressHUD.swift */,
-				CE71FDE92D22F95800BE1D06 /* OAuth2Service.swift */,
-				CE71FDED2D28B4AE00BE1D06 /* OAuth2TokenStorage.swift */,
-			);
-			name = Service;
 			sourceTree = "<group>";
 		};
 		CEC028062D36A3700034D925 /* Service */ = {
