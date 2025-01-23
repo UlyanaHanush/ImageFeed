@@ -13,6 +13,10 @@ final class UIBlockingProgressHUD {
     // MARK: - Private Properties
     
     private static var window: UIWindow? {
+        
+//        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
+//        return windowScene?.windows.first
+        
         return UIApplication.shared.windows.first
     }
     

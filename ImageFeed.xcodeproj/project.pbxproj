@@ -803,8 +803,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/jrendel/SwiftKeychainWrapper";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.0.1;
+				kind = exactVersion;
+				version = 4.0.1;
 			};
 		};
 		CE71FDFE2D2F0BD300BE1D06 /* XCRemoteSwiftPackageReference "ProgressHUD" */ = {

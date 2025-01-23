@@ -28,31 +28,78 @@ final class AuthViewController: UIViewController {
     private let oauth2Service = OAuth2Service.shared
     private let oauth2TokenStorage = OAuth2TokenStorage()
     
+    private lazy var enterButton: UIButton = {
+        let button = UIButton(type: .custom)
+        
+        button.backgroundColor = .white
+        button.setTitle("Войти", for: .normal)
+        button.titleLabel?.font = .boldSystemFont(ofSize: 17)
+        button.setTitleColor(.black, for: .normal)
+        button.layer.cornerRadius = 16
+        button.layer.masksToBounds = true
+        
+        button.addTarget(nil, action: #selector(buttonTapped(_:)), for: .touchUpInside)
+        
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
+    
+    private lazy var authScreenLogoImage: UIImageView = {
+        let imageView = UIImageView(image: UIImage(named: "auth_screen_logo"))
+        
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
     // MARK: - UIViewController(*)
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        addSubviews()
     }
     
-    // MARK: - Segue
+    // MARK: - IBAction
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == showWebViewSegueIdentifier {
-            guard
-                // segue.destination переход между контроллерами
-                let webViewViewController = segue.destination as? WebViewViewController
-            else {
-                assertionFailure("Failed to prepare for \(showWebViewSegueIdentifier)")
-                return
-            }
-            webViewViewController.delegate = self
-        } else {
-            super.prepare(for: segue, sender: sender)
-        }
+    @IBAction func buttonTapped(_ sender: UIButton) {
+        _ = UIStoryboard(name: "Main", bundle: nil)
+        let webViewViewController = WebViewViewController()
+        webViewViewController.delegate = self
+        
+        webViewViewController.modalPresentationStyle = .fullScreen
+        present(webViewViewController, animated: true, completion: nil)
     }
     
     // MARK: -Private Methods
     
+    private func addSubviews() {
+        view.addSubview(enterButton)
+        view.addSubview(authScreenLogoImage)
+        view.backgroundColor = .ypBlack
+        
+        configureBackButton()
+        setupConstraints()
+    }
+    
+    private func setupConstraints() {
+        enterButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16).isActive = true
+        enterButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16).isActive = true
+        enterButton.centerXAnchor.constraint(equalTo: super.view.centerXAnchor).isActive = true
+        enterButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -90).isActive = true
+        enterButton.heightAnchor.constraint(equalToConstant: 48).isActive = true
+        
+        
+        authScreenLogoImage.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+            .isActive = true
+        authScreenLogoImage.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            .isActive = true
+    }
+    
+    private func configureBackButton() {
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationItem.backBarButtonItem?.tintColor = UIColor(named: "YP Black")
+    }
+
     /// приватный метод для показа алерта ошибки
     private func showNetworkError() {
         let alert = UIAlertController(

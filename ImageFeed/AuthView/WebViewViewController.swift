@@ -26,19 +26,45 @@ final class WebViewViewController: UIViewController {
     
     weak var delegate: WebViewViewControllerDelegate?
     
-    // MARK: - IBOutlet
-    
-    @IBOutlet private var progressView: UIProgressView!
-    @IBOutlet private var webView: WKWebView!
-    
     // MARK: - Private Properties
     
     private var estimatedProgressObservation: NSKeyValueObservation?
+    
+    private lazy var webView: WKWebView = {
+        let preferences = WKPreferences()
+                
+        let configuration = WKWebViewConfiguration()
+        configuration.preferences = preferences
+                
+        let webView = WKWebView(frame: CGRect.zero, configuration: configuration)
+                
+        webView.allowsBackForwardNavigationGestures = true
+        webView.scrollView.isScrollEnabled = true
+
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        return webView
+    }()
+    
+    private var progressView = UIProgressView()
+    
+    private lazy var backButton: UIButton = {
+        let button = UIButton(type: .custom)
+        
+        let imageButton = UIImage(named: "nav_back_button")
+        button.setImage(imageButton , for: .normal)
+        
+        button.addTarget(nil, action: #selector(didTapBackButton(_:)), for: .touchUpInside)
+        
+        button.translatesAutoresizingMaskIntoConstraints = false
+        return button
+    }()
     
     // MARK: - UIViewController(*)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        addSubviews()
         
         webView.navigationDelegate = self
         loadAuthView()
@@ -56,6 +82,36 @@ final class WebViewViewController: UIViewController {
     }
     
     // MARK: - Private Methods
+    
+    private func setupConstraints() {
+        webView.leadingAnchor.constraint(equalTo: super.view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        webView.trailingAnchor.constraint(equalTo: super.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        webView.bottomAnchor.constraint(equalTo: super.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
+        webView.topAnchor.constraint(equalTo: backButton.bottomAnchor).isActive = true
+        
+        progressView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        progressView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
+        progressView.topAnchor.constraint(equalTo: backButton.bottomAnchor).isActive = true
+        
+        progressView.translatesAutoresizingMaskIntoConstraints = false
+        
+        backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
+        backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+        backButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
+        backButton.widthAnchor.constraint(equalToConstant: 64).isActive = true
+    }
+    
+    private func addSubviews() {
+        
+        progressView.tintColor = .ypBlack
+        
+        view.addSubview(webView)
+        view.addSubview(progressView)
+        view.addSubview(backButton)
+        view.backgroundColor = .white
+
+        setupConstraints()
+    }
     
     private func updateProgress() {
         progressView.progress = Float(webView.estimatedProgress)
