@@ -12,7 +12,6 @@ final class ImagesListViewController: UIViewController {
     // MARK: - Constants
     
     let photosName: [String] = Array(0..<20).map{ "\($0)" }
-    let showSingleImageSegueIdentifier = "ShowSingleImage"
     
     // MARK: - Public Properties
     
@@ -23,34 +22,61 @@ final class ImagesListViewController: UIViewController {
         return formatter
     }()
     
-    // MARK: - IBOutlet
-
-    @IBOutlet private var tableView: UITableView!
+    // MARK: - Private Properties
+    
+    lazy var tableView: UITableView = {
+        tableView = UITableView()
+        tableView.backgroundColor = .ypBlack
+        tableView.separatorStyle = .none
+        
+        tableView.rowHeight = 200
+        tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
+        
+        tableView.register(ImagesListCell.self, forCellReuseIdentifier: ImagesListCell.reuseIdentifier)
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        return tableView
+    }()
 
     // MARK: - UIViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.rowHeight = 200
-        tableView.contentInset = UIEdgeInsets(top: 12, left: 0, bottom: 12, right: 0)
+        addSubviews()
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == showSingleImageSegueIdentifier {
-            guard
-                let viewController = segue.destination as? SingleImageViewController,
-                let indexPath = sender as? IndexPath
-            else {
-                assertionFailure("Invalid segue destination")
-                return
-            }
+    // MARK: -Private Methods
+    
+    private func addSubviews() {
+        view.addSubview(tableView)
+        view.backgroundColor = .black
+        
+        setupConstraints()
+    }
+    
+    private func setupConstraints() {
+        NSLayoutConstraint.activate([
+            tableView.leadingAnchor.constraint(equalTo: super.view.safeAreaLayoutGuide.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: super.view.safeAreaLayoutGuide.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: super.view.safeAreaLayoutGuide.bottomAnchor),
+            tableView.topAnchor.constraint(equalTo: super.view.safeAreaLayoutGuide.topAnchor)
+        ])
+    }
+    
+    func showSingleImage(indexPath: IndexPath) {
+        
+        _ = UIStoryboard(name: "Main", bundle: nil)
+        let singleImageViewController = SingleImageViewController()
 
-            let image = UIImage(named: photosName[indexPath.row])
-            viewController.image = image
-        } else {
-            super.prepare(for: segue, sender: sender)
-        }
+        let image = UIImage(named: photosName[indexPath.row])
+        singleImageViewController.image = image
+        
+        singleImageViewController.modalPresentationStyle = .fullScreen
+        present(singleImageViewController, animated: true, completion: nil)
     }
 }
 
@@ -79,7 +105,7 @@ extension ImagesListViewController: UITableViewDataSource {
 extension ImagesListViewController: UITableViewDelegate {
     /// переход от таблице к одной картинке
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: showSingleImageSegueIdentifier, sender: indexPath)
+        showSingleImage(indexPath: indexPath)
     }
 
     /// просчет высоты ячейки

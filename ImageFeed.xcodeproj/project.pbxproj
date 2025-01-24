@@ -128,6 +128,7 @@
 			isa = PBXGroup;
 			children = (
 				CE71FDEB2D287FBD00BE1D06 /* NetworkClient.swift */,
+				CE71FE012D306C0D00BE1D06 /* UIBlockingProgressHUD.swift */,
 			);
 			path = ServiceGeneral;
 			sourceTree = "<group>";
@@ -143,7 +144,6 @@
 		CE583C0B2D415AA80042E447 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				CE71FE012D306C0D00BE1D06 /* UIBlockingProgressHUD.swift */,
 				CE71FDE92D22F95800BE1D06 /* OAuth2Service.swift */,
 				CE71FDED2D28B4AE00BE1D06 /* OAuth2TokenStorage.swift */,
 			);

@@ -68,11 +68,11 @@ final class SplashViewController: UIViewController {
     }
     
     private func setupConstraints() {
-        // splashScreenLogoImageView Constraints
-        splashScreenLogoImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-            .isActive = true
-        splashScreenLogoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-            .isActive = true
+        NSLayoutConstraint.activate([
+            splashScreenLogoImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
+                ,
+            splashScreenLogoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
     }
     
     private func creatingView() {
@@ -82,7 +82,7 @@ final class SplashViewController: UIViewController {
     }
     
     private func showAuthViewController() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        _ = UIStoryboard(name: "Main", bundle: nil)
         
         let authViewController = AuthViewController()
         

@@ -100,27 +100,29 @@ final class ProfileViewController: UIViewController {
     }
     
     private func setupConstraints() {
+        NSLayoutConstraint.activate([
         // avatarImageView Constraints
-        avatarImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16).isActive = true
-        avatarImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32).isActive = true
-        avatarImageView.widthAnchor.constraint(equalToConstant: 70).isActive = true
-        avatarImageView.heightAnchor.constraint(equalTo: avatarImageView.widthAnchor).isActive = true
+        avatarImageView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+        avatarImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 32),
+        avatarImageView.widthAnchor.constraint(equalToConstant: 70),
+        avatarImageView.heightAnchor.constraint(equalTo: avatarImageView.widthAnchor),
         
         // logoutButton Constraints
-        logoutButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20).isActive = true
-        logoutButton.centerYAnchor.constraint(equalTo: avatarImageView.centerYAnchor).isActive = true
+        logoutButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
+        logoutButton.centerYAnchor.constraint(equalTo: avatarImageView.centerYAnchor),
         
         // nameLable Constraints
-        nameLable.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16).isActive = true
-        nameLable.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 8).isActive = true
+        nameLable.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+        nameLable.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 8),
         
         // loginNameLable Constraints
-        loginNameLable.leadingAnchor.constraint(equalTo: nameLable.leadingAnchor).isActive = true
-        loginNameLable.topAnchor.constraint(equalTo: nameLable.bottomAnchor, constant: 8).isActive = true
+        loginNameLable.leadingAnchor.constraint(equalTo: nameLable.leadingAnchor),
+        loginNameLable.topAnchor.constraint(equalTo: nameLable.bottomAnchor, constant: 8),
         
         // descriptionLabel Constraints
-        descriptionLabel.leadingAnchor.constraint(equalTo: loginNameLable.leadingAnchor).isActive = true
-        descriptionLabel.topAnchor.constraint(equalTo: loginNameLable.bottomAnchor, constant: 8).isActive = true
+        descriptionLabel.leadingAnchor.constraint(equalTo: loginNameLable.leadingAnchor),
+        descriptionLabel.topAnchor.constraint(equalTo: loginNameLable.bottomAnchor, constant: 8)
+        ])
     }
     
     private func updateProfileDetails() {

@@ -84,21 +84,23 @@ final class WebViewViewController: UIViewController {
     // MARK: - Private Methods
     
     private func setupConstraints() {
-        webView.leadingAnchor.constraint(equalTo: super.view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        webView.trailingAnchor.constraint(equalTo: super.view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        webView.bottomAnchor.constraint(equalTo: super.view.safeAreaLayoutGuide.bottomAnchor).isActive = true
-        webView.topAnchor.constraint(equalTo: backButton.bottomAnchor).isActive = true
-        
-        progressView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        progressView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor).isActive = true
-        progressView.topAnchor.constraint(equalTo: backButton.bottomAnchor).isActive = true
+        NSLayoutConstraint.activate([
+            webView.leadingAnchor.constraint(equalTo: super.view.leadingAnchor),
+            webView.trailingAnchor.constraint(equalTo: super.view.trailingAnchor),
+            webView.bottomAnchor.constraint(equalTo: super.view.bottomAnchor),
+            webView.topAnchor.constraint(equalTo: backButton.bottomAnchor),
+            
+            progressView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            progressView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            progressView.topAnchor.constraint(equalTo: backButton.bottomAnchor),
+            
+            backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            backButton.heightAnchor.constraint(equalToConstant: 44),
+            backButton.widthAnchor.constraint(equalToConstant: 64)
+        ])
         
         progressView.translatesAutoresizingMaskIntoConstraints = false
-        
-        backButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor).isActive = true
-        backButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-        backButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
-        backButton.widthAnchor.constraint(equalToConstant: 64).isActive = true
     }
     
     private func addSubviews() {

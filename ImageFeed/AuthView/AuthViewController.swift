@@ -82,17 +82,16 @@ final class AuthViewController: UIViewController {
     }
     
     private func setupConstraints() {
-        enterButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16).isActive = true
-        enterButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16).isActive = true
-        enterButton.centerXAnchor.constraint(equalTo: super.view.centerXAnchor).isActive = true
-        enterButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -90).isActive = true
-        enterButton.heightAnchor.constraint(equalToConstant: 48).isActive = true
-        
-        
-        authScreenLogoImage.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-            .isActive = true
-        authScreenLogoImage.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-            .isActive = true
+        NSLayoutConstraint.activate([
+            enterButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            enterButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            enterButton.centerXAnchor.constraint(equalTo: super.view.centerXAnchor),
+            enterButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -90),
+            enterButton.heightAnchor.constraint(equalToConstant: 48),
+            
+            authScreenLogoImage.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            authScreenLogoImage.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
     }
     
     private func configureBackButton() {
