@@ -53,7 +53,7 @@ final class ImagesListViewController: UIViewController {
     
     private func addSubviews() {
         view.addSubview(tableView)
-        view.backgroundColor = .black
+        view.backgroundColor = .ypBlack
         
         setupConstraints()
     }

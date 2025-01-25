@@ -63,6 +63,7 @@ final class SplashViewController: UIViewController {
         
         // Создаём экземпляр корневого контроллера из Storyboard с помощью ранее заданного идентификатора
         _ = UIStoryboard(name: "Main", bundle: .main)
+        
         let tabBarController = TabBarController()
         
 //        let tabBarController = UIStoryboard(name: "Main", bundle: .main)
