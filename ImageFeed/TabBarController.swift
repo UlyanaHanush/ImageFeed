@@ -12,7 +12,7 @@ final class TabBarController: UITabBarController {
     // MARK: - Pablic Methods
     override func awakeFromNib() {
         super.awakeFromNib()
-        let storyboard = UIStoryboard(name: "Main", bundle: .main)
+        _ = UIStoryboard(name: "Main", bundle: .main)
         
         let imagesListViewController = ImagesListViewController()
         imagesListViewController.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "tab_editorial_active"), selectedImage: nil)
