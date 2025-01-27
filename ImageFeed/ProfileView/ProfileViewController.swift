@@ -24,7 +24,7 @@ final class ProfileViewController: UIViewController {
     
     private lazy var logoutButton: UIButton = {
         let button = UIButton.systemButton(
-            with: UIImage(systemName: "iPad.and.arrow.forward")!,
+            with: UIImage(systemName: "ipad.and.arrow.forward")!,
             target: self,
             action: #selector(Self.didTapButton))
         button.tintColor = .iPadAndArrowForward
