@@ -25,8 +25,8 @@ final class AuthViewController: UIViewController {
     // MARK: - Private Properties
     
     private let showWebViewSegueIdentifier = "ShowWebView"
-    private let oauth2Service = OAuth2Service.shared
-    private let oauth2TokenStorage = OAuth2TokenStorage()
+    private let oAuth2Service = OAuth2Service.shared
+    private let oAuth2TokenStorage = OAuth2TokenStorage()
     
     private lazy var enterButton: UIButton = {
         let button = UIButton(type: .custom)
@@ -62,7 +62,6 @@ final class AuthViewController: UIViewController {
     // MARK: - IBAction
     
     @IBAction func buttonTapped(_ sender: UIButton) {
-        _ = UIStoryboard(name: "Main", bundle: nil)
         let webViewViewController = WebViewViewController()
         webViewViewController.delegate = self
         
@@ -99,7 +98,6 @@ final class AuthViewController: UIViewController {
         navigationItem.backBarButtonItem?.tintColor = UIColor(named: "YP Black")
     }
 
-    /// приватный метод для показа алерта ошибки
     private func showNetworkError() {
         let alert = UIAlertController(
             title: "Что-то пошло не так",
@@ -109,10 +107,8 @@ final class AuthViewController: UIViewController {
         // в замыкании пишем, что должно происходить при нажатии на кнопку
         let action = UIAlertAction(title: "Ок", style: .default) { _ in }
         
-        // добавляем в алерт кнопку
         alert.addAction(action)
         
-        // показываем всплывающее окно
         self.present(alert, animated: true, completion: nil)
     }
 }
@@ -123,21 +119,21 @@ extension AuthViewController: WebViewViewControllerDelegate {
     /// сообщает SplashViewController что получен токен
     func webViewViewController(_ vc: WebViewViewController, didAuthenticateWithCode code: String) {
         vc.dismiss(animated: true)
-        // // блокирует пользовательское взаимодействие и включает анимацию
+        // // блокирует взаимодействие пользователя и включает анимацию
         UIBlockingProgressHUD.show()
         
-        oauth2Service.fetchOAuthToken(with: code) { [weak self] result in
+        oAuth2Service.fetchOAuthToken(with: code) { [weak self] result in
             guard let self = self else { return }
             
-            // разблокирует пользовательского взаимодействия и выключит анимацию
+            // разблокирует взаимодействия пользователя и выключит анимацию
             UIBlockingProgressHUD.dismiss()
             
             switch result {
             case .success(let token):
                 delegate?.didAuthenticate(self, didAuthenticateWithCode: code)
-                oauth2TokenStorage.token = token
+                oAuth2TokenStorage.token = token
                 
-                print("Успешно получен токен: \(token)")
+                print("Токе успешно получен: \(token)")
             case .failure(let error):
                 print("[AuthViewController: webViewViewController]: \(error.localizedDescription)")
                 showNetworkError()

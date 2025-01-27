@@ -20,12 +20,12 @@ final class ProfileImageService {
     
     // MARK: - Private Properties
     
-    private let oauth2TokenStorage = OAuth2TokenStorage()
+    private let oAuth2TokenStorage = OAuth2TokenStorage()
     private var networkClient = NetworkClient()
     private (set) var avatarURL: String?
     
     private let urlSession = URLSession.shared
-    // указателя на последнюю созданную задачу
+    // это указатель на последнюю созданную задачу
     private var task: URLSessionTask?
     // Переменная для хранения значения code, которое было передано в последнем созданном запросе.
     private var lastUserName: String?
@@ -71,7 +71,7 @@ final class ProfileImageService {
     
     // MARK: - Private Methods
     
-    /// URLRequest из составных компоненто
+    /// URLRequest из составных компонентов
     private func makeProfileImageRequest(username: String) -> URLRequest? {
         guard let baseURL = URL(string: "https://api.unsplash.com") else {
             assertionFailure("[ProfileImageService: makeProfileImageRequest]: Failed to create URL")
@@ -85,7 +85,7 @@ final class ProfileImageService {
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         
-        guard let token = oauth2TokenStorage.token else {
+        guard let token = oAuth2TokenStorage.token else {
             assertionFailure("[ProfileImageService: makeProfileImageRequest]: Failed token")
             return nil
         }

@@ -21,17 +21,23 @@ enum Constants {
 // MARK: - ProfileView
 
 enum ProfileViewConstants {
-    static let unsplashProfileURLString = "https://api.unsplash.com/me"
+    static let unSplashProfileURLString = "https://api.unsplash.com/me"
 }
 
 // MARK: - ProfileImage
 
 enum ProfileImageConstants {
-    static let unsplashProfileImageURLString = "https://api.unsplash.com//users/"
+    static let unSplashProfileImageURLString = "https://api.unsplash.com//users/"
 }
 
 // MARK: - Auth2ServiceError
 
 enum Auth2ServiceError: Error {
     case invalidRequest
+}
+
+// MARK: - WebView
+
+enum WebViewConstants {
+    static let unSplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
 }

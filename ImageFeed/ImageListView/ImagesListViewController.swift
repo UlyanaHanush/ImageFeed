@@ -68,8 +68,6 @@ final class ImagesListViewController: UIViewController {
     }
     
     func showSingleImage(indexPath: IndexPath) {
-        
-        _ = UIStoryboard(name: "Main", bundle: nil)
         let singleImageViewController = SingleImageViewController()
 
         let image = UIImage(named: photosName[indexPath.row])

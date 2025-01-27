@@ -24,43 +24,43 @@ final class ProfileViewController: UIViewController {
     
     private lazy var logoutButton: UIButton = {
         let button = UIButton.systemButton(
-            with: UIImage(systemName: "ipad.and.arrow.forward")!,
+            with: UIImage(systemName: "iPad.and.arrow.forward")!,
             target: self,
             action: #selector(Self.didTapButton))
-        button.tintColor = .ipadAndArrowForward
+        button.tintColor = .iPadAndArrowForward
         
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
-    private lazy var nameLable: UILabel = {
-        let lable = UILabel()
-        lable.text = "Екатерина Новикова"
-        lable.font = .boldSystemFont(ofSize: 23)
-        lable.textColor = .ypWhite
+    private lazy var nameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Екатерина Новикова"
+        label.font = .boldSystemFont(ofSize: 23)
+        label.textColor = .ypWhite
         
-        lable.translatesAutoresizingMaskIntoConstraints = false
-        return lable
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
-    private lazy var loginNameLable: UILabel = {
-        let lable = UILabel()
-        lable.text = "@ekaterina_nov"
-        lable.font = .systemFont(ofSize: 13)
-        lable.textColor = .loginNameLable
+    private lazy var loginNameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "@ekaterina_nov"
+        label.font = .systemFont(ofSize: 13)
+        label.textColor = .loginNameLabel
         
-        lable.translatesAutoresizingMaskIntoConstraints = false
-        return lable
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     private lazy var descriptionLabel: UILabel = {
-        let lable = UILabel()
-        lable.text = "Hello, World!"
-        lable.font = .systemFont(ofSize: 13)
-        lable.textColor = .ypWhite
+        let label = UILabel()
+        label.text = "Hello, World!"
+        label.font = .systemFont(ofSize: 13)
+        label.textColor = .ypWhite
         
-        lable.translatesAutoresizingMaskIntoConstraints = false
-        return lable
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     // MARK: - UIViewController(*)
@@ -94,8 +94,8 @@ final class ProfileViewController: UIViewController {
     private func addSubviews() {
         view.addSubview(avatarImageView)
         view.addSubview(logoutButton)
-        view.addSubview(nameLable)
-        view.addSubview(loginNameLable)
+        view.addSubview(nameLabel)
+        view.addSubview(loginNameLabel)
         view.addSubview(descriptionLabel)
     }
     
@@ -111,34 +111,33 @@ final class ProfileViewController: UIViewController {
         logoutButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -20),
         logoutButton.centerYAnchor.constraint(equalTo: avatarImageView.centerYAnchor),
         
-        // nameLable Constraints
-        nameLable.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-        nameLable.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 8),
+        // nameLabel Constraints
+        nameLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+        nameLabel.topAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 8),
         
-        // loginNameLable Constraints
-        loginNameLable.leadingAnchor.constraint(equalTo: nameLable.leadingAnchor),
-        loginNameLable.topAnchor.constraint(equalTo: nameLable.bottomAnchor, constant: 8),
+        // loginNameLabel Constraints
+        loginNameLabel.leadingAnchor.constraint(equalTo: nameLabel.leadingAnchor),
+        loginNameLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 8),
         
         // descriptionLabel Constraints
-        descriptionLabel.leadingAnchor.constraint(equalTo: loginNameLable.leadingAnchor),
-        descriptionLabel.topAnchor.constraint(equalTo: loginNameLable.bottomAnchor, constant: 8)
+        descriptionLabel.leadingAnchor.constraint(equalTo: loginNameLabel.leadingAnchor),
+        descriptionLabel.topAnchor.constraint(equalTo: loginNameLabel.bottomAnchor, constant: 8)
         ])
     }
     
     private func updateProfileDetails() {
-        if let profile = profileService.profile {
-            nameLable.text = profile.name
-            loginNameLable.text = profile.loginName
-            descriptionLabel.text = profile.bio
-        } else {
-            print("profile was not found")
+        guard let profile = profileService.profile else {
+            print("[ProfileViewController]: Profile was not found")
+            return
         }
+        nameLabel.text = profile.name
+        loginNameLabel.text = profile.loginName
+        descriptionLabel.text = profile.bio
     }
     
     private func updateAvatar() {
-        guard
-            let profileImageURL = ProfileImageService.shared.avatarURL,
-            let url = URL(string: profileImageURL)
+        guard let profileImageURL = ProfileImageService.shared.avatarURL,
+              let url = URL(string: profileImageURL)
         else { return }
         
         let processor = RoundCornerImageProcessor(cornerRadius: 61)

@@ -16,12 +16,11 @@ final class ProfileService {
     
     // MARK: - Private Properties
     
-    private let oauth2TokenStorage = OAuth2TokenStorage()
     private var networkClient = NetworkClient()
     private(set) var profile: Profile?
     
     private let urlSession = URLSession.shared
-    // указателя на последнюю созданную задачу
+    // это указателя на последнюю созданную задачу
     private var task: URLSessionTask?
     // Переменная для хранения значения code, которое было передано в последнем созданном запросе.
     private var lastToken: String?
@@ -68,9 +67,9 @@ final class ProfileService {
     
     // MARK: - Private Methods
     
-    /// URLRequest из составных компоненто
+    /// URLRequest из составных компонентов
     private func makeProfileRequest(token: String) -> URLRequest? {
-        guard let url = URL(string: ProfileViewConstants.unsplashProfileURLString) else {
+        guard let url = URL(string: ProfileViewConstants.unSplashProfileURLString) else {
             assertionFailure("[ProfileService: makeProfileRequest]: Failed to create URL")
             return nil
         }

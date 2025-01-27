@@ -17,11 +17,6 @@ protocol WebViewViewControllerDelegate: AnyObject {
 
 final class WebViewViewController: UIViewController {
     
-    // MARK: - Enum
-    private enum WebViewConstants {
-        static let unsplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
-    }
-    
     // MARK: - Public Properties
     
     weak var delegate: WebViewViewControllerDelegate?
@@ -121,16 +116,16 @@ final class WebViewViewController: UIViewController {
         progressView.isHidden = fabs(webView.estimatedProgress - 1.0) <= 0.0001
     }
     
-    /// формирует URL в соответствии с документацией Unsplash и направляет пользователя на страницу авторизации
+    /// формирует URL в соответствии с документацией UnSplash и направляет пользователя на страницу авторизации
     private func loadAuthView() {
-        // инициализируем структуру URLComponents с указанием адреса запроса
-        guard var urlComponents = URLComponents(string: WebViewConstants.unsplashAuthorizeURLString) else {
+        // инициализация структуры URLComponents с указанием адреса запроса
+        guard var urlComponents = URLComponents(string: WebViewConstants.unSplashAuthorizeURLString) else {
             print("Error: init URLComponents")
             return
         }
         
         urlComponents.queryItems = [
-            // значение client_id — код доступа приложения
+            // значение client_id — код доступа к приложению
             URLQueryItem(name: "client_id", value: Constants.accessKey),
             // URI, который обрабатывает успешную авторизацию пользователя
             URLQueryItem(name: "redirect_uri", value: Constants.redirectURI),
@@ -156,7 +151,7 @@ extension WebViewViewController: WKNavigationDelegate {
     ///  Запрашивает у делегата разрешение на навигационные действия на основе информации
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         if let code = code(from: navigationAction) {
-            // сообщаем AuthViewCotroller что код авторизации получен
+            // сообщаем AuthViewController что код авторизации получен
             delegate?.webViewViewController(self, didAuthenticateWithCode: code)
             // отменяем навигационное действие (всё, что нужно, мы от webView уже получили)
             decisionHandler(.cancel)
@@ -175,7 +170,7 @@ extension WebViewViewController: WKNavigationDelegate {
             let urlComponents = URLComponents(string: url.absoluteString),
             // Проверяем, совпадает ли адрес запроса с адресом получения кода
             urlComponents.path == "/oauth/authorize/native",
-            // Пверяем, есть ли в URLComponents компоненты запроса
+            // Пверяет, есть ли в URLComponents компоненты запроса
             let items = urlComponents.queryItems,
             // Ищем в массиве компонентов такой компонент, у которого значение name == code.
             let codeItem = items.first(where: { $0.name == "code" })

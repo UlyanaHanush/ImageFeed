@@ -15,10 +15,7 @@ final class SplashViewController: UIViewController {
     
     // MARK: - Private Properties
     
-    private let showAuthenticationScreenSegueIdentifier = "ShowAuthenticationScreen"
-    
-    private let oauth2TokenStorage = OAuth2TokenStorage()
-    private let oauth2Service = OAuth2Service.shared
+    private let oAuth2TokenStorage = OAuth2TokenStorage()
     private var profileService = ProfileService.shared
     private let profileImageService = ProfileImageService.shared
     
@@ -33,14 +30,14 @@ final class SplashViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if let token = oauth2TokenStorage.token {
+        if let token = oAuth2TokenStorage.token {
+            switchToTabBarController()
             fetchProfile(token)
         } else {
+            showAuthViewController()
             print("[SplashViewController: viewDidAppear]: token was not found")
         }
-        
         creatingView()
-        showAuthViewController()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,27 +51,20 @@ final class SplashViewController: UIViewController {
     
     // MARK: - Private Methods
     
-    /// Переход на флоу галереи
+    /// Переход на галерею фотографий
     private func switchToTabBarController() {
         // Получаем экземпляр `window` приложения
         guard let window = UIApplication.shared.windows.first else {
             fatalError("Invalid Configuration")
         }
         
-        // Создаём экземпляр корневого контроллера из Storyboard с помощью ранее заданного идентификатора
-        _ = UIStoryboard(name: "Main", bundle: .main)
-        
         let tabBarController = TabBarController()
-        
-//        let tabBarController = UIStoryboard(name: "Main", bundle: .main)
-//            .instantiateViewController(withIdentifier: "TabBarViewController")
         window.rootViewController = tabBarController
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            splashScreenLogoImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor)
-                ,
+            splashScreenLogoImageView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             splashScreenLogoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
@@ -86,15 +76,11 @@ final class SplashViewController: UIViewController {
     }
     
     private func showAuthViewController() {
-        _ = UIStoryboard(name: "Main", bundle: nil)
-        
         let authViewController = AuthViewController()
-        
         authViewController.delegate = self
+        authViewController.modalPresentationStyle = .fullScreen
            
-        let navigationController = UINavigationController(rootViewController: authViewController)
-        navigationController.modalPresentationStyle = .fullScreen
-        present(navigationController, animated: true, completion: nil)
+        present(authViewController, animated: true, completion: nil)
     }
 }
 
@@ -103,7 +89,8 @@ final class SplashViewController: UIViewController {
 extension SplashViewController: AuthViewControllerDelegate {
     func didAuthenticate(_ vc: AuthViewController, didAuthenticateWithCode code: String) {
         dismiss(animated: true)
-        guard let token = OAuth2TokenStorage().token else { return }
+        
+        guard let token = oAuth2TokenStorage.token else { return }
         fetchProfile(token)
     }
     

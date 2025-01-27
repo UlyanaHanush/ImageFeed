@@ -16,11 +16,11 @@ final class OAuth2Service {
     
     // MARK: - Private Properties
     
-    private let oauth2TokenStorage = OAuth2TokenStorage()
+    private let oAuth2TokenStorage = OAuth2TokenStorage()
     private var networkClient = NetworkClient()
     
     private let urlSession = URLSession.shared
-    // указателя на последнюю созданную задачу
+    // последняя созданная задача
     private var task: URLSessionTask?
     // Переменная для хранения значения code, которое было передано в последнем созданном запросе.
     private var lastCode: String?
@@ -46,7 +46,7 @@ final class OAuth2Service {
             switch result {
             case .success(let tokenResponse):
                 // сохраняем токен
-                self?.oauth2TokenStorage.token = tokenResponse.accessToken
+                self?.oAuth2TokenStorage.token = tokenResponse.accessToken
                 completion(.success(tokenResponse.accessToken))
             case .failure(let error):
                 print("[OAuth2Service]: [fetchOAuthToken]: \(error.localizedDescription)")
@@ -61,7 +61,7 @@ final class OAuth2Service {
     
     // MARK: - Private Methods
     
-    /// URLRequest из составных компоненто
+    /// URLRequest из составных компонентов
     private func makeOAuthTokenRequest(code: String) -> URLRequest? {
         let baseURL = URL(string: "https://unsplash.com")
         

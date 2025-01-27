@@ -14,7 +14,7 @@ final class ImagesListCell: UITableViewCell {
     
     static let reuseIdentifier = "ImagesListCell"
     
-    // MARK: - Private Propeties
+    // MARK: - Private Properties
     
     lazy var cellImage: UIImageView = {
         let imageView = UIImageView()
@@ -27,12 +27,12 @@ final class ImagesListCell: UITableViewCell {
     }()
     
     lazy var dateLabel: UILabel = {
-        let lable = UILabel()
-        lable.textColor = .ypWhite
-        lable.font = .systemFont(ofSize: 13)
+        let label = UILabel()
+        label.textColor = .ypWhite
+        label.font = .systemFont(ofSize: 13)
         
-        lable.translatesAutoresizingMaskIntoConstraints = false
-        return lable
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
     }()
     
     lazy var gradientImage: UIImageView = {

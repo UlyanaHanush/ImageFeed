@@ -13,22 +13,18 @@ final class UIBlockingProgressHUD {
     // MARK: - Private Properties
     
     private static var window: UIWindow? {
-        
-//        let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene
-//        return windowScene?.windows.first
-        
         return UIApplication.shared.windows.first
     }
     
     // MARK: - Public Methods
     
-    /// блокирует пользовательское взаимодействие
+    /// блокирует взаимодействие пользователя
     static func show() {
         window?.isUserInteractionEnabled = false
         ProgressHUD.animate()
     }
     
-    /// разблокирует пользовательского взаимодействия
+    /// разблокирует взаимодействия пользователя
     static func dismiss() {
         window?.isUserInteractionEnabled = true
         ProgressHUD.dismiss()

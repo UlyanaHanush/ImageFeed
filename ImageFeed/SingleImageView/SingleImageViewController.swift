@@ -62,6 +62,7 @@ final class SingleImageViewController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
+    
     // MARK: - UIViewController
     
     override func viewDidLoad() {
@@ -149,7 +150,7 @@ final class SingleImageViewController: UIViewController {
         let scale = min(maxZoomScale, max(minZoomScale, min(hScale, vScale)))
         
         // Вызов функции не меняет scrollView.contentSize.
-        // Помечает, что данные лэйаута устарели, и что при следующей итерации лэйаута экрана значение scale будет считано и применено к содержимому.
+        // Помечает, что данные layout устарели, и что при следующей итерации layout экрана значение scale будет считано и применено к содержимому.
         scrollView.setZoomScale(scale, animated: false)
         // форсирует пересчет фреймов
         scrollView.layoutIfNeeded()
