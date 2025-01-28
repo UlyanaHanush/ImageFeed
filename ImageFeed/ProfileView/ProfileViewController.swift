@@ -27,7 +27,7 @@ final class ProfileViewController: UIViewController {
             with: UIImage(systemName: "ipad.and.arrow.forward")!,
             target: self,
             action: #selector(Self.didTapButton))
-        button.tintColor = .iPadAndArrowForward
+        button.tintColor = .ipadAndArrowForward
         
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
