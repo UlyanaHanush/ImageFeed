@@ -34,7 +34,7 @@ final class SingleImageViewController: UIViewController {
     private lazy var backButtonSingleImageView: UIButton = {
         let button = UIButton(type: .custom)
         
-        let imageButton = UIImage(named: "backward")
+        let imageButton = UIImage(named: "Backward")
         button.setImage(imageButton , for: .normal)
         
         button.addTarget(nil, action: #selector(didTapBackButton(_:)), for: .touchUpInside)
