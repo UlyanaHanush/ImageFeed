@@ -42,8 +42,8 @@ enum WebViewConstants {
     static let unSplashAuthorizeURLString = "https://unsplash.com/oauth/authorize"
 }
 
-// MARK: - ProfileView
-
-enum ImagesListConstants {
-    static let unSplashImagesListURLString = "https://api.unsplash.com/photos"
-}
+//// MARK: - ProfileView
+//
+//enum ImagesListConstants {
+//    static let unSplashImagesListURLString = "https://api.unsplash.com/photos"
+//}

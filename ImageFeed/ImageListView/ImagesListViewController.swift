@@ -12,7 +12,7 @@ final class ImagesListViewController: UIViewController {
     // MARK: - Constants
     
     let photosName: [String] = Array(0..<20).map{ "\($0)" }
-    let imagesListService = ImagesListService()
+    //let imagesListService = ImagesListService()
     
     // MARK: - Public Properties
     
@@ -139,10 +139,10 @@ extension ImagesListViewController {
     }
 }
 
-extension ImagesListViewController {
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row + 1 == imagesListService.photos.count {
-            imagesListService.fetchPhotosNextPage(<#Int#>, completion: <#(Result<Profile, any Error>) -> Void#>)
-        }
-    }
-}
+//extension ImagesListViewController {
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        if indexPath.row + 1 == imagesListService.photos.count {
+//            imagesListService.fetchPhotosNextPage(<#Int#>, completion: <#(Result<Profile, any Error>) -> Void#>)
+//        }
+//    }
+//}
