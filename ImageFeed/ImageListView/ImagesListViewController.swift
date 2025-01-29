@@ -12,6 +12,7 @@ final class ImagesListViewController: UIViewController {
     // MARK: - Constants
     
     let photosName: [String] = Array(0..<20).map{ "\($0)" }
+    let imagesListService = ImagesListService()
     
     // MARK: - Public Properties
     
@@ -135,5 +136,13 @@ extension ImagesListViewController {
         
         let likeImage = isLiked ? UIImage(named: "like_button_on") : UIImage(named: "like_button_off")
         cell.likeButton.setImage(likeImage, for: .normal)
+    }
+}
+
+extension ImagesListViewController {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row + 1 == imagesListService.photos.count {
+            imagesListService.fetchPhotosNextPage(<#Int#>, completion: <#(Result<Profile, any Error>) -> Void#>)
+        }
     }
 }

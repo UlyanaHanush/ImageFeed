@@ -22,3 +22,11 @@ enum ProfileImageServiceError: Error {
     case invalidURL
     case decodingError
 }
+
+// MARK: - ImagesListService
+
+enum ImagesListServiceError: Error {
+    case invalidRequest
+    case invalidURL
+    case decodingError
+}

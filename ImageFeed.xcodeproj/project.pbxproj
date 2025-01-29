@@ -10,6 +10,9 @@
 		CE583BFC2D3ED27C0042E447 /* SwiftKeychainWrapper in Frameworks */ = {isa = PBXBuildFile; productRef = CE583BFB2D3ED27C0042E447 /* SwiftKeychainWrapper */; };
 		CE583BFE2D3FEA8C0042E447 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE583BFD2D3FEA8C0042E447 /* TabBarController.swift */; };
 		CE583C2E2D446AC20042E447 /* ProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = CE583C2D2D446AC20042E447 /* ProgressHUD */; };
+		CE583C342D4901F60042E447 /* ImagesListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE583C332D4901F60042E447 /* ImagesListService.swift */; };
+		CE583C372D4902DC0042E447 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE583C362D4902DC0042E447 /* Photo.swift */; };
+		CE583C392D4919D40042E447 /* PhotoResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE583C382D4919D40042E447 /* PhotoResult.swift */; };
 		CE71FDE12D11B2DD00BE1D06 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE71FDE02D11B2DD00BE1D06 /* Constants.swift */; };
 		CE71FDE42D12FFC900BE1D06 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE71FDE32D12FFC900BE1D06 /* AuthViewController.swift */; };
 		CE71FDE62D143E5000BE1D06 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE71FDE52D143E5000BE1D06 /* WebViewViewController.swift */; };
@@ -61,6 +64,9 @@
 
 /* Begin PBXFileReference section */
 		CE583BFD2D3FEA8C0042E447 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		CE583C332D4901F60042E447 /* ImagesListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListService.swift; sourceTree = "<group>"; };
+		CE583C362D4902DC0042E447 /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		CE583C382D4919D40042E447 /* PhotoResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoResult.swift; sourceTree = "<group>"; };
 		CE71FDE02D11B2DD00BE1D06 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		CE71FDE32D12FFC900BE1D06 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		CE71FDE52D143E5000BE1D06 /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
@@ -162,8 +168,10 @@
 		CE583C0D2D415B890042E447 /* ImageListView */ = {
 			isa = PBXGroup;
 			children = (
-				CEC321DC2CF894B500260A7E /* ImagesListCell.swift */,
+				CE583C352D4902BD0042E447 /* Models */,
+				CE583C322D4901DC0042E447 /* Service */,
 				CEFD3F762CF0AC780006E47A /* ImagesListViewController.swift */,
+				CEC321DC2CF894B500260A7E /* ImagesListCell.swift */,
 			);
 			path = ImageListView;
 			sourceTree = "<group>";
@@ -182,6 +190,23 @@
 				CE71FDF52D2BEB8E00BE1D06 /* SplashViewController.swift */,
 			);
 			path = SplashView;
+			sourceTree = "<group>";
+		};
+		CE583C322D4901DC0042E447 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				CE583C332D4901F60042E447 /* ImagesListService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		CE583C352D4902BD0042E447 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CE583C362D4902DC0042E447 /* Photo.swift */,
+				CE583C382D4919D40042E447 /* PhotoResult.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 		CE71FDE22D12FFB300BE1D06 /* AuthView */ = {
@@ -417,11 +442,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CE583C342D4901F60042E447 /* ImagesListService.swift in Sources */,
 				CEC0280D2D3C3F3E0034D925 /* ProfileResult.swift in Sources */,
 				CE71FDE62D143E5000BE1D06 /* WebViewViewController.swift in Sources */,
 				CEFD3F772CF0AC780006E47A /* ImagesListViewController.swift in Sources */,
 				CE583BFE2D3FEA8C0042E447 /* TabBarController.swift in Sources */,
 				CEC0280F2D3C3F5E0034D925 /* Profile.swift in Sources */,
+				CE583C392D4919D40042E447 /* PhotoResult.swift in Sources */,
+				CE583C372D4902DC0042E447 /* Photo.swift in Sources */,
 				CEFD3F7D2CF0AC780006E47A /* ImageFeed.xcdatamodeld in Sources */,
 				CEFD3F732CF0AC780006E47A /* AppDelegate.swift in Sources */,
 				CEC321DD2CF894B500260A7E /* ImagesListCell.swift in Sources */,
