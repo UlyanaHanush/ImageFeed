@@ -9,61 +9,50 @@ import Foundation
 
 final class ImagesListService {
     
+    // MARK: - Constants
     static let didChangeNotification = Notification.Name(rawValue: "ImagesListServiceDidChange")
     
+    // MARK: - Private Properties
+    
     private (set) var photos: [Photo] = []
-    private(set) var photo: Photo?
     private var lastLoadedPage: Int?
     
     private let networkClient = NetworkClient()
     private let oAuth2TokenStorage = OAuth2TokenStorage()
     
-    private let urlSession = URLSession.shared
-    // это указателя на последнюю созданную задачу
     private var task: URLSessionTask?
-    // Переменная для хранения значения code, которое было передано в последнем созданном запросе.
-    private var lastToken: String?
     
-    func fetchPhotosNextPage(token: String ,completion: @escaping (Result<Photo, Error>) -> Void) {
-
-        // let nextPage = (lastLoadedPage?.number ?? 0) + 1
-        let nextPage = (lastLoadedPage ?? 0) + 1
-        
+    // MARK: - Public Methods
+    
+    func fetchPhotosNextPage() {
         assert(Thread.isMainThread)
-        guard lastToken != token else {
-            completion(.failure(ImagesListServiceError.invalidRequest))
+        guard task == nil else {
+            print("[ImagesListService]:[fetchPhotosNextPage]")
             return
         }
         task?.cancel()
-        lastToken = token
+        
+        let nextPage = (lastLoadedPage ?? 0) + 1
             
-        guard let request = makeImageListRequest(nextPage: nextPage, token: token) else {
-            completion(.failure(ImagesListServiceError.invalidURL))
+        guard let request = makeImageListRequest(nextPage: nextPage) else {
+            print("[ImagesListService]:[fetchPhotosNextPage]: invalidRequest")
             return
         }
             
-        let task = networkClient.objectTask(for: request) { [weak self] (result: Result<PhotoResult, Error>) in
+        let task = networkClient.objectTask(for: request) { [weak self] (result: Result<[PhotoResult], Error>) in
             switch result {
             case .success(let photoResult):
-                let photo = Photo(
-                    id: photoResult.id,
-                    size: CGSize(width: photoResult.width, height: photoResult.height),
-                    createdAt: photoResult.createdAt,
-                    welcomeDescription: photoResult.description,
-                    thumbImageURL: photoResult.urlsResult.thumb,
-                    largeImageURL: photoResult.urlsResult.full,
-                    isLiked: photoResult.likedByUser)
+
+                 let photo = photoResult.map { Photo(photoResult: $0) }
+                 self?.photos.append(contentsOf: photo)
                 
-                self?.photos.append(photo)
-                self?.photo = photo
-                completion(.success(photo))
+                NotificationCenter.default.post(name: Self.didChangeNotification, object: self)
+                self?.lastLoadedPage = nextPage
 
             case .failure(let error):
-                print("Network or request error: \(error.localizedDescription)")
-                completion(.failure(ImagesListServiceError.decodingError))
+                print("[ImagesListService]:[fetchPhotosNextPage]:network or request error: \(error.localizedDescription)")
             }
             self?.task = nil
-            self?.lastToken = nil
         }
         self.task = task
         task.resume()
@@ -71,7 +60,7 @@ final class ImagesListService {
         
     // MARK: - Private Methods
     
-    private func makeImageListRequest(nextPage: Int, token: String) -> URLRequest? {
+    private func makeImageListRequest(nextPage: Int) -> URLRequest? {
         guard let url = URL(string: ImagesListConstants.unSplashImagesListURLString + "?page=\(nextPage)"),
               let token = oAuth2TokenStorage.token
         else {
@@ -86,5 +75,3 @@ final class ImagesListService {
         return request
     }
 }
-
-
