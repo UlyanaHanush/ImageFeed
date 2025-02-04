@@ -9,17 +9,21 @@ import Foundation
 
 final class ImagesListService {
     
+    // MARK: - Singleton
+    
+    static let shared = ImagesListService()
+    private init() {}
+    
     // MARK: - Constants
+    
     static let didChangeNotification = Notification.Name(rawValue: "ImagesListServiceDidChange")
+    private let networkClient = NetworkClient()
+    private let oAuth2TokenStorage = OAuth2TokenStorage()
     
     // MARK: - Private Properties
     
     private (set) var photos: [Photo] = []
     private var lastLoadedPage: Int?
-    
-    private let networkClient = NetworkClient()
-    private let oAuth2TokenStorage = OAuth2TokenStorage()
-    
     private var task: URLSessionTask?
     
     // MARK: - Public Methods
@@ -42,13 +46,11 @@ final class ImagesListService {
         let task = networkClient.objectTask(for: request) { [weak self] (result: Result<[PhotoResult], Error>) in
             switch result {
             case .success(let photoResult):
-
-                 let photo = photoResult.map { Photo(photoResult: $0) }
-                 self?.photos.append(contentsOf: photo)
+                let photo = photoResult.map { Photo(photoResult: $0) }
+                self?.photos.append(contentsOf: photo)
                 
                 NotificationCenter.default.post(name: Self.didChangeNotification, object: self)
                 self?.lastLoadedPage = nextPage
-
             case .failure(let error):
                 print("[ImagesListService]:[fetchPhotosNextPage]:network or request error: \(error.localizedDescription)")
             }
@@ -67,7 +69,6 @@ final class ImagesListService {
             assertionFailure("[ImagesListService: makeImageListRequest]: Failed to create URL")
             return nil
         }
-
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")

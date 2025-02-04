@@ -13,10 +13,12 @@ final class ProfileViewController: UIViewController {
     
     private let profileService = ProfileService.shared
     private let splashViewController = SplashViewController.shared
-    private var profileImageServiceObserver: NSObjectProtocol?
     
     private lazy var avatarImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "Photo"))
+        imageView.layer.masksToBounds = false
+        imageView.layer.cornerRadius = 35
+        imageView.clipsToBounds = true
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -69,15 +71,7 @@ final class ProfileViewController: UIViewController {
         super.viewDidLoad()
         
         creatingView()
-        
-        profileImageServiceObserver = NotificationCenter.default.addObserver(
-            forName: ProfileImageService.didChangeNotification,
-            object: nil,
-            queue: .main
-        ) { [weak self] _ in
-            guard let self = self else { return }
-            self.updateAvatar()
-        }
+        profileImageServiceObserver()
         updateAvatar()
     }
     
@@ -144,6 +138,17 @@ final class ProfileViewController: UIViewController {
         
         avatarImageView.kf.indicatorType = .activity
         avatarImageView.kf.setImage(with: url, placeholder: UIImage(named: "Photo"), options: [.processor(processor)])
+    }
+    
+    private func profileImageServiceObserver() {
+        NotificationCenter.default.addObserver(
+            forName: ProfileImageService.didChangeNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            guard let self = self else { return }
+            self.updateAvatar()
+        }
     }
         
     @objc

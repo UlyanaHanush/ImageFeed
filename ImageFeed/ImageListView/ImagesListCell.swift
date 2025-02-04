@@ -5,8 +5,8 @@
 //  Created by ulyana on 28.11.24.
 //
 
-import Foundation
 import UIKit
+import Kingfisher
 
 final class ImagesListCell: UITableViewCell {
 
@@ -14,7 +14,7 @@ final class ImagesListCell: UITableViewCell {
     
     static let reuseIdentifier = "ImagesListCell"
     
-    // MARK: - Private Properties
+    // MARK: - Public Properties
     
     lazy var cellImage: UIImageView = {
         let imageView = UIImageView()
@@ -65,6 +65,15 @@ final class ImagesListCell: UITableViewCell {
         
         setupConstraints()
         contentView.backgroundColor = .ypBlack
+    }
+    
+    // MARK: - Public Methods
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        // Отменяем загрузку, чтобы избежать багов при переиспользовании ячеек
+        cellImage.kf.cancelDownloadTask()
     }
     
     // MARK: - Private Methods
