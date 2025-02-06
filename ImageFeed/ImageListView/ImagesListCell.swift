@@ -82,6 +82,9 @@ final class ImagesListCell: UITableViewCell {
         
         // Отменяем загрузку, чтобы избежать багов при переиспользовании ячеек
         cellImage.kf.cancelDownloadTask()
+        cellImage.image = nil
+        dateLabel.text = nil
+        likeButton.setImage(UIImage(named: "like_button_off"), for: .normal)
     }
     
     // MARK: - IBAction
