@@ -32,6 +32,10 @@ final class ProfileImageService {
 
     // MARK: - Public Methods
     
+    func cleanAvatar() {
+        avatarURL = nil
+    }
+    
     func fetchProfileImageURL(username: String, _ completion: @escaping (Result<String, Error>) -> Void) {
         assert(Thread.isMainThread)
         guard lastUserName != username else {

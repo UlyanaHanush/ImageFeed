@@ -13,6 +13,7 @@ final class ProfileViewController: UIViewController {
     
     private let profileService = ProfileService.shared
     private let splashViewController = SplashViewController.shared
+    private let profileLogoutService = ProfileLogoutService.shared
     
     private lazy var avatarImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "Photo"))
@@ -152,5 +153,7 @@ final class ProfileViewController: UIViewController {
     }
         
     @objc
-    private func didTapButton() {}
+    private func didTapButton() {
+        profileLogoutService.logout()
+    }
 }

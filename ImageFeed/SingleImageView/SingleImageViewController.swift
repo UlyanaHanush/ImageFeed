@@ -99,6 +99,7 @@ final class SingleImageViewController: UIViewController {
                 self.centerImageInScrollViewAfterZoom()
             case .failure(let error):
                 print("[SingleImageViewController]:[setImage]\(error.localizedDescription)")
+                self.showError()
             }
         }
     }
@@ -163,6 +164,23 @@ final class SingleImageViewController: UIViewController {
         let x = (newContentSize.width - visibleRectSize.width) / 2
         let y = (newContentSize.height - visibleRectSize.height) / 2
         scrollView.setContentOffset(CGPoint(x: x, y: y), animated: false)
+    }
+    
+    private func showError() {
+        let alert = UIAlertController(
+            title: "Что-то пошло не так",
+            message: "Попробовать ещё раз?",
+            preferredStyle: .alert) // preferredStyle может быть .alert или .actionSheet
+        
+        // в замыкании пишем, что должно происходить при нажатии на кнопку
+        let action = UIAlertAction(title: "Не надо", style: .default) { _ in }
+        let actionRepeat = UIAlertAction(title: "Повторить", style: .default) { _ in
+            self.updateImage() }
+        
+        alert.addAction(action)
+        alert.addAction(actionRepeat)
+        
+        self.present(alert, animated: true, completion: nil)
     }
 }
 

@@ -28,6 +28,10 @@ final class ImagesListService {
     
     // MARK: - Public Methods
     
+    func cleanImagesList() {
+        photos.removeAll()
+    }
+    
     func fetchPhotosNextPage() {
         assert(Thread.isMainThread)
         guard task == nil else {

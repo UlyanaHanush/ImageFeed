@@ -165,6 +165,8 @@ extension ImagesListViewController {
     
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
         cell.backgroundColor = .clear
+        cell.selectionStyle = .none
+        
         cell.delegate = self
         
         let url = URL(string: photos[indexPath.row].thumbImageURL)
@@ -210,8 +212,23 @@ extension ImagesListViewController: ImagesListCellDelegate {
             case .failure(let error):
                 print("[ImagesListViewController]:[imageListCellDidTapLike] \(error.localizedDescription)")
                 UIBlockingProgressHUD.dismiss()
+                self.showAlert()
             }
         }
+    }
+    
+    private func showAlert() {
+        let alert = UIAlertController(
+            title: "Что-то пошло не так",
+            message: "Попробовать ещё раз?",
+            preferredStyle: .alert) // preferredStyle может быть .alert или .actionSheet
+        
+        // в замыкании пишем, что должно происходить при нажатии на кнопку
+        let action = UIAlertAction(title: "OK", style: .default) { _ in }
+        
+        alert.addAction(action)
+        
+        self.present(alert, animated: true, completion: nil)
     }
 }
 

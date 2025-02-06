@@ -27,6 +27,10 @@ final class ProfileService {
 
     // MARK: - Public Methods
     
+    func cleanProfile() {
+        profile = nil
+    }
+    
     /// десериализация данных и обработка ошибок
     func fetchProfile(_ token: String, completion: @escaping (Result<Profile, Error>) -> Void) {
         assert(Thread.isMainThread)
