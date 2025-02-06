@@ -8,6 +8,10 @@
 import UIKit
 import Kingfisher
 
+protocol ImagesListCellDelegate: AnyObject {
+    func imageListCellDidTapLike(_ cell: ImagesListCell)
+}
+
 final class ImagesListCell: UITableViewCell {
 
     // MARK: - Constants
@@ -15,6 +19,8 @@ final class ImagesListCell: UITableViewCell {
     static let reuseIdentifier = "ImagesListCell"
     
     // MARK: - Public Properties
+    
+    weak var delegate: ImagesListCellDelegate?
     
     lazy var cellImage: UIImageView = {
         let imageView = UIImageView()
@@ -45,6 +51,8 @@ final class ImagesListCell: UITableViewCell {
     lazy var likeButton: UIButton = {
         let button = UIButton()
         
+        button.addTarget(nil, action: #selector(didTapLikeButton(_:)), for: .touchUpInside)
+        
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
         
@@ -74,6 +82,11 @@ final class ImagesListCell: UITableViewCell {
         
         // Отменяем загрузку, чтобы избежать багов при переиспользовании ячеек
         cellImage.kf.cancelDownloadTask()
+    }
+    
+    // MARK: - IBAction
+    @IBAction func didTapLikeButton(_ sender: Any) {
+        delegate?.imageListCellDidTapLike(self)
     }
     
     // MARK: - Private Methods

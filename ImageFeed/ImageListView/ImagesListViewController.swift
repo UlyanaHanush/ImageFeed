@@ -122,6 +122,7 @@ extension ImagesListViewController: UITableViewDataSource {
         guard let imageListCell = cell as? ImagesListCell else {
             return UITableViewCell()
         }
+        
         configCell(for: imageListCell, with: indexPath)
         return imageListCell
     }
@@ -163,6 +164,9 @@ extension ImagesListViewController {
        }
     
     func configCell(for cell: ImagesListCell, with indexPath: IndexPath) {
+        cell.backgroundColor = .clear
+        cell.delegate = self
+        
         let url = URL(string: photos[indexPath.row].thumbImageURL)
         let processor = RoundCornerImageProcessor(cornerRadius: 16)
             
@@ -178,10 +182,36 @@ extension ImagesListViewController {
             
         cell.dateLabel.text = dateFormatter.string(from: Date())
         
-        let isLiked = indexPath.row % 2 == 0
-        
-        let likeImage = isLiked ? UIImage(named: "like_button_on") : UIImage(named: "like_button_off")
+        let photo = photos[indexPath.row]
+        let likeImage = photo.isLiked ? UIImage(named: "like_button_on") : UIImage(named: "like_button_off")
         cell.likeButton.setImage(likeImage, for: .normal)
+    }
+}
+
+// MARK: - ImagesListCellDelegate
+
+extension ImagesListViewController: ImagesListCellDelegate {
+    func imageListCellDidTapLike(_ cell: ImagesListCell) {
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        let photo = photos[indexPath.row]
+        
+        UIBlockingProgressHUD.show()
+        imagesListService.changeLike(photoId: photo.id, isLike: photo.isLiked) { [weak self] result in
+            guard let self = self else { return }
+            
+            switch result {
+            case .success(_):
+                self.photos = self.imagesListService.photos
+                let photo = self.imagesListService.photos[indexPath.row]
+                
+                let likeImage = photo.isLiked ? UIImage(named: "like_button_on") : UIImage(named: "like_button_off")
+                cell.likeButton.setImage(likeImage, for: .normal)
+                UIBlockingProgressHUD.dismiss()
+            case .failure(let error):
+                print("[ImagesListViewController]:[imageListCellDidTapLike] \(error.localizedDescription)")
+                UIBlockingProgressHUD.dismiss()
+            }
+        }
     }
 }
 
