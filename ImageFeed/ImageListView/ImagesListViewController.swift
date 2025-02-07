@@ -181,10 +181,10 @@ extension ImagesListViewController {
                 print("[ImagesListViewController]:[configCell]\(error.localizedDescription)")
             }
         }
-            
-        cell.dateLabel.text = dateFormatter.string(from: Date())
-        
         let photo = photos[indexPath.row]
+        
+        cell.dateLabel.text = dateFormatter.string(from: photo.createdAt ?? Date())
+       
         let likeImage = photo.isLiked ? UIImage(named: "like_button_on") : UIImage(named: "like_button_off")
         cell.likeButton.setImage(likeImage, for: .normal)
     }
@@ -206,8 +206,7 @@ extension ImagesListViewController: ImagesListCellDelegate {
                 self.photos = self.imagesListService.photos
                 let photo = self.imagesListService.photos[indexPath.row]
                 
-                let likeImage = photo.isLiked ? UIImage(named: "like_button_on") : UIImage(named: "like_button_off")
-                cell.likeButton.setImage(likeImage, for: .normal)
+                cell.setIsLiked(photo.isLiked )
                 UIBlockingProgressHUD.dismiss()
             case .failure(let error):
                 print("[ImagesListViewController]:[imageListCellDidTapLike] \(error.localizedDescription)")
@@ -221,11 +220,9 @@ extension ImagesListViewController: ImagesListCellDelegate {
         let alert = UIAlertController(
             title: "Что-то пошло не так",
             message: "Попробовать ещё раз?",
-            preferredStyle: .alert) // preferredStyle может быть .alert или .actionSheet
-        
-        // в замыкании пишем, что должно происходить при нажатии на кнопку
+            preferredStyle: .alert)
+
         let action = UIAlertAction(title: "OK", style: .default) { _ in }
-        
         alert.addAction(action)
         
         self.present(alert, animated: true, completion: nil)
