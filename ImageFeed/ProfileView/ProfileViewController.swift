@@ -73,7 +73,31 @@ final class ProfileViewController: UIViewController {
         
         creatingView()
         profileImageServiceObserver()
+        imageListServiceObserver()
         updateAvatar()
+    }
+    
+    // MARK: - Public Methods
+    
+    private func switchToSplashViewController() {
+        // Получаем экземпляр `window` приложения
+        guard let window = UIApplication.shared.windows.first else {
+            fatalError("Invalid Configuration")
+        }
+        
+        let splashViewController = SplashViewController()
+        window.rootViewController = splashViewController
+    }
+    
+    private func imageListServiceObserver() {
+        NotificationCenter.default.addObserver(
+            forName: ProfileLogoutService.didChangeNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            guard let self = self else { return }
+            switchToSplashViewController()
+        }
     }
     
     // MARK: - Private Methods

@@ -19,6 +19,10 @@ final class ImagesListService {
     static let didChangeNotification = Notification.Name(rawValue: "ImagesListServiceDidChange")
     private let networkClient = NetworkClient()
     private let oAuth2TokenStorage = OAuth2TokenStorage()
+    private let dateFormatter: ISO8601DateFormatter = {
+          let formatter = ISO8601DateFormatter()
+          return formatter
+      }()
     
     // MARK: - Private Properties
     
@@ -50,8 +54,22 @@ final class ImagesListService {
         let task = networkClient.objectTask(for: request) { [weak self] (result: Result<[PhotoResult], Error>) in
             switch result {
             case .success(let photoResult):
-                let photo = photoResult.map { Photo(photoResult: $0) }
-                self?.photos.append(contentsOf: photo)
+                for result in photoResult {
+                    let photo = Photo (
+                        id: result.id,
+                        size: CGSize(width: result.width, height: result.height),
+                        createdAt: {
+                            guard let dateString = result.createdAt else {
+                                return nil
+                            }
+                            return self?.dateFormatter.date(from: dateString)
+                        }(),
+                        welcomeDescription: result.description,
+                        thumbImageURL: result.urls.thumb,
+                        largeImageURL: result.urls.full,
+                        isLiked: result.likedByUser)
+                    self?.photos.append(photo)
+                }
                 
                 NotificationCenter.default.post(name: Self.didChangeNotification, object: self)
                 self?.lastLoadedPage = nextPage
@@ -72,11 +90,24 @@ final class ImagesListService {
         
         let task = networkClient.objectTask(for: request) { [weak self] (result: Result<PhotoLikedResult, Error>) in
             switch result {
-            case .success(let photoResult):
-                let photo = Photo(photoResult: photoResult.photo)
+            case .success(let photoLikedResult):
+                let photo = Photo(
+                    id: photoLikedResult.photo.id,
+                    size: CGSize(width: photoLikedResult.photo.width, height: photoLikedResult.photo.height),
+                    createdAt: {
+                        if let dateString = photoLikedResult.photo.createdAt {
+                            return self?.dateFormatter.date(from: dateString)
+                        }
+                        return nil
+                    }(),
+                    welcomeDescription: photoLikedResult.photo.description,
+                    thumbImageURL: photoLikedResult.photo.urls.thumb,
+                    largeImageURL: photoLikedResult.photo.urls.full,
+                    isLiked: photoLikedResult.photo.likedByUser)
+                    
                 guard let index = self?.photos.firstIndex(where: {$0.id == photoId}) else { return }
-                
                 self?.photos[index].isLiked = photo.isLiked
+            
                 completion(.success(true))
             case .failure(let error):
                 print("[ImagesListService]:[changeLike]:network or request error: \(error.localizedDescription)")
@@ -103,7 +134,7 @@ final class ImagesListService {
     }
     
     private func makeChangeLikeRequest(photoId: String,  isLike: Bool) -> URLRequest? {
-        guard let url = URL(string: "https://api.unsplash.com/photos/\(photoId)/like"),
+        guard let url = URL(string: ImagesListConstants.unSplashImagesListURLString + "/\(photoId)/like"),
               let token = oAuth2TokenStorage.token
         else {
             assertionFailure("[ImagesListService: makeChangeLikeRequest]: Failed to create URL")

@@ -15,6 +15,10 @@ final class ProfileLogoutService {
     static let shared = ProfileLogoutService()
     private init() { }
     
+    // MARK: - Public Properties
+    
+    static let didChangeNotification = Notification.Name(rawValue: "ProfileLogoutProviderDidChange")
+    
     // MARK: - Private Properties
     
     private let oAuth2TokenStorage = OAuth2TokenStorage()
@@ -27,7 +31,8 @@ final class ProfileLogoutService {
     func logout() {
         cleanCookies()
         cleanUserData()
-        switchToSplashViewController()
+        
+        NotificationCenter.default.post(name: Self.didChangeNotification, object: self)
     }
 
     // MARK: - Private Methods
@@ -49,16 +54,6 @@ final class ProfileLogoutService {
         profileService.cleanProfile()
         profileImageService.cleanAvatar()
         imagesListService.cleanImagesList()
-    }
-    
-    private func switchToSplashViewController() {
-        // Получаем экземпляр `window` приложения
-        guard let window = UIApplication.shared.windows.first else {
-            fatalError("Invalid Configuration")
-        }
-        
-        let splashViewController = SplashViewController()
-        window.rootViewController = splashViewController
     }
 }
     

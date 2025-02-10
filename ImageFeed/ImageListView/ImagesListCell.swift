@@ -93,7 +93,7 @@ final class ImagesListCell: UITableViewCell {
     }
     
     // MARK: - IBAction
-    @IBAction func didTapLikeButton(_ sender: Any) {
+    @IBAction private func didTapLikeButton(_ sender: Any) {
         delegate?.imageListCellDidTapLike(self)
     }
     

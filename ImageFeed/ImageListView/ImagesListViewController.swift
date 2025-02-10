@@ -54,17 +54,15 @@ final class ImagesListViewController: UIViewController {
         imagesListService.fetchPhotosNextPage()
     }
     
-    // MARK: - Public Methods
+    // MARK: - Private Methods
     
-    func showSingleImage(indexPath: IndexPath) {
+    private func showSingleImage(indexPath: IndexPath) {
         let singleImageViewController = SingleImageViewController()
         singleImageViewController.imageObject = imagesListService.photos[indexPath.row]
         singleImageViewController.modalPresentationStyle = .fullScreen
         present(singleImageViewController, animated: true, completion: nil)
     }
-    
-    // MARK: - Private Methods
-    
+
     private func addSubviews() {
         view.addSubview(tableView)
         view.backgroundColor = .ypBlack
@@ -170,10 +168,9 @@ extension ImagesListViewController {
         cell.delegate = self
         
         let url = URL(string: photos[indexPath.row].thumbImageURL)
-        let processor = RoundCornerImageProcessor(cornerRadius: 16)
             
         cell.cellImage.kf.indicatorType = .activity
-        cell.cellImage.kf.setImage(with: url, placeholder: UIImage(named: "plugOnLoading"), options: [.processor(processor)]) { result in
+        cell.cellImage.kf.setImage(with: url, placeholder: UIImage(named: "plugOnLoading")) { result in
             switch result {
             case .success:
                 self.tableView.reloadRows(at: [indexPath], with: .automatic)
@@ -183,7 +180,10 @@ extension ImagesListViewController {
         }
         let photo = photos[indexPath.row]
         
-        cell.dateLabel.text = dateFormatter.string(from: photo.createdAt ?? Date())
+        guard let photoCreatedAt = photo.createdAt else {
+            return cell.dateLabel.text = nil
+        }
+        cell.dateLabel.text = dateFormatter.string(from: photoCreatedAt)
        
         let likeImage = photo.isLiked ? UIImage(named: "like_button_on") : UIImage(named: "like_button_off")
         cell.likeButton.setImage(likeImage, for: .normal)
@@ -201,16 +201,15 @@ extension ImagesListViewController: ImagesListCellDelegate {
         imagesListService.changeLike(photoId: photo.id, isLike: photo.isLiked) { [weak self] result in
             guard let self = self else { return }
             
+            UIBlockingProgressHUD.dismiss()
             switch result {
             case .success(_):
                 self.photos = self.imagesListService.photos
                 let photo = self.imagesListService.photos[indexPath.row]
                 
                 cell.setIsLiked(photo.isLiked )
-                UIBlockingProgressHUD.dismiss()
             case .failure(let error):
                 print("[ImagesListViewController]:[imageListCellDidTapLike] \(error.localizedDescription)")
-                UIBlockingProgressHUD.dismiss()
                 self.showAlert()
             }
         }
