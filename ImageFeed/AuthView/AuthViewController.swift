@@ -69,7 +69,7 @@ final class AuthViewController: UIViewController {
         present(webViewViewController, animated: true, completion: nil)
     }
     
-    // MARK: -Private Methods
+    // MARK: - Private Methods
     
     private func addSubviews() {
         view.addSubview(enterButton)

@@ -6,24 +6,16 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class SingleImageViewController: UIViewController {
     
     // MARK: - Public Properties
-    
-    var image: UIImage? {
-        didSet {
-            guard isViewLoaded, let image else { return }
-            
-            imageView.image = image
-            imageView.frame.size = image.size
-            rescaleAndCenterImageInScrollView(image: image)
-        }
-    }
+    var imageObject: Photo?
     
     // MARK: - Private Properties
     
-    private var imageView: UIImageView = {
+    private lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         
@@ -43,9 +35,14 @@ final class SingleImageViewController: UIViewController {
         return button
     }()
     
-    private var scrollView: UIScrollView = {
+    private lazy var scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.bouncesZoom = true
+        
+        scrollView.delegate = self
+        
+        scrollView.minimumZoomScale = 0.1
+        scrollView.maximumZoomScale = 1.25
         
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         return scrollView
@@ -67,18 +64,9 @@ final class SingleImageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        scrollView.delegate = self
-        
-        scrollView.minimumZoomScale = 0.1
-        scrollView.maximumZoomScale = 1.25
-        
+
         addSubviews()
-        
-        guard let image else { return }
-        imageView.image = image
-        imageView.frame.size = image.size
-        rescaleAndCenterImageInScrollView(image: image)
+        updateImage()
     }
     
     // MARK: - IBAction
@@ -88,7 +76,7 @@ final class SingleImageViewController: UIViewController {
     }
     
     @IBAction private func didTapSaveButton(_ sender: UIButton) {
-        guard let image else { return }
+        guard let image = imageView.image else { return }
         let share = UIActivityViewController(
             activityItems: [image],
             applicationActivities: nil
@@ -97,6 +85,24 @@ final class SingleImageViewController: UIViewController {
     }
     
     // MARK: - Private Methods
+    
+    private func updateImage() {
+        UIBlockingProgressHUD.show()
+        imageView.kf.setImage(with: URL(string: imageObject?.largeImageURL ?? "")) { [weak self] result in
+            UIBlockingProgressHUD.dismiss()
+            
+            guard let self else { return }
+            
+            switch result {
+            case .success(let imageResult):
+                rescaleAndCenterImageInScrollView(image: imageResult.image)
+                self.centerImageInScrollViewAfterZoom()
+            case .failure(let error):
+                print("[SingleImageViewController]:[setImage]\(error.localizedDescription)")
+                self.showError()
+            }
+        }
+    }
     
     private func addSubviews() {
         view.backgroundColor = .ypBlack
@@ -149,8 +155,7 @@ final class SingleImageViewController: UIViewController {
         let vScale = visibleRectSize.height / imageSize.height
         let scale = min(maxZoomScale, max(minZoomScale, min(hScale, vScale)))
         
-        // Вызов функции не меняет scrollView.contentSize.
-        // Помечает, что данные layout устарели, и что при следующей итерации layout экрана значение scale будет считано и применено к содержимому.
+        // Помечает, что данные layout устарели, и что при следующей итерации layout экрана значение scale будет считано и применено к содержимому. Вызов функции не меняет scrollView.contentSize.
         scrollView.setZoomScale(scale, animated: false)
         // форсирует пересчет фреймов
         scrollView.layoutIfNeeded()
@@ -159,6 +164,23 @@ final class SingleImageViewController: UIViewController {
         let x = (newContentSize.width - visibleRectSize.width) / 2
         let y = (newContentSize.height - visibleRectSize.height) / 2
         scrollView.setContentOffset(CGPoint(x: x, y: y), animated: false)
+    }
+    
+    private func showError() {
+        let alert = UIAlertController(
+            title: "Что-то пошло не так",
+            message: "Попробовать ещё раз?",
+            preferredStyle: .alert) // preferredStyle может быть .alert или .actionSheet
+        
+        // в замыкании пишем, что должно происходить при нажатии на кнопку
+        let action = UIAlertAction(title: "Не надо", style: .default) { _ in }
+        let actionRepeat = UIAlertAction(title: "Повторить", style: .default) { _ in
+            self.updateImage() }
+        
+        alert.addAction(action)
+        alert.addAction(actionRepeat)
+        
+        self.present(alert, animated: true, completion: nil)
     }
 }
 

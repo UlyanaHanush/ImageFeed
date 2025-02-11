@@ -13,10 +13,13 @@ final class ProfileViewController: UIViewController {
     
     private let profileService = ProfileService.shared
     private let splashViewController = SplashViewController.shared
-    private var profileImageServiceObserver: NSObjectProtocol?
+    private let profileLogoutService = ProfileLogoutService.shared
     
     private lazy var avatarImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "Photo"))
+        imageView.layer.masksToBounds = false
+        imageView.layer.cornerRadius = 35
+        imageView.clipsToBounds = true
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
@@ -69,16 +72,32 @@ final class ProfileViewController: UIViewController {
         super.viewDidLoad()
         
         creatingView()
+        profileImageServiceObserver()
+        imageListServiceObserver()
+        updateAvatar()
+    }
+    
+    // MARK: - Public Methods
+    
+    private func switchToSplashViewController() {
+        // Получаем экземпляр `window` приложения
+        guard let window = UIApplication.shared.windows.first else {
+            fatalError("Invalid Configuration")
+        }
         
-        profileImageServiceObserver = NotificationCenter.default.addObserver(
-            forName: ProfileImageService.didChangeNotification,
+        let splashViewController = SplashViewController()
+        window.rootViewController = splashViewController
+    }
+    
+    private func imageListServiceObserver() {
+        NotificationCenter.default.addObserver(
+            forName: ProfileLogoutService.didChangeNotification,
             object: nil,
             queue: .main
         ) { [weak self] _ in
             guard let self = self else { return }
-            self.updateAvatar()
+            switchToSplashViewController()
         }
-        updateAvatar()
     }
     
     // MARK: - Private Methods
@@ -145,7 +164,33 @@ final class ProfileViewController: UIViewController {
         avatarImageView.kf.indicatorType = .activity
         avatarImageView.kf.setImage(with: url, placeholder: UIImage(named: "Photo"), options: [.processor(processor)])
     }
+    
+    private func profileImageServiceObserver() {
+        NotificationCenter.default.addObserver(
+            forName: ProfileImageService.didChangeNotification,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            guard let self = self else { return }
+            self.updateAvatar()
+        }
+    }
         
     @objc
-    private func didTapButton() {}
+    private func didTapButton() {
+        let alert = UIAlertController(
+            title: "Пока пока!",
+            message: "Уверены что хотите выйти?",
+            preferredStyle: .alert)
+        
+        let actionYes = UIAlertAction(title: "Да", style: .default) { _ in
+            self.profileLogoutService.logout()
+        }
+        let actionNo = UIAlertAction(title: "Нет", style: .default) { _ in }
+        
+        alert.addAction(actionYes)
+        alert.addAction(actionNo)
+        
+        self.present(alert, animated: true, completion: nil)
+    }
 }

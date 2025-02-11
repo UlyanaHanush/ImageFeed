@@ -5,8 +5,12 @@
 //  Created by ulyana on 28.11.24.
 //
 
-import Foundation
 import UIKit
+import Kingfisher
+
+protocol ImagesListCellDelegate: AnyObject {
+    func imageListCellDidTapLike(_ cell: ImagesListCell)
+}
 
 final class ImagesListCell: UITableViewCell {
 
@@ -14,7 +18,9 @@ final class ImagesListCell: UITableViewCell {
     
     static let reuseIdentifier = "ImagesListCell"
     
-    // MARK: - Private Properties
+    // MARK: - Public Properties
+    
+    weak var delegate: ImagesListCellDelegate?
     
     lazy var cellImage: UIImageView = {
         let imageView = UIImageView()
@@ -45,6 +51,8 @@ final class ImagesListCell: UITableViewCell {
     lazy var likeButton: UIButton = {
         let button = UIButton()
         
+        button.addTarget(nil, action: #selector(didTapLikeButton(_:)), for: .touchUpInside)
+        
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
         
@@ -65,6 +73,28 @@ final class ImagesListCell: UITableViewCell {
         
         setupConstraints()
         contentView.backgroundColor = .ypBlack
+    }
+    
+    // MARK: - Public Methods
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        // Отменяем загрузку, чтобы избежать багов при переиспользовании ячеек
+        cellImage.kf.cancelDownloadTask()
+        cellImage.image = nil
+        dateLabel.text = nil
+        likeButton.setImage(UIImage(named: "like_button_off"), for: .normal)
+    }
+    
+    func setIsLiked(_ isLiked: Bool ) {
+        let likeImage = isLiked ? UIImage(named: "like_button_on") : UIImage(named: "like_button_off")
+        likeButton.setImage(likeImage, for: .normal)
+    }
+    
+    // MARK: - IBAction
+    @IBAction private func didTapLikeButton(_ sender: Any) {
+        delegate?.imageListCellDidTapLike(self)
     }
     
     // MARK: - Private Methods
