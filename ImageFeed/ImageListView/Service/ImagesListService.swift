@@ -59,10 +59,11 @@ final class ImagesListService {
                         id: result.id,
                         size: CGSize(width: result.width, height: result.height),
                         createdAt: {
-                            guard let dateString = result.createdAt else {
+                            if let dateString = result.createdAt {
+                                return self?.dateFormatter.date(from: dateString)
+                            } else {
                                 return nil
                             }
-                            return self?.dateFormatter.date(from: dateString)
                         }(),
                         welcomeDescription: result.description,
                         thumbImageURL: result.urls.thumb,

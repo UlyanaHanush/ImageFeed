@@ -180,10 +180,9 @@ extension ImagesListViewController {
         }
         let photo = photos[indexPath.row]
         
-        guard let photoCreatedAt = photo.createdAt else {
-            return cell.dateLabel.text = nil
+        if let photoCreatedAt = photo.createdAt {
+            cell.dateLabel.text = dateFormatter.string(from: photoCreatedAt)
         }
-        cell.dateLabel.text = dateFormatter.string(from: photoCreatedAt)
        
         let likeImage = photo.isLiked ? UIImage(named: "like_button_on") : UIImage(named: "like_button_off")
         cell.likeButton.setImage(likeImage, for: .normal)
