@@ -24,7 +24,6 @@ final class AuthViewController: UIViewController {
     
     // MARK: - Private Properties
     
-    private let showWebViewSegueIdentifier = "ShowWebView"
     private let oAuth2Service = OAuth2Service.shared
     private let oAuth2TokenStorage = OAuth2TokenStorage()
     
@@ -64,6 +63,10 @@ final class AuthViewController: UIViewController {
     @IBAction func buttonTapped(_ sender: UIButton) {
         let webViewViewController = WebViewViewController()
         webViewViewController.delegate = self
+        
+        let webViewPresenter = WebViewPresenter()
+        webViewViewController.presenter = webViewPresenter
+        webViewPresenter.view = webViewViewController
         
         webViewViewController.modalPresentationStyle = .fullScreen
         present(webViewViewController, animated: true, completion: nil)
