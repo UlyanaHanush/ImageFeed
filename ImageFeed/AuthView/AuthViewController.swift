@@ -62,13 +62,16 @@ final class AuthViewController: UIViewController {
     
     @IBAction func buttonTapped(_ sender: UIButton) {
         let webViewViewController = WebViewViewController()
-        webViewViewController.delegate = self
         
-        let webViewPresenter = WebViewPresenter()
-        webViewViewController.presenter = webViewPresenter
+        let authHelper = AuthHelper()
+        
+        let webViewPresenter = WebViewPresenter(authHelper: authHelper)
         webViewPresenter.view = webViewViewController
         
+        webViewViewController.presenter = webViewPresenter
+        webViewViewController.delegate = self
         webViewViewController.modalPresentationStyle = .fullScreen
+        
         present(webViewViewController, animated: true, completion: nil)
     }
     
