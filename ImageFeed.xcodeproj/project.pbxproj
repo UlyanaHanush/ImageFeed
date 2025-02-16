@@ -17,6 +17,8 @@
 		CE60B6462D621FEC000FB62E /* WebViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE60B6452D621FEC000FB62E /* WebViewPresenter.swift */; };
 		CE60B6482D6247A0000FB62E /* AuthConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE60B6472D6247A0000FB62E /* AuthConfiguration.swift */; };
 		CE60B64B2D624B91000FB62E /* AuthHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE60B64A2D624B91000FB62E /* AuthHelper.swift */; };
+		CE60B64D2D625E81000FB62E /* WebViewPresenterSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE60B64C2D625E81000FB62E /* WebViewPresenterSpy.swift */; };
+		CE60B64F2D6261E0000FB62E /* WebViewViewControllerSpy.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE60B64E2D6261E0000FB62E /* WebViewViewControllerSpy.swift */; };
 		CE71FDE12D11B2DD00BE1D06 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE71FDE02D11B2DD00BE1D06 /* Constants.swift */; };
 		CE71FDE42D12FFC900BE1D06 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE71FDE32D12FFC900BE1D06 /* AuthViewController.swift */; };
 		CE71FDE62D143E5000BE1D06 /* WebViewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE71FDE52D143E5000BE1D06 /* WebViewViewController.swift */; };
@@ -43,7 +45,7 @@
 		CEFD3F772CF0AC780006E47A /* ImagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFD3F762CF0AC780006E47A /* ImagesListViewController.swift */; };
 		CEFD3F7D2CF0AC780006E47A /* ImageFeed.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CEFD3F7B2CF0AC780006E47A /* ImageFeed.xcdatamodeld */; };
 		CEFD3F7F2CF0AC7A0006E47A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CEFD3F7E2CF0AC7A0006E47A /* Assets.xcassets */; };
-		CEFD3F8D2CF0AC7B0006E47A /* ImageFeedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFD3F8C2CF0AC7B0006E47A /* ImageFeedTests.swift */; };
+		CEFD3F8D2CF0AC7B0006E47A /* WebViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFD3F8C2CF0AC7B0006E47A /* WebViewTests.swift */; };
 		CEFD3F972CF0AC7B0006E47A /* ImageFeedUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFD3F962CF0AC7B0006E47A /* ImageFeedUITests.swift */; };
 		CEFD3F992CF0AC7B0006E47A /* ImageFeedUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFD3F982CF0AC7B0006E47A /* ImageFeedUITestsLaunchTests.swift */; };
 /* End PBXBuildFile section */
@@ -74,6 +76,8 @@
 		CE60B6452D621FEC000FB62E /* WebViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewPresenter.swift; sourceTree = "<group>"; };
 		CE60B6472D6247A0000FB62E /* AuthConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthConfiguration.swift; sourceTree = "<group>"; };
 		CE60B64A2D624B91000FB62E /* AuthHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthHelper.swift; sourceTree = "<group>"; };
+		CE60B64C2D625E81000FB62E /* WebViewPresenterSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewPresenterSpy.swift; sourceTree = "<group>"; };
+		CE60B64E2D6261E0000FB62E /* WebViewViewControllerSpy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewControllerSpy.swift; sourceTree = "<group>"; };
 		CE71FDE02D11B2DD00BE1D06 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		CE71FDE32D12FFC900BE1D06 /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		CE71FDE52D143E5000BE1D06 /* WebViewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewViewController.swift; sourceTree = "<group>"; };
@@ -102,7 +106,7 @@
 		CEFD3F812CF0AC7A0006E47A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CEFD3F832CF0AC7A0006E47A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CEFD3F882CF0AC7B0006E47A /* ImageFeedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImageFeedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		CEFD3F8C2CF0AC7B0006E47A /* ImageFeedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFeedTests.swift; sourceTree = "<group>"; };
+		CEFD3F8C2CF0AC7B0006E47A /* WebViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebViewTests.swift; sourceTree = "<group>"; };
 		CEFD3F922CF0AC7B0006E47A /* ImageFeedUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ImageFeedUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEFD3F962CF0AC7B0006E47A /* ImageFeedUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFeedUITests.swift; sourceTree = "<group>"; };
 		CEFD3F982CF0AC7B0006E47A /* ImageFeedUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageFeedUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -304,7 +308,9 @@
 		CEFD3F8B2CF0AC7B0006E47A /* ImageFeedTests */ = {
 			isa = PBXGroup;
 			children = (
-				CEFD3F8C2CF0AC7B0006E47A /* ImageFeedTests.swift */,
+				CEFD3F8C2CF0AC7B0006E47A /* WebViewTests.swift */,
+				CE60B64C2D625E81000FB62E /* WebViewPresenterSpy.swift */,
+				CE60B64E2D6261E0000FB62E /* WebViewViewControllerSpy.swift */,
 			);
 			path = ImageFeedTests;
 			sourceTree = "<group>";
@@ -496,7 +502,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CEFD3F8D2CF0AC7B0006E47A /* ImageFeedTests.swift in Sources */,
+				CEFD3F8D2CF0AC7B0006E47A /* WebViewTests.swift in Sources */,
+				CE60B64F2D6261E0000FB62E /* WebViewViewControllerSpy.swift in Sources */,
+				CE60B64D2D625E81000FB62E /* WebViewPresenterSpy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

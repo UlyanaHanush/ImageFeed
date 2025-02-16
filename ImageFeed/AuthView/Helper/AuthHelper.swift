@@ -51,7 +51,7 @@ final class AuthHelper: AuthHelperProtocol {
     
     // MARK: - Private Methods
     
-    private func authURL() -> URL? {
+    func authURL() -> URL? {
         guard var urlComponents = URLComponents(string: configuration.authURLString) else {
             print("Error: init URLComponents")
             return nil
