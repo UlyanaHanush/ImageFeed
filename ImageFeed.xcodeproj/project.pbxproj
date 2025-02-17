@@ -41,6 +41,7 @@
 		CEC322842CFC72B600260A7E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CEFD3F802CF0AC7A0006E47A /* LaunchScreen.storyboard */; };
 		CEC322882CFCD5D700260A7E /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC322872CFCD5D700260A7E /* ProfileViewController.swift */; };
 		CEC3228E2D00D09100260A7E /* SingleImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEC3228D2D00D09100260A7E /* SingleImageViewController.swift */; };
+		CEEF7AC52D6353600047305A /* ImagesListViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEEF7AC42D6353600047305A /* ImagesListViewPresenter.swift */; };
 		CEFD3F732CF0AC780006E47A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFD3F722CF0AC780006E47A /* AppDelegate.swift */; };
 		CEFD3F752CF0AC780006E47A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFD3F742CF0AC780006E47A /* SceneDelegate.swift */; };
 		CEFD3F772CF0AC780006E47A /* ImagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CEFD3F762CF0AC780006E47A /* ImagesListViewController.swift */; };
@@ -99,6 +100,7 @@
 		CEC321DC2CF894B500260A7E /* ImagesListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListCell.swift; sourceTree = "<group>"; };
 		CEC322872CFCD5D700260A7E /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		CEC3228D2D00D09100260A7E /* SingleImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleImageViewController.swift; sourceTree = "<group>"; };
+		CEEF7AC42D6353600047305A /* ImagesListViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesListViewPresenter.swift; sourceTree = "<group>"; };
 		CEFD3F6F2CF0AC780006E47A /* ImageFeed.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageFeed.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CEFD3F722CF0AC780006E47A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		CEFD3F742CF0AC780006E47A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 				CE583C322D4901DC0042E447 /* Service */,
 				CEFD3F762CF0AC780006E47A /* ImagesListViewController.swift */,
 				CEC321DC2CF894B500260A7E /* ImagesListCell.swift */,
+				CEEF7AC42D6353600047305A /* ImagesListViewPresenter.swift */,
 			);
 			path = ImageListView;
 			sourceTree = "<group>";
@@ -479,6 +482,7 @@
 				CEFD3F7D2CF0AC780006E47A /* ImageFeed.xcdatamodeld in Sources */,
 				CEFD3F732CF0AC780006E47A /* AppDelegate.swift in Sources */,
 				CEC321DD2CF894B500260A7E /* ImagesListCell.swift in Sources */,
+				CEEF7AC52D6353600047305A /* ImagesListViewPresenter.swift in Sources */,
 				CE71FDEE2D28B4AE00BE1D06 /* OAuth2TokenStorage.swift in Sources */,
 				CEC028132D3C40000034D925 /* ProfileImage.swift in Sources */,
 				CE71FDEA2D22F95800BE1D06 /* OAuth2Service.swift in Sources */,
