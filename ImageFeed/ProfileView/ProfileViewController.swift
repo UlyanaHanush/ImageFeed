@@ -7,13 +7,19 @@
 import UIKit
 import Kingfisher
 
-final class ProfileViewController: UIViewController {
+public protocol ProfileViewControllerProtocol:  AnyObject {
+    var presenter: ProfileViewPresenterProtocol? { get set }
+    func updateAvatar()
+    func switchToSplashViewController()
+}
+
+final class ProfileViewController: UIViewController & ProfileViewControllerProtocol {
+    
+    // MARK: - Public Properties
+    
+    var presenter: ProfileViewPresenterProtocol?
     
     // MARK: - Private Properties
-    
-    private let profileService = ProfileService.shared
-    private let splashViewController = SplashViewController.shared
-    private let profileLogoutService = ProfileLogoutService.shared
     
     private lazy var avatarImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "Photo"))
@@ -71,15 +77,14 @@ final class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        presenter?.viewDidLoad()
         creatingView()
-        profileImageServiceObserver()
-        imageListServiceObserver()
-        updateAvatar()
     }
     
     // MARK: - Public Methods
     
-    private func switchToSplashViewController() {
+    func switchToSplashViewController() {
         // Получаем экземпляр `window` приложения
         guard let window = UIApplication.shared.windows.first else {
             fatalError("Invalid Configuration")
@@ -89,25 +94,15 @@ final class ProfileViewController: UIViewController {
         window.rootViewController = splashViewController
     }
     
-    private func imageListServiceObserver() {
-        NotificationCenter.default.addObserver(
-            forName: ProfileLogoutService.didChangeNotification,
-            object: nil,
-            queue: .main
-        ) { [weak self] _ in
-            guard let self = self else { return }
-            switchToSplashViewController()
-        }
-    }
-    
     // MARK: - Private Methods
     
     private func creatingView() {
         addSubviews()
         setupConstraints()
+        view.backgroundColor = .ypBlack
         
         updateProfileDetails()
-        view.backgroundColor = .ypBlack
+        updateAvatar()
     }
     
     private func addSubviews() {
@@ -145,8 +140,7 @@ final class ProfileViewController: UIViewController {
     }
     
     private func updateProfileDetails() {
-        guard let profile = profileService.profile else {
-            print("[ProfileViewController]: Profile was not found")
+        guard let profile = presenter?.didUpdateProfileDetails() else {
             return
         }
         nameLabel.text = profile.name
@@ -154,26 +148,13 @@ final class ProfileViewController: UIViewController {
         descriptionLabel.text = profile.bio
     }
     
-    private func updateAvatar() {
-        guard let profileImageURL = ProfileImageService.shared.avatarURL,
-              let url = URL(string: profileImageURL)
-        else { return }
-        
+    func updateAvatar() {
+        guard let url = presenter?.didUpdateAvatar() else {
+            return
+        }
         let processor = RoundCornerImageProcessor(cornerRadius: 61)
-        
         avatarImageView.kf.indicatorType = .activity
         avatarImageView.kf.setImage(with: url, placeholder: UIImage(named: "Photo"), options: [.processor(processor)])
-    }
-    
-    private func profileImageServiceObserver() {
-        NotificationCenter.default.addObserver(
-            forName: ProfileImageService.didChangeNotification,
-            object: nil,
-            queue: .main
-        ) { [weak self] _ in
-            guard let self = self else { return }
-            self.updateAvatar()
-        }
     }
         
     @objc
@@ -184,7 +165,7 @@ final class ProfileViewController: UIViewController {
             preferredStyle: .alert)
         
         let actionYes = UIAlertAction(title: "Да", style: .default) { _ in
-            self.profileLogoutService.logout()
+            self.presenter?.logout()
         }
         let actionNo = UIAlertAction(title: "Нет", style: .default) { _ in }
         

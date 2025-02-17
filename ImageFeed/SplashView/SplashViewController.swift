@@ -54,7 +54,7 @@ final class SplashViewController: UIViewController {
     private func switchToTabBarController() {
         // Получаем экземпляр `window` приложения
         guard let window = UIApplication.shared.windows.first else {
-            fatalError("Invalid Configuration")
+            fatalError("[SplashViewController: switchToTabBarController]: Invalid Configuration")
         }
         
         let tabBarController = TabBarController()
@@ -106,7 +106,7 @@ extension SplashViewController: AuthViewControllerDelegate {
                 profileImageService.fetchProfileImageURL(username: profile.username) { _ in }
                 self.switchToTabBarController()
             case .failure(let error):
-                print("Profile was not found:\(error)")
+                print("[SplashViewController: fetchProfile] Profile was not found:\(error)")
                 break
             }
         }
