@@ -14,7 +14,10 @@ final class ImagesListServiceSpy: ImagesListServiceProtocol {
         case test
     }
     
-    let emulateError: Bool = false
+    let emulateError: Bool
+    init(emulateError: Bool) {
+        self.emulateError = emulateError
+    }
     
     var fetchPhotosNextPageCalled: Bool = false
     

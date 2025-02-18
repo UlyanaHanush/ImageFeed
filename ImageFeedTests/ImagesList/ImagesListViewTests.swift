@@ -39,7 +39,7 @@ final class ImagesListViewTests: XCTestCase {
     
     func testPresenterCallsUpdateTableViewAnimated() {
         //given
-        let imagesListServiceSpy = ImagesListServiceSpy()
+        let imagesListServiceSpy = ImagesListServiceSpy(emulateError: false)
         let imagesListViewControllerSpy = ImagesListViewControllerSpy()
         let imagesListViewPresenter = ImagesListViewPresenter()
         imagesListViewPresenter.view = imagesListViewControllerSpy
@@ -66,7 +66,7 @@ final class ImagesListViewTests: XCTestCase {
     
     func testPresenterCallsFetchPhotosNextPage() {
         //given
-        let imagesListServiceSpy = ImagesListServiceSpy()
+        let imagesListServiceSpy = ImagesListServiceSpy(emulateError: false)
         let imagesListViewPresenter = ImagesListViewPresenter(imagesListService: imagesListServiceSpy)
         
         //when
@@ -78,7 +78,7 @@ final class ImagesListViewTests: XCTestCase {
     
     func testPresenterViewDidLoadCallsFetchPhotosNextPage() {
         //given
-        let imagesListServiceSpy = ImagesListServiceSpy()
+        let imagesListServiceSpy = ImagesListServiceSpy(emulateError: false)
         let imagesListViewPresenter = ImagesListViewPresenter(imagesListService: imagesListServiceSpy)
         
         //when
@@ -90,7 +90,7 @@ final class ImagesListViewTests: XCTestCase {
     
     func testSuccessChangeLike() throws {
         // Given
-        let imagesListServiceSpy = ImagesListServiceSpy() //(emulateError: false) // говорим, что не хотим эмулировать ошибку
+        let imagesListServiceSpy = ImagesListServiceSpy(emulateError: false)
         let imagesListViewPresenter = ImagesListViewPresenter(imagesListService: imagesListServiceSpy)
         
         // When
@@ -112,14 +112,12 @@ final class ImagesListViewTests: XCTestCase {
             // Then
             switch result {
             case .success(_):
-                // давайте проверим, что пришло, например, два фильма — ведь в тестовых данных их всего два
                 XCTAssertEqual(imagesListViewPresenter.photos[0].isLiked, true)
                 expectation.fulfill()
             case .failure(_):
                 XCTFail("Unexpected failure")
             }
         }
-        
         waitForExpectations(timeout: 1)
     }
 }
