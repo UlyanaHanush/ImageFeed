@@ -66,9 +66,8 @@ final class ImagesListViewTests: XCTestCase {
     
     func testPresenterCallsFetchPhotosNextPage() {
         //given
-        let imagesListViewPresenter = ImagesListViewPresenter()
         let imagesListServiceSpy = ImagesListServiceSpy()
-        imagesListViewPresenter.imagesListService = imagesListServiceSpy
+        let imagesListViewPresenter = ImagesListViewPresenter(imagesListService: imagesListServiceSpy)
         
         //when
         imagesListViewPresenter.loadImages()
@@ -79,14 +78,48 @@ final class ImagesListViewTests: XCTestCase {
     
     func testPresenterViewDidLoadCallsFetchPhotosNextPage() {
         //given
-        let imagesListViewPresenter = ImagesListViewPresenter()
         let imagesListServiceSpy = ImagesListServiceSpy()
-        imagesListViewPresenter.imagesListService = imagesListServiceSpy
+        let imagesListViewPresenter = ImagesListViewPresenter(imagesListService: imagesListServiceSpy)
         
         //when
         imagesListViewPresenter.viewDidLoad()
         
         //then
         XCTAssertTrue(imagesListServiceSpy.fetchPhotosNextPageCalled)
+    }
+    
+    func testSuccessChangeLike() throws {
+        // Given
+        let imagesListServiceSpy = ImagesListServiceSpy() //(emulateError: false) // говорим, что не хотим эмулировать ошибку
+        let imagesListViewPresenter = ImagesListViewPresenter(imagesListService: imagesListServiceSpy)
+        
+        // When
+        let expectation = expectation(description: "Loading expectation")
+        
+        var photo = Photo(
+                        id: "",
+                        size: CGSize(),
+                        createdAt: nil,
+                        welcomeDescription: nil,
+                        thumbImageURL: "",
+                        largeImageURL: "",
+                        isLiked: false
+                    )
+        var photos = [photo]
+        imagesListViewPresenter.photos = photos
+        
+        imagesListViewPresenter.didChangeLike(photoId: photo.id, isLike: photo.isLiked) { result in
+            // Then
+            switch result {
+            case .success(_):
+                // давайте проверим, что пришло, например, два фильма — ведь в тестовых данных их всего два
+                XCTAssertEqual(imagesListViewPresenter.photos[0].isLiked, true)
+                expectation.fulfill()
+            case .failure(_):
+                XCTFail("Unexpected failure")
+            }
+        }
+        
+        waitForExpectations(timeout: 1)
     }
 }
