@@ -44,6 +44,7 @@ final class WebViewViewController: UIViewController & WebViewControllerProtocol 
         webView.allowsBackForwardNavigationGestures = true
         webView.scrollView.isScrollEnabled = true
         webView.navigationDelegate = self
+        webView.accessibilityIdentifier = "UnsplashWebView"
 
         webView.translatesAutoresizingMaskIntoConstraints = false
         return webView

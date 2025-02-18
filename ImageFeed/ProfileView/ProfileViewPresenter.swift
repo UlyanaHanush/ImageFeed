@@ -12,7 +12,7 @@ public protocol ProfileViewPresenterProtocol {
     func viewDidLoad()
     func didUpdateProfileDetails() -> Profile?
     func didUpdateAvatar() -> URL?
-    func logout()
+    func didLogout()
 }
 
 final class ProfileViewPresenter: ProfileViewPresenterProtocol {
@@ -52,9 +52,11 @@ final class ProfileViewPresenter: ProfileViewPresenterProtocol {
         return url
     }
     
-    func logout() {
+    func didLogout() {
         profileLogoutService.logout()
     }
+    
+    // MARK: - Private Methods
     
     private func profileImageServiceObserver() {
         NotificationCenter.default.addObserver(

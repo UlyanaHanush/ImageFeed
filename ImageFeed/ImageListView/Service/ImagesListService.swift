@@ -7,7 +7,13 @@
 
 import Foundation
 
-final class ImagesListService {
+public protocol ImagesListServiceProtocol: AnyObject {
+    func fetchPhotosNextPage()
+    var photos: [Photo] { get }
+    func changeLike(photoId: String, isLike: Bool, _ completion: @escaping (Result<Bool, Error>) -> Void)
+}
+
+final class ImagesListService: ImagesListServiceProtocol {
     
     // MARK: - Singleton
     
@@ -121,7 +127,7 @@ final class ImagesListService {
     // MARK: - Private Methods
     
     private func makeImageListRequest(nextPage: Int) -> URLRequest? {
-        guard let url = URL(string: ImagesListConstants.unSplashImagesListURLString + "?page=\(nextPage)"),
+        guard let url = URL(string: ImagesListConfiguration.standard.imagesListURLString + "?page=\(nextPage)"),
               let token = oAuth2TokenStorage.token
         else {
             assertionFailure("[ImagesListService: makeImageListRequest]: Failed to create URL")
@@ -135,7 +141,7 @@ final class ImagesListService {
     }
     
     private func makeChangeLikeRequest(photoId: String,  isLike: Bool) -> URLRequest? {
-        guard let url = URL(string: ImagesListConstants.unSplashImagesListURLString + "/\(photoId)/like"),
+        guard let url = URL(string: ImagesListConfiguration.standard.imagesListURLString + "/\(photoId)/like"),
               let token = oAuth2TokenStorage.token
         else {
             assertionFailure("[ImagesListService: makeChangeLikeRequest]: Failed to create URL")

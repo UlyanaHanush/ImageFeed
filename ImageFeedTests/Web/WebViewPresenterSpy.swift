@@ -9,7 +9,6 @@ import Foundation
 import ImageFeed
 
 final class WebViewPresenterSpy: WebViewPresenterProtocol {
-    
     var viewDidLoadCalled: Bool = false
     
     var view: WebViewControllerProtocol?

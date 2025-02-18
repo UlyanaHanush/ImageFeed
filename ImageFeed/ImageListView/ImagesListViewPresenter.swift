@@ -7,13 +7,15 @@
 
 import Foundation
 
-protocol ImagesListViewPresenterProtocol {
+public protocol ImagesListViewPresenterProtocol {
     var view: ImagesListViewControllerProtocol? { get set }
+    var imagesListService: ImagesListServiceProtocol? { get }
     var photos: [Photo] { get set }
     func viewDidLoad()
     func didUpdateTableViewAnimated()
     func loadImages()
     func didChangeLike(photoId: String, isLike: Bool, _ completion: @escaping (Result<Bool, Error>) -> Void)
+    
 }
 
 final class ImagesListViewPresenter: ImagesListViewPresenterProtocol {
@@ -22,22 +24,26 @@ final class ImagesListViewPresenter: ImagesListViewPresenterProtocol {
     
     var view: ImagesListViewControllerProtocol?
     var photos: [Photo] = []
+    var imagesListService: ImagesListServiceProtocol?
     
-    // MARK: - Private Properties
+    // MARK: - Init
     
-    let imagesListService = ImagesListService.shared
+    init(imagesListService: ImagesListServiceProtocol? = ImagesListService.shared) {
+            self.imagesListService = imagesListService
+        }
     
     // MARK: - Public Methods
     
     func viewDidLoad() {
         imageListServiceObserver()
-        imagesListService.fetchPhotosNextPage()
+        imagesListService?.fetchPhotosNextPage()
     }
     
     func didUpdateTableViewAnimated() {
         let oldCount = photos.count
-        let newCount = imagesListService.photos.count
-        photos = imagesListService.photos
+        guard let newCount = imagesListService?.photos.count else { return }
+        guard let photos = imagesListService?.photos else { return }
+        self.photos = photos
         if newCount != oldCount {
             view?.oldCount = oldCount
             view?.newCount = newCount
@@ -46,11 +52,11 @@ final class ImagesListViewPresenter: ImagesListViewPresenterProtocol {
     }
     
     func loadImages() {
-        imagesListService.fetchPhotosNextPage()
+        imagesListService?.fetchPhotosNextPage()
     }
     
     func didChangeLike(photoId: String, isLike: Bool, _ completion: @escaping (Result<Bool, Error>) -> Void) {
-        imagesListService.changeLike(photoId: photoId, isLike: isLike) { [weak self] result in
+        imagesListService?.changeLike(photoId: photoId, isLike: isLike) { [weak self] result in
             guard let self = self else { return }
             
             switch result {

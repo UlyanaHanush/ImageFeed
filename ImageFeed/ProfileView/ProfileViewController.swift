@@ -37,6 +37,7 @@ final class ProfileViewController: UIViewController & ProfileViewControllerProto
             target: self,
             action: #selector(Self.didTapButton))
         button.tintColor = .ipadAndArrowForward
+        button.accessibilityIdentifier = "logout button"
         
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
@@ -94,6 +95,24 @@ final class ProfileViewController: UIViewController & ProfileViewControllerProto
         window.rootViewController = splashViewController
     }
     
+    func updateProfileDetails() {
+        guard let profile = presenter?.didUpdateProfileDetails() else {
+            return
+        }
+        nameLabel.text = profile.name
+        loginNameLabel.text = profile.loginName
+        descriptionLabel.text = profile.bio
+    }
+    
+    func updateAvatar() {
+        guard let url = presenter?.didUpdateAvatar() else {
+            return
+        }
+        let processor = RoundCornerImageProcessor(cornerRadius: 61)
+        avatarImageView.kf.indicatorType = .activity
+        avatarImageView.kf.setImage(with: url, placeholder: UIImage(named: "Photo"), options: [.processor(processor)])
+    }
+    
     // MARK: - Private Methods
     
     private func creatingView() {
@@ -139,24 +158,6 @@ final class ProfileViewController: UIViewController & ProfileViewControllerProto
         ])
     }
     
-    private func updateProfileDetails() {
-        guard let profile = presenter?.didUpdateProfileDetails() else {
-            return
-        }
-        nameLabel.text = profile.name
-        loginNameLabel.text = profile.loginName
-        descriptionLabel.text = profile.bio
-    }
-    
-    func updateAvatar() {
-        guard let url = presenter?.didUpdateAvatar() else {
-            return
-        }
-        let processor = RoundCornerImageProcessor(cornerRadius: 61)
-        avatarImageView.kf.indicatorType = .activity
-        avatarImageView.kf.setImage(with: url, placeholder: UIImage(named: "Photo"), options: [.processor(processor)])
-    }
-        
     @objc
     private func didTapButton() {
         let alert = UIAlertController(
@@ -165,7 +166,7 @@ final class ProfileViewController: UIViewController & ProfileViewControllerProto
             preferredStyle: .alert)
         
         let actionYes = UIAlertAction(title: "Да", style: .default) { _ in
-            self.presenter?.logout()
+            self.presenter?.didLogout()
         }
         let actionNo = UIAlertAction(title: "Нет", style: .default) { _ in }
         

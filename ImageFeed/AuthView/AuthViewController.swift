@@ -36,6 +36,7 @@ final class AuthViewController: UIViewController {
         button.setTitleColor(.black, for: .normal)
         button.layer.cornerRadius = 16
         button.layer.masksToBounds = true
+        button.accessibilityIdentifier = "Authenticate"
         
         button.addTarget(nil, action: #selector(buttonTapped(_:)), for: .touchUpInside)
         

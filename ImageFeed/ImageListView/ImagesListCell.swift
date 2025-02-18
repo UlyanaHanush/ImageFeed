@@ -50,8 +50,10 @@ final class ImagesListCell: UITableViewCell {
     
     lazy var likeButton: UIButton = {
         let button = UIButton()
+        button.setImage(UIImage(named: "like_button_off"), for: .normal)
         
         button.addTarget(nil, action: #selector(didTapLikeButton(_:)), for: .touchUpInside)
+        button.accessibilityIdentifier = "like button"
         
         button.translatesAutoresizingMaskIntoConstraints = false
         return button

@@ -8,7 +8,7 @@
 import UIKit
 import Kingfisher
 
-protocol ImagesListViewControllerProtocol: AnyObject {
+public protocol ImagesListViewControllerProtocol: AnyObject {
     var presenter: ImagesListViewPresenterProtocol? { get set }
     var oldCount: Int { get set }
     var newCount: Int { get set }
@@ -59,6 +59,17 @@ final class ImagesListViewController: UIViewController & ImagesListViewControlle
         addSubviews()
     }
     
+    // MARK: - Public Methods
+    
+    func updateTableViewAnimated() {
+        tableView.performBatchUpdates {
+            let indexPaths = (oldCount..<newCount).map { i in
+                IndexPath(row: i, section: 0)
+            }
+            tableView.insertRows(at: indexPaths, with: .automatic)
+        } completion: { _ in }
+    }
+    
     // MARK: - Private Methods
     
     private func showSingleImage(indexPath: IndexPath) {
@@ -82,15 +93,6 @@ final class ImagesListViewController: UIViewController & ImagesListViewControlle
             tableView.bottomAnchor.constraint(equalTo: super.view.safeAreaLayoutGuide.bottomAnchor),
             tableView.topAnchor.constraint(equalTo: super.view.safeAreaLayoutGuide.topAnchor)
         ])
-    }
-    
-    func updateTableViewAnimated() {
-        tableView.performBatchUpdates {
-            let indexPaths = (oldCount..<newCount).map { i in
-                IndexPath(row: i, section: 0)
-            }
-            tableView.insertRows(at: indexPaths, with: .automatic)
-        } completion: { _ in }
     }
 }
 
@@ -136,6 +138,8 @@ extension ImagesListViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if ProcessInfo.processInfo.environment["isUITest"] == "true" { return }
+        
         guard let photo = presenter?.photos else { return }
         if indexPath.row + 1 == photo.count {
             presenter?.loadImages()

@@ -14,6 +14,12 @@ final class OAuth2Service {
     static let shared = OAuth2Service()
     private init() {}
     
+    // MARK: - Auth2ServiceError
+
+    private enum Auth2ServiceError: Error {
+        case invalidRequest
+    }
+    
     // MARK: - Private Properties
     
     private let oAuth2TokenStorage = OAuth2TokenStorage()
