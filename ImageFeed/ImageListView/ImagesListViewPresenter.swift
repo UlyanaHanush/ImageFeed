@@ -22,7 +22,7 @@ final class ImagesListViewPresenter: ImagesListViewPresenterProtocol {
     
     // MARK: - Public Properties
     
-    var view: ImagesListViewControllerProtocol?
+    weak var view: ImagesListViewControllerProtocol?
     var photos: [Photo] = []
     var imagesListService: ImagesListServiceProtocol?
     

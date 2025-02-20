@@ -108,9 +108,8 @@ final class ProfileViewController: UIViewController & ProfileViewControllerProto
         guard let url = presenter?.didUpdateAvatar() else {
             return
         }
-        let processor = RoundCornerImageProcessor(cornerRadius: 61)
         avatarImageView.kf.indicatorType = .activity
-        avatarImageView.kf.setImage(with: url, placeholder: UIImage(named: "Photo"), options: [.processor(processor)])
+        avatarImageView.kf.setImage(with: url, placeholder: UIImage(named: "Photo"))
     }
     
     // MARK: - Private Methods
