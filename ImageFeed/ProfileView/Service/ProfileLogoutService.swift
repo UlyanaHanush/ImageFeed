@@ -50,7 +50,7 @@ final class ProfileLogoutService {
     }
     
     private func cleanUserData() {
-        OAuth2TokenStorage().token = nil
+        oAuth2TokenStorage.token = nil
         profileService.cleanProfile()
         profileImageService.cleanAvatar()
         imagesListService.cleanImagesList()

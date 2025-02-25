@@ -24,7 +24,6 @@ final class AuthViewController: UIViewController {
     
     // MARK: - Private Properties
     
-    private let showWebViewSegueIdentifier = "ShowWebView"
     private let oAuth2Service = OAuth2Service.shared
     private let oAuth2TokenStorage = OAuth2TokenStorage()
     
@@ -37,6 +36,7 @@ final class AuthViewController: UIViewController {
         button.setTitleColor(.black, for: .normal)
         button.layer.cornerRadius = 16
         button.layer.masksToBounds = true
+        button.accessibilityIdentifier = "Authenticate"
         
         button.addTarget(nil, action: #selector(buttonTapped(_:)), for: .touchUpInside)
         
@@ -63,9 +63,16 @@ final class AuthViewController: UIViewController {
     
     @IBAction func buttonTapped(_ sender: UIButton) {
         let webViewViewController = WebViewViewController()
-        webViewViewController.delegate = self
         
+        let authHelper = AuthHelper()
+        
+        let webViewPresenter = WebViewPresenter(authHelper: authHelper)
+        webViewPresenter.view = webViewViewController
+        
+        webViewViewController.presenter = webViewPresenter
+        webViewViewController.delegate = self
         webViewViewController.modalPresentationStyle = .fullScreen
+        
         present(webViewViewController, animated: true, completion: nil)
     }
     

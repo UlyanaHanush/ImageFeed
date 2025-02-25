@@ -73,7 +73,7 @@ final class ProfileService {
     
     /// URLRequest из составных компонентов
     private func makeProfileRequest(token: String) -> URLRequest? {
-        guard let url = URL(string: ProfileViewConstants.unSplashProfileURLString) else {
+        guard let url = URL(string: ProfileConfiguration.standard.profileURLString) else {
             assertionFailure("[ProfileService: makeProfileRequest]: Failed to create URL")
             return nil
         }
